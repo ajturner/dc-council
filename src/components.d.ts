@@ -13,6 +13,12 @@ export namespace Components {
         "committee": any;
     }
     interface DcCouncilGame {
+        /**
+          * URL to Agency spreadsheet
+         */
+        "agencyFilename": string;
+        "committeeFilename": string;
+        "memberFilename": string;
     }
     interface DcCouncilMemberCard {
         "member": any;
@@ -58,6 +64,12 @@ declare namespace LocalJSX {
         "committee"?: any;
     }
     interface DcCouncilGame {
+        /**
+          * URL to Agency spreadsheet
+         */
+        "agencyFilename"?: string;
+        "committeeFilename"?: string;
+        "memberFilename"?: string;
     }
     interface DcCouncilMemberCard {
         "member"?: any;

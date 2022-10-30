@@ -14,6 +14,11 @@ export class DcCouncilAgencyCard {
       <Host>
         <slot></slot>
         <h3>{this.agency?.name}</h3>
+        <ul>
+          <li>Cluster: {this.agency.cluster}</li>
+          <li>Budget: {this.agency.budget}</li>
+          <li><a href={this.agency.link} target="_new">Website</a></li>
+        </ul>
       </Host>
     );
   }
