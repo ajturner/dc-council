@@ -6,19 +6,77 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
+    interface DcCouncilAgencyCard {
+        "agency": any;
+    }
+    interface DcCouncilCommitteeCard {
+        "committee": any;
+    }
+    interface DcCouncilGame {
+    }
+    interface DcCouncilMemberCard {
+        "member": any;
+    }
 }
 declare global {
+    interface HTMLDcCouncilAgencyCardElement extends Components.DcCouncilAgencyCard, HTMLStencilElement {
+    }
+    var HTMLDcCouncilAgencyCardElement: {
+        prototype: HTMLDcCouncilAgencyCardElement;
+        new (): HTMLDcCouncilAgencyCardElement;
+    };
+    interface HTMLDcCouncilCommitteeCardElement extends Components.DcCouncilCommitteeCard, HTMLStencilElement {
+    }
+    var HTMLDcCouncilCommitteeCardElement: {
+        prototype: HTMLDcCouncilCommitteeCardElement;
+        new (): HTMLDcCouncilCommitteeCardElement;
+    };
+    interface HTMLDcCouncilGameElement extends Components.DcCouncilGame, HTMLStencilElement {
+    }
+    var HTMLDcCouncilGameElement: {
+        prototype: HTMLDcCouncilGameElement;
+        new (): HTMLDcCouncilGameElement;
+    };
+    interface HTMLDcCouncilMemberCardElement extends Components.DcCouncilMemberCard, HTMLStencilElement {
+    }
+    var HTMLDcCouncilMemberCardElement: {
+        prototype: HTMLDcCouncilMemberCardElement;
+        new (): HTMLDcCouncilMemberCardElement;
+    };
     interface HTMLElementTagNameMap {
+        "dc-council-agency-card": HTMLDcCouncilAgencyCardElement;
+        "dc-council-committee-card": HTMLDcCouncilCommitteeCardElement;
+        "dc-council-game": HTMLDcCouncilGameElement;
+        "dc-council-member-card": HTMLDcCouncilMemberCardElement;
     }
 }
 declare namespace LocalJSX {
+    interface DcCouncilAgencyCard {
+        "agency"?: any;
+    }
+    interface DcCouncilCommitteeCard {
+        "committee"?: any;
+    }
+    interface DcCouncilGame {
+    }
+    interface DcCouncilMemberCard {
+        "member"?: any;
+    }
     interface IntrinsicElements {
+        "dc-council-agency-card": DcCouncilAgencyCard;
+        "dc-council-committee-card": DcCouncilCommitteeCard;
+        "dc-council-game": DcCouncilGame;
+        "dc-council-member-card": DcCouncilMemberCard;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "dc-council-agency-card": LocalJSX.DcCouncilAgencyCard & JSXBase.HTMLAttributes<HTMLDcCouncilAgencyCardElement>;
+            "dc-council-committee-card": LocalJSX.DcCouncilCommitteeCard & JSXBase.HTMLAttributes<HTMLDcCouncilCommitteeCardElement>;
+            "dc-council-game": LocalJSX.DcCouncilGame & JSXBase.HTMLAttributes<HTMLDcCouncilGameElement>;
+            "dc-council-member-card": LocalJSX.DcCouncilMemberCard & JSXBase.HTMLAttributes<HTMLDcCouncilMemberCardElement>;
         }
     }
 }
