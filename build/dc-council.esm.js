@@ -1,0 +1,2 @@
+import{p as o,b as s}from"./p-11bd583b.js";const t=()=>{const s=import.meta.url;const t={};if(s!==""){t.resourcesUrl=new URL(".",s).href}return o(t)};t().then((o=>s([],o)));
+//# sourceMappingURL=dc-council.esm.js.map
