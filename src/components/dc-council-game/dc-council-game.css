@@ -1,3 +1,33 @@
 :host {
   display: block;
 }
+.column {
+  width: 300px;
+}
+
+#header {
+  background-color #BBB;
+}
+#gameboard {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-template-rows: auto;
+
+  grid-template-areas: 
+    "header header header"
+    "agencies . committees"
+    "members . committees"
+    "footer footer footer";
+}
+dc-council-committee-list {
+  grid-area: committees;
+}
+dc-council-member-list {
+  grid-area: members;
+}
+dc-council-agency-list {
+  grid-area: agencies;
+  overflow: auto;
+  height: 500px;
+  border: thin solid #888;
+}

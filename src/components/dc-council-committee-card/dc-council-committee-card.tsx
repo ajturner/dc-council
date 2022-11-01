@@ -13,13 +13,18 @@ export class DcCouncilCommitteeCard {
     return (
       <Host>
         <slot></slot>
-        <h3>{this.committee?.name}</h3>
-        <ul>
+        <calcite-card>
+          <span slot="title" class="title">
+          <calcite-icon icon="group" scale="m" aria-hidden="true"></calcite-icon>
+          {this.committee?.name}
+        </span>
+        <ul class="details subtitle">
           {Object.keys(this.committee).map(key => {
             return <li>{key}: {this.committee[key]}</li>
           })}
           <li><a href={this.committee.link} target="_new">Website</a></li>
         </ul>
+        </calcite-card>
       </Host>
     );
   }

@@ -28,22 +28,31 @@ export class DcCouncilGame {
   render() {
     return (
       <Host>
-        <slot></slot>
-        {this.agencies.map((agency) => {
-          return (
-            <dc-council-agency-card agency={agency}></dc-council-agency-card>
-          )
-        })}
-        {this.members.map((member) => {
-          return (
-            <dc-council-member-card member={member}></dc-council-member-card>
-          )
-        })}
-        {this.committees.map((committee) => {
-          return (
-            <dc-council-committee-card committee={committee}></dc-council-committee-card>
-          )
-        })}
+        
+        <div id="gameboard">
+          <div id="header">
+            <slot name="header"></slot>
+          </div>
+          <dc-council-agency-list
+            agencies={this.agencies}
+            >
+              <h2>Agencies</h2>
+            </dc-council-agency-list>
+          
+          <dc-council-member-list
+            members={this.members}
+            >
+            <h2>DC Council Members</h2>
+          </dc-council-member-list>
+          <dc-council-committee-list 
+            committees={this.committees}
+            >
+            <h2>Committees</h2>
+          </dc-council-committee-list>
+          <div id="footer">
+            <slot name="footer"></slot>
+          </div>          
+        </div>  
       </Host>
     );
   }

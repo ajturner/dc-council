@@ -38,7 +38,7 @@
     "papaparse": "^5.3.2"
   },
   "devDependencies": {
-    "@esri/calcite-components": "^1.0.0-beta.93",
+    "@esri/calcite-components": "^1.0.0-beta.97",
     "@stencil/sass": "^2.0.0",
     "@stencil/store": "^2.0.0",
     "@types/jest": "^27.0.3",

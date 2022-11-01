@@ -9,8 +9,19 @@ export namespace Components {
     interface DcCouncilAgencyCard {
         "agency": any;
     }
+    interface DcCouncilAgencyList {
+        "agencies": any[];
+    }
     interface DcCouncilCommitteeCard {
         "committee": any;
+    }
+    interface DcCouncilCommitteeList {
+        "committees": any[];
+    }
+    interface DcCouncilCommitteePlaceholder {
+        "committee": any;
+    }
+    interface DcCouncilCommmitteeMemberList {
     }
     interface DcCouncilGame {
         /**
@@ -23,6 +34,9 @@ export namespace Components {
     interface DcCouncilMemberCard {
         "member": any;
     }
+    interface DcCouncilMemberList {
+        "members": any[];
+    }
 }
 declare global {
     interface HTMLDcCouncilAgencyCardElement extends Components.DcCouncilAgencyCard, HTMLStencilElement {
@@ -31,11 +45,35 @@ declare global {
         prototype: HTMLDcCouncilAgencyCardElement;
         new (): HTMLDcCouncilAgencyCardElement;
     };
+    interface HTMLDcCouncilAgencyListElement extends Components.DcCouncilAgencyList, HTMLStencilElement {
+    }
+    var HTMLDcCouncilAgencyListElement: {
+        prototype: HTMLDcCouncilAgencyListElement;
+        new (): HTMLDcCouncilAgencyListElement;
+    };
     interface HTMLDcCouncilCommitteeCardElement extends Components.DcCouncilCommitteeCard, HTMLStencilElement {
     }
     var HTMLDcCouncilCommitteeCardElement: {
         prototype: HTMLDcCouncilCommitteeCardElement;
         new (): HTMLDcCouncilCommitteeCardElement;
+    };
+    interface HTMLDcCouncilCommitteeListElement extends Components.DcCouncilCommitteeList, HTMLStencilElement {
+    }
+    var HTMLDcCouncilCommitteeListElement: {
+        prototype: HTMLDcCouncilCommitteeListElement;
+        new (): HTMLDcCouncilCommitteeListElement;
+    };
+    interface HTMLDcCouncilCommitteePlaceholderElement extends Components.DcCouncilCommitteePlaceholder, HTMLStencilElement {
+    }
+    var HTMLDcCouncilCommitteePlaceholderElement: {
+        prototype: HTMLDcCouncilCommitteePlaceholderElement;
+        new (): HTMLDcCouncilCommitteePlaceholderElement;
+    };
+    interface HTMLDcCouncilCommmitteeMemberListElement extends Components.DcCouncilCommmitteeMemberList, HTMLStencilElement {
+    }
+    var HTMLDcCouncilCommmitteeMemberListElement: {
+        prototype: HTMLDcCouncilCommmitteeMemberListElement;
+        new (): HTMLDcCouncilCommmitteeMemberListElement;
     };
     interface HTMLDcCouncilGameElement extends Components.DcCouncilGame, HTMLStencilElement {
     }
@@ -49,19 +87,41 @@ declare global {
         prototype: HTMLDcCouncilMemberCardElement;
         new (): HTMLDcCouncilMemberCardElement;
     };
+    interface HTMLDcCouncilMemberListElement extends Components.DcCouncilMemberList, HTMLStencilElement {
+    }
+    var HTMLDcCouncilMemberListElement: {
+        prototype: HTMLDcCouncilMemberListElement;
+        new (): HTMLDcCouncilMemberListElement;
+    };
     interface HTMLElementTagNameMap {
         "dc-council-agency-card": HTMLDcCouncilAgencyCardElement;
+        "dc-council-agency-list": HTMLDcCouncilAgencyListElement;
         "dc-council-committee-card": HTMLDcCouncilCommitteeCardElement;
+        "dc-council-committee-list": HTMLDcCouncilCommitteeListElement;
+        "dc-council-committee-placeholder": HTMLDcCouncilCommitteePlaceholderElement;
+        "dc-council-commmittee-member-list": HTMLDcCouncilCommmitteeMemberListElement;
         "dc-council-game": HTMLDcCouncilGameElement;
         "dc-council-member-card": HTMLDcCouncilMemberCardElement;
+        "dc-council-member-list": HTMLDcCouncilMemberListElement;
     }
 }
 declare namespace LocalJSX {
     interface DcCouncilAgencyCard {
         "agency"?: any;
     }
+    interface DcCouncilAgencyList {
+        "agencies"?: any[];
+    }
     interface DcCouncilCommitteeCard {
         "committee"?: any;
+    }
+    interface DcCouncilCommitteeList {
+        "committees"?: any[];
+    }
+    interface DcCouncilCommitteePlaceholder {
+        "committee"?: any;
+    }
+    interface DcCouncilCommmitteeMemberList {
     }
     interface DcCouncilGame {
         /**
@@ -74,11 +134,19 @@ declare namespace LocalJSX {
     interface DcCouncilMemberCard {
         "member"?: any;
     }
+    interface DcCouncilMemberList {
+        "members"?: any[];
+    }
     interface IntrinsicElements {
         "dc-council-agency-card": DcCouncilAgencyCard;
+        "dc-council-agency-list": DcCouncilAgencyList;
         "dc-council-committee-card": DcCouncilCommitteeCard;
+        "dc-council-committee-list": DcCouncilCommitteeList;
+        "dc-council-committee-placeholder": DcCouncilCommitteePlaceholder;
+        "dc-council-commmittee-member-list": DcCouncilCommmitteeMemberList;
         "dc-council-game": DcCouncilGame;
         "dc-council-member-card": DcCouncilMemberCard;
+        "dc-council-member-list": DcCouncilMemberList;
     }
 }
 export { LocalJSX as JSX };
@@ -86,9 +154,14 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "dc-council-agency-card": LocalJSX.DcCouncilAgencyCard & JSXBase.HTMLAttributes<HTMLDcCouncilAgencyCardElement>;
+            "dc-council-agency-list": LocalJSX.DcCouncilAgencyList & JSXBase.HTMLAttributes<HTMLDcCouncilAgencyListElement>;
             "dc-council-committee-card": LocalJSX.DcCouncilCommitteeCard & JSXBase.HTMLAttributes<HTMLDcCouncilCommitteeCardElement>;
+            "dc-council-committee-list": LocalJSX.DcCouncilCommitteeList & JSXBase.HTMLAttributes<HTMLDcCouncilCommitteeListElement>;
+            "dc-council-committee-placeholder": LocalJSX.DcCouncilCommitteePlaceholder & JSXBase.HTMLAttributes<HTMLDcCouncilCommitteePlaceholderElement>;
+            "dc-council-commmittee-member-list": LocalJSX.DcCouncilCommmitteeMemberList & JSXBase.HTMLAttributes<HTMLDcCouncilCommmitteeMemberListElement>;
             "dc-council-game": LocalJSX.DcCouncilGame & JSXBase.HTMLAttributes<HTMLDcCouncilGameElement>;
             "dc-council-member-card": LocalJSX.DcCouncilMemberCard & JSXBase.HTMLAttributes<HTMLDcCouncilMemberCardElement>;
+            "dc-council-member-list": LocalJSX.DcCouncilMemberList & JSXBase.HTMLAttributes<HTMLDcCouncilMemberListElement>;
         }
     }
 }
