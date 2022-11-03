@@ -1,5 +1,9 @@
 :host {
   display: block;
+  border: 2px solid blue;
+}
+:host(.ghost) {
+  background: rgba(76, 72, 255, 0.75);
 }
 .details {
   display: none;
@@ -7,4 +11,12 @@
 .title {
   font-size: 1.2rem;
   font-weight: 600;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;  
+  border: 1px dashed green;
+  background-color: #AAA;
+  min-height: 100px;
 }

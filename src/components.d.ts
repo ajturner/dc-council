@@ -8,12 +8,28 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface DcCouncilAgencyCard {
         "agency": any;
+        /**
+          * Drag + Drop group name
+         */
+        "group": string;
     }
     interface DcCouncilAgencyList {
         "agencies": any[];
+        /**
+          * Drag + Drop group name
+         */
+        "group": string;
     }
     interface DcCouncilCommitteeCard {
+        /**
+          * Agencies that are managed by this committee
+         */
+        "agencies": any[];
         "committee": any;
+        /**
+          * Drag + Drop group name
+         */
+        "group": string;
     }
     interface DcCouncilCommitteeList {
         "committees": any[];
@@ -108,12 +124,28 @@ declare global {
 declare namespace LocalJSX {
     interface DcCouncilAgencyCard {
         "agency"?: any;
+        /**
+          * Drag + Drop group name
+         */
+        "group"?: string;
     }
     interface DcCouncilAgencyList {
         "agencies"?: any[];
+        /**
+          * Drag + Drop group name
+         */
+        "group"?: string;
     }
     interface DcCouncilCommitteeCard {
+        /**
+          * Agencies that are managed by this committee
+         */
+        "agencies"?: any[];
         "committee"?: any;
+        /**
+          * Drag + Drop group name
+         */
+        "group"?: string;
     }
     interface DcCouncilCommitteeList {
         "committees"?: any[];

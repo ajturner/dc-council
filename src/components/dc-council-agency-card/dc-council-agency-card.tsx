@@ -1,4 +1,5 @@
 import { Component, Host, h, Prop } from '@stencil/core';
+import Sortable from 'sortablejs';
 
 @Component({
   tag: 'dc-council-agency-card',
@@ -8,10 +9,24 @@ import { Component, Host, h, Prop } from '@stencil/core';
 export class DcCouncilAgencyCard {
 
   @Prop() agency;
+  /**
+   * Drag + Drop group name
+   */
+  @Prop() group: string = "committee";
+
+  private container: HTMLElement;
+  componentDidLoad() {
+    Sortable.create(this.container, {
+      animation: 150,
+      group: this.group,
+      ghostClass: 'ghost',
+    });
+  }
 
   render() {
     return (
       <Host>
+      <div ref={el => (this.container = el as HTMLElement)}>
         <slot></slot>
         <calcite-card draggable="true">
           <span slot="title" class="title">
@@ -25,6 +40,7 @@ export class DcCouncilAgencyCard {
             <li><a href={this.agency.link} target="_new">Website</a></li>
           </ul>
         </calcite-card>
+        </div>
       </Host>
     );
   }

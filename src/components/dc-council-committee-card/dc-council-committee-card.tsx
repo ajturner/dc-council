@@ -1,4 +1,6 @@
 import { Component, Host, h, Prop } from '@stencil/core';
+import Sortable from 'sortablejs';
+// https://ionic.io/blog/building-with-stencil-drag-and-drop-components
 
 @Component({
   tag: 'dc-council-committee-card',
@@ -8,6 +10,25 @@ import { Component, Host, h, Prop } from '@stencil/core';
 export class DcCouncilCommitteeCard {
 
   @Prop() committee;
+
+  /**
+   * Agencies that are managed by this committee
+   */
+  @Prop() agencies = [];
+
+  /**
+   * Drag + Drop group name
+   */
+  @Prop() group: string = "committee";
+
+  componentDidLoad() {
+    Sortable.create(this.container, {
+      animation: 150,
+      group: this.group,
+      ghostClass: 'ghost',
+    });
+  }
+  private container: HTMLElement;
 
   render() {
     return (
@@ -25,6 +46,9 @@ export class DcCouncilCommitteeCard {
           <li><a href={this.committee.link} target="_new">Website</a></li>
         </ul>
         </calcite-card>
+
+        <h3>Agencies</h3>
+        <dc-council-agency-list></dc-council-agency-list>
       </Host>
     );
   }
