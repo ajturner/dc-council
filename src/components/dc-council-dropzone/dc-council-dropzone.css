@@ -1,0 +1,5 @@
+:host {
+  display: block;
+  border: 1px dashed #888;
+  min-height: 100px;;
+}

@@ -8,17 +8,9 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface DcCouncilAgencyCard {
         "agency": any;
-        /**
-          * Drag + Drop group name
-         */
-        "group": string;
     }
     interface DcCouncilAgencyList {
         "agencies": any[];
-        /**
-          * Drag + Drop group name
-         */
-        "group": string;
     }
     interface DcCouncilCommitteeCard {
         /**
@@ -26,10 +18,6 @@ export namespace Components {
          */
         "agencies": any[];
         "committee": any;
-        /**
-          * Drag + Drop group name
-         */
-        "group": string;
     }
     interface DcCouncilCommitteeList {
         "committees": any[];
@@ -38,6 +26,12 @@ export namespace Components {
     }
     interface DcCouncilCommitteePlaceholder {
         "committee": any;
+    }
+    interface DcCouncilDropzone {
+        /**
+          * Drag + Drop group name
+         */
+        "group": string;
     }
     interface DcCouncilGame {
         /**
@@ -91,6 +85,12 @@ declare global {
         prototype: HTMLDcCouncilCommitteePlaceholderElement;
         new (): HTMLDcCouncilCommitteePlaceholderElement;
     };
+    interface HTMLDcCouncilDropzoneElement extends Components.DcCouncilDropzone, HTMLStencilElement {
+    }
+    var HTMLDcCouncilDropzoneElement: {
+        prototype: HTMLDcCouncilDropzoneElement;
+        new (): HTMLDcCouncilDropzoneElement;
+    };
     interface HTMLDcCouncilGameElement extends Components.DcCouncilGame, HTMLStencilElement {
     }
     var HTMLDcCouncilGameElement: {
@@ -116,6 +116,7 @@ declare global {
         "dc-council-committee-list": HTMLDcCouncilCommitteeListElement;
         "dc-council-committee-member-list": HTMLDcCouncilCommitteeMemberListElement;
         "dc-council-committee-placeholder": HTMLDcCouncilCommitteePlaceholderElement;
+        "dc-council-dropzone": HTMLDcCouncilDropzoneElement;
         "dc-council-game": HTMLDcCouncilGameElement;
         "dc-council-member-card": HTMLDcCouncilMemberCardElement;
         "dc-council-member-list": HTMLDcCouncilMemberListElement;
@@ -124,17 +125,9 @@ declare global {
 declare namespace LocalJSX {
     interface DcCouncilAgencyCard {
         "agency"?: any;
-        /**
-          * Drag + Drop group name
-         */
-        "group"?: string;
     }
     interface DcCouncilAgencyList {
         "agencies"?: any[];
-        /**
-          * Drag + Drop group name
-         */
-        "group"?: string;
     }
     interface DcCouncilCommitteeCard {
         /**
@@ -142,10 +135,6 @@ declare namespace LocalJSX {
          */
         "agencies"?: any[];
         "committee"?: any;
-        /**
-          * Drag + Drop group name
-         */
-        "group"?: string;
     }
     interface DcCouncilCommitteeList {
         "committees"?: any[];
@@ -154,6 +143,12 @@ declare namespace LocalJSX {
     }
     interface DcCouncilCommitteePlaceholder {
         "committee"?: any;
+    }
+    interface DcCouncilDropzone {
+        /**
+          * Drag + Drop group name
+         */
+        "group"?: string;
     }
     interface DcCouncilGame {
         /**
@@ -176,6 +171,7 @@ declare namespace LocalJSX {
         "dc-council-committee-list": DcCouncilCommitteeList;
         "dc-council-committee-member-list": DcCouncilCommitteeMemberList;
         "dc-council-committee-placeholder": DcCouncilCommitteePlaceholder;
+        "dc-council-dropzone": DcCouncilDropzone;
         "dc-council-game": DcCouncilGame;
         "dc-council-member-card": DcCouncilMemberCard;
         "dc-council-member-list": DcCouncilMemberList;
@@ -191,6 +187,7 @@ declare module "@stencil/core" {
             "dc-council-committee-list": LocalJSX.DcCouncilCommitteeList & JSXBase.HTMLAttributes<HTMLDcCouncilCommitteeListElement>;
             "dc-council-committee-member-list": LocalJSX.DcCouncilCommitteeMemberList & JSXBase.HTMLAttributes<HTMLDcCouncilCommitteeMemberListElement>;
             "dc-council-committee-placeholder": LocalJSX.DcCouncilCommitteePlaceholder & JSXBase.HTMLAttributes<HTMLDcCouncilCommitteePlaceholderElement>;
+            "dc-council-dropzone": LocalJSX.DcCouncilDropzone & JSXBase.HTMLAttributes<HTMLDcCouncilDropzoneElement>;
             "dc-council-game": LocalJSX.DcCouncilGame & JSXBase.HTMLAttributes<HTMLDcCouncilGameElement>;
             "dc-council-member-card": LocalJSX.DcCouncilMemberCard & JSXBase.HTMLAttributes<HTMLDcCouncilMemberCardElement>;
             "dc-council-member-list": LocalJSX.DcCouncilMemberList & JSXBase.HTMLAttributes<HTMLDcCouncilMemberListElement>;

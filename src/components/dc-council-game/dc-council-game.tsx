@@ -4,7 +4,7 @@ import { loadAgencies, loadCommittees, loadMembers } from '../../utils/data';
 @Component({
   tag: 'dc-council-game',
   styleUrl: 'dc-council-game.css',
-  shadow: true,
+  scoped: true,
 })
 export class DcCouncilGame {
 

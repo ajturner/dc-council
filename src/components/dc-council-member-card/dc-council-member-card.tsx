@@ -4,7 +4,7 @@ import "@esri/calcite-components/dist/calcite/calcite.css";
 @Component({
   tag: 'dc-council-member-card',
   styleUrl: 'dc-council-member-card.css',
-  shadow: true,
+  scoped: true,
 })
 export class DcCouncilMemberCard {
 

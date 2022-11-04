@@ -3,7 +3,7 @@ import { Component, Host, h, Prop } from '@stencil/core';
 @Component({
   tag: 'dc-council-member-list',
   styleUrl: 'dc-council-member-list.css',
-  shadow: true,
+  scoped: true,
 })
 export class DcCouncilMemberList {
 

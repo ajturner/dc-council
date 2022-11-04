@@ -3,7 +3,7 @@ import { Component, Host, h, Prop } from '@stencil/core';
 @Component({
   tag: 'dc-council-committee-placeholder',
   styleUrl: 'dc-council-committee-placeholder.css',
-  shadow: true,
+  scoped: true,
 })
 export class DcCouncilCommitteePlaceholder {
 
