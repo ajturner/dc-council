@@ -3,7 +3,7 @@ import { Component, Host, h, Prop } from '@stencil/core';
 @Component({
   tag: 'dc-council-member-list',
   styleUrl: 'dc-council-member-list.css',
-  scoped: true,
+  shadow: true,
 })
 export class DcCouncilMemberList {
 
@@ -13,13 +13,16 @@ export class DcCouncilMemberList {
     return (
       <Host>
         <slot></slot>
-        <div id="members" class="container">
+          <dc-council-dropzone
+            group="member"
+            class="container">
           {this.members.map((member) => {
             return (
               <dc-council-member-card member={member}></dc-council-member-card>
             )
           })}
-        </div>        
+        </dc-council-dropzone>
+          
       </Host>
     );
   }

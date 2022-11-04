@@ -28,6 +28,7 @@
 }
 dc-council-committee-list {
   grid-area: committees;
+  max-height: 600px;
 }
 dc-council-member-list {
   grid-area: members;
