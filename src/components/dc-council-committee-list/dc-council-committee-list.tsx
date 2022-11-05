@@ -13,8 +13,8 @@ export class DcCouncilCommitteeList {
     return (
       <Host>
         <slot></slot>
+        {/* <dc-council-committee-placeholder></dc-council-committee-placeholder> */}
         <div id="committees" class="container">
-          <dc-council-committee-placeholder></dc-council-committee-placeholder>
           {this.committees.map((committee) => {
             return (
               <dc-council-committee-card committee={committee}></dc-council-committee-card>

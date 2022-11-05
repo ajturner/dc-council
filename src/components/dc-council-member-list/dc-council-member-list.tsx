@@ -19,7 +19,6 @@ export class DcCouncilMemberList {
   
   @Watch('members')
   membersUpdated(newMembers:Array<IMember>, _oldMembers:Array<IMember>) {
-    debugger;
     console.log("membersUpdated", newMembers)
     const newSize:number = this.members.length + newMembers.length;
     if(newSize > this.max) {

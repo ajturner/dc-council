@@ -39,12 +39,14 @@ export class DcCouncilGame {
           </div>
           <dc-council-agency-list
             agencies={this.agencies}
+            class="pieces"
             >
               <h2>Agencies</h2>
             </dc-council-agency-list>
           
           <dc-council-member-list
             members={this.members}
+            class="pieces"
             >
             <h2>DC Council Members</h2>
           </dc-council-member-list>

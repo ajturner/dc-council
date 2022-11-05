@@ -14,8 +14,8 @@
 
   grid-template-areas: 
     "header header"
-    "agencies committees"
-    "members committees"
+    "agencies members"
+    "committees committees"
     "footer footer";
 }
 
@@ -28,14 +28,19 @@
 }
 dc-council-committee-list {
   grid-area: committees;
-  max-height: 600px;
+  width: 100vw;
+  /* max-height: 600px; */
 }
+
 dc-council-member-list {
   grid-area: members;
 }
 dc-council-agency-list {
   grid-area: agencies;
-  overflow: auto;
-  height: 500px;
-  border: thin solid #888;
+}
+
+.pieces {
+  overflow-x: scroll;
+  /* border: thin solid #888; */
+  width: 40vw;
 }

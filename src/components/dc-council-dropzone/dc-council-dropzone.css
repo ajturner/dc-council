@@ -1,5 +1,11 @@
 :host {
   display: block;
-  border: 1px dashed #888;
-  min-height: 100px;;
+  background-color: #DDD;
+}
+.sc-dc-council-dropzone:empty::after {
+  content: "drop here";
+  text-align: center;
+}
+.sc-dc-council-dropzone {  /* width: 100%; */
+  min-height: 100px;
 }

@@ -31,7 +31,6 @@ export class DcCouncilCommitteeCard {
         </ul>
         </calcite-card>
 
-        <h3>Staff</h3>
         <dc-council-committee-member-list></dc-council-committee-member-list>
 
         <h3>Agencies</h3>
