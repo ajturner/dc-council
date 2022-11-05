@@ -1,2 +1,0 @@
-import{r as s,h as t,H as o}from"./p-9b567a07.js";const r=":host{display:block}";const c=class{constructor(t){s(this,t)}render(){return t(o,null,t("slot",null))}};c.style=r;export{c as dc_council_committee_member_list};
-//# sourceMappingURL=p-e664c408.entry.js.map
