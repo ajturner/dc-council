@@ -56,6 +56,14 @@ export namespace Components {
         "members": Array<IMember>;
     }
 }
+export interface DcCouncilCommitteeCardCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLDcCouncilCommitteeCardElement;
+}
+export interface DcCouncilCommitteePlaceholderCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLDcCouncilCommitteePlaceholderElement;
+}
 export interface DcCouncilDropzoneCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLDcCouncilDropzoneElement;
@@ -147,6 +155,7 @@ declare namespace LocalJSX {
          */
         "agencies"?: any[];
         "committee"?: any;
+        "onRemoveCommittee"?: (event: DcCouncilCommitteeCardCustomEvent<any>) => void;
     }
     interface DcCouncilCommitteeList {
         "committees"?: any[];
@@ -155,6 +164,7 @@ declare namespace LocalJSX {
     }
     interface DcCouncilCommitteePlaceholder {
         "committee"?: any;
+        "onAddCommittee"?: (event: DcCouncilCommitteePlaceholderCustomEvent<any>) => void;
     }
     interface DcCouncilDropzone {
         /**

@@ -1,4 +1,4 @@
-import { Component, Host, h, Prop } from '@stencil/core';
+import { Component, Host, h, Prop, Listen } from '@stencil/core';
 
 @Component({
   tag: 'dc-council-committee-list',
@@ -7,13 +7,33 @@ import { Component, Host, h, Prop } from '@stencil/core';
 })
 export class DcCouncilCommitteeList {
 
-  @Prop() committees = [];
+  @Prop({ mutable: true, reflect: true }) committees = [];
   
+  @Listen('addCommittee')
+  addCommittee(_evt) {
+    console.log("addCommittee");
+    this.committees = [...this.committees, {
+      name: "New Committee"
+    }]
+  }
+  
+  // TODO: Replace Agencies to available
+  @Listen('removeCommittee')
+  removeCommittee(evt) {
+    console.log("removeCommittee", evt.detail);
+    this.committees = this.committees.filter(c => {
+      console.log("compare", [c, evt.detail])
+      return c.name !== evt.detail.name
+    })
+  }
+
   render() {
     return (
       <Host>
-        <slot></slot>
-        {/* <dc-council-committee-placeholder></dc-council-committee-placeholder> */}
+        <div class="head">
+          <slot></slot>
+          <dc-council-committee-placeholder></dc-council-committee-placeholder>
+        </div>
         <div id="committees" class="container">
           {this.committees.map((committee) => {
             return (

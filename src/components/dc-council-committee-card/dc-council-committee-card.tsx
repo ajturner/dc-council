@@ -1,4 +1,4 @@
-import { Component, Host, h, Prop } from '@stencil/core';
+import { Component, Host, h, Prop, Event, EventEmitter } from '@stencil/core';
 
 @Component({
   tag: 'dc-council-committee-card',
@@ -13,6 +13,12 @@ export class DcCouncilCommitteeCard {
    * Agencies that are managed by this committee
    */
   @Prop() agencies = [];
+
+  @Event() removeCommittee: EventEmitter<any>;
+
+  deleteButton() {
+    this.removeCommittee.emit(this.committee);
+  }
 
   render() {
     return (
@@ -29,6 +35,19 @@ export class DcCouncilCommitteeCard {
           })}
           <li><a href={this.committee.link} target="_new">Website</a></li>
         </ul>
+      <div slot="footer-trailing">
+        <calcite-button
+          id="card-icon-test-6"
+          scale="s"
+          appearance="transparent"
+          color="red"
+          icon-start="x"
+          alignment="center"
+          type="button"
+          width="auto"
+          onClick={this.deleteButton.bind(this)}
+        >Delete Committee</calcite-button>
+      </div>        
         </calcite-card>
 
         <dc-council-committee-member-list></dc-council-committee-member-list>
