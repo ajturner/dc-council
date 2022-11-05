@@ -9,7 +9,7 @@ export class DcCouncilCommitteeCard {
 
   @Prop() committee;
   
-  // private membersEl:HTMLDcCouncilCommitteeMemberListElement;
+  private membersEl:HTMLDcCouncilCommitteeMemberListElement;
   
   /**
    * Agencies that are managed by this committee
@@ -19,6 +19,7 @@ export class DcCouncilCommitteeCard {
   @Event() removeCommittee: EventEmitter<any>;
 
   deleteButton() {
+    console.log(this.membersEl);
     this.removeCommittee.emit(this.committee);
   }
 
