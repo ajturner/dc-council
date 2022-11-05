@@ -15,12 +15,21 @@ export class DcCouncilDropzone {
    */
   @Prop() group: string;
 
+  /**
+   * Temporary id 
+   */
+  @Prop() position: string;
+
   @Event() addedElement : EventEmitter<any>;
 
-  @Listen('onEnd') 
-  dragEnd(evt) {
+  @Listen('onAdd') 
+  elemendAdded(evt) {
     console.log("draggable onEnd", evt);
-    this.addedElement.emit(evt);
+    // debugger;
+
+    // We could have an array of items
+    const items = evt.items.length > 0 ? evt.items : [evt.item];
+    this.addedElement.emit( items );
   }
 
 
@@ -34,7 +43,7 @@ export class DcCouncilDropzone {
       multiDrag: true,
       fallbackTolerance: 3, // So that we can select items on mobile
      	selectedClass: 'selected', // The class applied to the selected items
-      onEnd: this.dragEnd.bind(this)
+      onAdd: this.elemendAdded.bind(this),
     });
   }
   private container: HTMLElement;

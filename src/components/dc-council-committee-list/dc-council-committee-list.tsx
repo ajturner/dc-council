@@ -37,7 +37,11 @@ export class DcCouncilCommitteeList {
         <div id="committees" class="container">
           {this.committees.map((committee) => {
             return (
-              <dc-council-committee-card committee={committee}></dc-council-committee-card>
+              <dc-council-committee-card 
+                class="committee-card"
+                id={`committee-${committee.id}`}
+                committee={committee}
+              ></dc-council-committee-card>
             )
           })}          
         </div> 

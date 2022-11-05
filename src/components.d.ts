@@ -33,6 +33,10 @@ export namespace Components {
           * Drag + Drop group name
          */
         "group": string;
+        /**
+          * Temporary id
+         */
+        "position": string;
     }
     interface DcCouncilGame {
         /**
@@ -54,6 +58,7 @@ export namespace Components {
           * Array of people in this list
          */
         "members": Array<IMember>;
+        "position": string;
     }
 }
 export interface DcCouncilCommitteeCardCustomEvent<T> extends CustomEvent<T> {
@@ -172,6 +177,10 @@ declare namespace LocalJSX {
          */
         "group"?: string;
         "onAddedElement"?: (event: DcCouncilDropzoneCustomEvent<any>) => void;
+        /**
+          * Temporary id
+         */
+        "position"?: string;
     }
     interface DcCouncilGame {
         /**
@@ -193,6 +202,7 @@ declare namespace LocalJSX {
           * Array of people in this list
          */
         "members"?: Array<IMember>;
+        "position"?: string;
     }
     interface IntrinsicElements {
         "dc-council-agency-card": DcCouncilAgencyCard;

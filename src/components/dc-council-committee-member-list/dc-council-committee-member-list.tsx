@@ -3,7 +3,7 @@ import { Component, Host, h } from '@stencil/core';
 @Component({
   tag: 'dc-council-committee-member-list',
   styleUrl: 'dc-council-committee-member-list.css',
-  scoped: true,
+  shadow: true,
 })
 export class DcCouncilCommitteeMemberList {
 
@@ -20,12 +20,14 @@ export class DcCouncilCommitteeMemberList {
         <dc-council-member-list
           id="chair"
           max={1}
+          position="chair"
         >
-        Chair
+         Chair
         </dc-council-member-list>
         
         <dc-council-member-list
           id="members"
+          position="members"
         >
           Members
         </dc-council-member-list>
