@@ -8,7 +8,9 @@ import { Component, Host, h, Prop, Event, EventEmitter } from '@stencil/core';
 export class DcCouncilCommitteeCard {
 
   @Prop() committee;
-
+  
+  private membersEl:HTMLDcCouncilCommitteeMemberListElement;
+  
   /**
    * Agencies that are managed by this committee
    */
@@ -27,14 +29,38 @@ export class DcCouncilCommitteeCard {
         <calcite-card>
           <span slot="title" class="title">
           <calcite-icon icon="group" scale="m" aria-hidden="true"></calcite-icon>
-          {this.committee?.name}
+          
+          <calcite-input-text
+            scale="m"
+            status="idle"
+            alignment="start"
+            prefix-text=""
+            suffix-text=""
+            value={this.committee?.name}
+            placeholder="Committee Name"
+          ></calcite-input-text>
         </span>
-        <ul class="details subtitle">
+        <span slot="subtitle">
+          {this.agencies.length} agencies, 
+          $0 budget,
+          0 members
+          {/* {this.membersEl.getMembers().length} */}
+
+        <dc-council-committee-member-list
+          ref={el => (this.membersEl = el as HTMLDcCouncilCommitteeMemberListElement)}
+        ></dc-council-committee-member-list>
+
+        
+        <dc-council-agency-list>
+          Agencies
+        </dc-council-agency-list>          
+        </span>
+        {/* <ul class="details subtitle">
           {Object.keys(this.committee).map(key => {
             return <li>{key}: {this.committee[key]}</li>
           })}
           <li><a href={this.committee.link} target="_new">Website</a></li>
-        </ul>
+        </ul> */}
       <div slot="footer-trailing">
         <calcite-button
           id="card-icon-test-6"
@@ -50,10 +76,7 @@ export class DcCouncilCommitteeCard {
       </div>        
         </calcite-card>
 
-        <dc-council-committee-member-list></dc-council-committee-member-list>
 
-        <h3>Agencies</h3>
-        <dc-council-agency-list></dc-council-agency-list>
       </Host>
     );
   }

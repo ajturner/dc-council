@@ -42,7 +42,9 @@ export class DcCouncilMemberList {
     console.log("member-list render", this.members)
     return (
       <Host>
-        <slot></slot>
+          <span id="title">
+            <slot></slot>
+          </span>
           <dc-council-dropzone
             group="member"
             class="container">

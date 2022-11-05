@@ -11,7 +11,9 @@ export class DcCouncilAgencyList {
   render() {
     return (
       <Host>
-        <slot></slot>
+          <span id="title">
+            <slot></slot>
+          </span>
 
           <div 
             id="agencies" 

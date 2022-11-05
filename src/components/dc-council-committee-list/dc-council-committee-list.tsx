@@ -3,7 +3,7 @@ import { Component, Host, h, Prop, Listen } from '@stencil/core';
 @Component({
   tag: 'dc-council-committee-list',
   styleUrl: 'dc-council-committee-list.css',
-  scoped: true,
+  shadow: true,
 })
 export class DcCouncilCommitteeList {
 
@@ -13,17 +13,15 @@ export class DcCouncilCommitteeList {
   addCommittee(_evt) {
     console.log("addCommittee");
     this.committees = [...this.committees, {
-      name: "New Committee"
+      id: Math.floor(Math.random() * 1000)
     }]
   }
-  
+
   // TODO: Replace Agencies to available
   @Listen('removeCommittee')
   removeCommittee(evt) {
-    console.log("removeCommittee", evt.detail);
     this.committees = this.committees.filter(c => {
-      console.log("compare", [c, evt.detail])
-      return c.name !== evt.detail.name
+      return c.id !== evt.detail.id
     })
   }
 
@@ -31,8 +29,10 @@ export class DcCouncilCommitteeList {
     return (
       <Host>
         <div class="head">
-          <slot></slot>
-          <dc-council-committee-placeholder></dc-council-committee-placeholder>
+          <span id="title"><slot></slot></span>
+          <dc-council-committee-placeholder
+            id="newCommitteeButton"
+          ></dc-council-committee-placeholder>
         </div>
         <div id="committees" class="container">
           {this.committees.map((committee) => {

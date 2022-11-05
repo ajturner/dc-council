@@ -41,19 +41,19 @@ export class DcCouncilGame {
             agencies={this.agencies}
             class="pieces"
             >
-              <h2>Agencies</h2>
+              Agencies
             </dc-council-agency-list>
           
           <dc-council-member-list
             members={this.members}
             class="pieces"
             >
-            <h2>DC Council Members</h2>
+            DC Council Members
           </dc-council-member-list>
           <dc-council-committee-list 
             committees={this.committees}
             >
-            <h2>Committees</h2>
+            Committees
           </dc-council-committee-list>
           <div id="footer">
             <slot name="footer"></slot>

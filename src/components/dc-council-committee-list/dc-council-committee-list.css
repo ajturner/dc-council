@@ -3,11 +3,23 @@
 }
 
 .head {
-  display: flex;
-  flex-direction: column;
+  /* display: flex;
+  flex-direction: column; */
+  /* align-items: left; */
+  clear: both;
+  margin: 20px 0;
 }
-.head calcite-button {
-  align-self: flex-end;
+#title {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+#newCommitteeButton {
+  /* align-self: flex-end; */
+  /* margin-left: auto; */
+  /* float: right; */
+  display: inline;
+  margin-left: 50px;
 }
 .container {
   display: grid;

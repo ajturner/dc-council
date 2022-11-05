@@ -10,3 +10,9 @@
   grid-auto-columns: minmax(160px,1fr);
   overflow-x: auto;
 }
+
+#title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 400;
+}
