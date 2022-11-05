@@ -2,7 +2,7 @@ import * as Papa from 'papaparse';
 import { IMember } from './types';
 
 // https://github.com/andreasonny83/unique-names-generator
-import { uniqueNamesGenerator, Config, animals } from 'unique-names-generator';
+import { uniqueNamesGenerator, animals } from 'unique-names-generator';
 
 async function loadFile(filename:string, parser) {
 
