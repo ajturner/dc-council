@@ -9,7 +9,7 @@ export class DcCouncilCommitteeCard {
 
   @Prop() committee;
   
-  private membersEl:HTMLDcCouncilCommitteeMemberListElement;
+  // private membersEl:HTMLDcCouncilCommitteeMemberListElement;
   
   /**
    * Agencies that are managed by this committee

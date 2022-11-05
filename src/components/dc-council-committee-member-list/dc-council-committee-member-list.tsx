@@ -1,4 +1,4 @@
-import { Component, Host, h, Method } from '@stencil/core';
+import { Component, Host, h } from '@stencil/core';
 
 @Component({
   tag: 'dc-council-committee-member-list',
