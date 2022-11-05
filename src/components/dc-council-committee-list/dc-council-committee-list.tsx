@@ -1,4 +1,5 @@
 import { Component, Host, h, Prop, Listen } from '@stencil/core';
+import { createCommittee } from '../../utils/data';
 
 @Component({
   tag: 'dc-council-committee-list',
@@ -11,10 +12,9 @@ export class DcCouncilCommitteeList {
   
   @Listen('addCommittee')
   addCommittee(_evt) {
-    console.log("addCommittee");
-    this.committees = [...this.committees, {
-      id: Math.floor(Math.random() * 1000)
-    }]
+    const newCommittee = createCommittee();
+    console.log("addCommittee", newCommittee);
+    this.committees = [...this.committees, newCommittee];
   }
 
   // TODO: Replace Agencies to available
