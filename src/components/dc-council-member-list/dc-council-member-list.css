@@ -3,12 +3,22 @@
   cursor: pointer;
   min-height: 75px;
 }
-.sc-dc-council-dropzone {
+.sc-dc-council-dropzone, .dropzone {
   display: grid;
   grid-template-columns: repeat(auto-fill,minmax(160px,1fr));
   grid-auto-flow: column;
   grid-auto-columns: minmax(160px,1fr);
   overflow-x: auto;
+}
+.dropzone {
+  width: 100%;
+  min-height: 100px;
+}
+.dropzone:empty {
+  background-color: #CCC;
+}
+.dropzone:empty::after {
+  content: 'Add Members here'
 }
 
 #title {

@@ -1,4 +1,4 @@
-import { Component, Host, h, Prop, Event, EventEmitter } from '@stencil/core';
+import { Component, Host, h, Listen, Prop, Event, EventEmitter } from '@stencil/core';
 
 @Component({
   tag: 'dc-council-committee-card',
@@ -16,7 +16,15 @@ export class DcCouncilCommitteeCard {
    */
   @Prop() agencies = [];
 
+  @Prop() members = {chair: [], members: []};
+
   @Event() removeCommittee: EventEmitter<any>;
+
+  @Listen('membersAdded')
+  async membersAdded(_evt) {
+    this.members = await this.membersEl.getMembers();
+  }
+
 
   deleteButton() {
     console.log(this.membersEl);
@@ -44,7 +52,7 @@ export class DcCouncilCommitteeCard {
         <span slot="subtitle">
           {this.agencies.length} agencies, 
           $0 budget,
-          0 members
+          {this.members?.members.length} members
           {/* {this.membersEl.getMembers().length} */}
 
         <dc-council-committee-member-list

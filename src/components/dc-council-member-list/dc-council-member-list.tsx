@@ -1,4 +1,4 @@
-import { Component, Host, h, Prop, Watch, Listen, Element } from '@stencil/core';
+import { Component, Host, h, Prop, Watch, Listen, Element, Event, EventEmitter } from '@stencil/core';
 import { IMember } from '../../utils/types';
 @Component({
   tag: 'dc-council-member-list',
@@ -7,6 +7,8 @@ import { IMember } from '../../utils/types';
 })
 export class DcCouncilMemberList {
   @Element() el: HTMLElement;
+
+  @Event() membersAdded: EventEmitter<any>;
 
   /**
    * Maximum number of members allowed. Null or -1 means unlimited
@@ -20,32 +22,41 @@ export class DcCouncilMemberList {
   
   @Prop() position:string;
 
-  @Watch('members')
-  membersUpdated(newMembers:Array<IMember>, _oldMembers:Array<IMember> = []) {
-    console.log("membersUpdated", newMembers)
+  // @Watch('members')
+  addMembers(newMembers:Array<IMember>, _oldMembers:Array<IMember> = []) {
+    
+    console.log("membersUpdated", [this.position, newMembers])
+    // debugger;
     const newSize:number = this.members.length + newMembers.length;
-    if(newSize > this.max) {
+    if(!!this.max && newSize > this.max) {
       this.members = newMembers.slice(0,this.max)
     } else {
-      this.members = newMembers;
+      this.members = [...this.members, ...newMembers];
     }
+    
+    // Event up for other components
+    this.membersAdded.emit(this.members);
   }
 
   @Listen('addedElement')
   addedElement(evt) {
+    evt.preventDefault();
+
     // debugger;
-    console.log("dc-council-member-list addedElement", {
-      members: this.members,
-      evt,
-      card: evt.detail.item,
-      to: evt.detail.to,
-    })
+    // console.log("dc-council-member-list addedElement", {
+    //   members: this.members,
+    //   evt,
+    //   card: evt.detail.item,
+    //   to: evt.detail.to,
+    // })
     
-    // TODO: generalize for other dropzones
-    const newMembers = evt.detail.map(card => {
-      return(card.member)
-    });
-    this.membersUpdated(newMembers);
+    var data = evt.dataTransfer.getData("text");
+    const newMember = JSON.parse(data);
+    this.addMembers([newMember]);
+  }
+
+  allowDrop(evt) {
+    evt.preventDefault();
   }
 
   render() {
@@ -55,17 +66,23 @@ export class DcCouncilMemberList {
           <span id="title">
             <slot></slot>
           </span>
-          <dc-council-dropzone
+          {/* <dc-council-dropzone
             group="member"
             position={this.position}
-            class="container">
+            class="container"> */}
+
+          <div 
+            class="dropzone"
+            onDrop={this.addedElement.bind(this)}
+            onDragOver={this.allowDrop.bind(this)}
+          >
           {this.members.map((member) => {
             return (
               <dc-council-member-card member={member}></dc-council-member-card>
             )
           })}
-        </dc-council-dropzone>
-          
+          </div>
+        {/* </dc-council-dropzone> */}
       </Host>
     );
   }

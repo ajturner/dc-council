@@ -1,4 +1,4 @@
-import { Component, Host, h } from '@stencil/core';
+import { Component, Host, h, Method, Listen } from '@stencil/core';
 
 @Component({
   tag: 'dc-council-committee-member-list',
@@ -6,11 +6,16 @@ import { Component, Host, h } from '@stencil/core';
   shadow: true,
 })
 export class DcCouncilCommitteeMemberList {
+  private chairEl:HTMLDcCouncilMemberListElement;
+  private membersEl:HTMLDcCouncilMemberListElement;
 
-  // @Method()
-  // async getMembers {
-
-  // }
+  @Method()
+  public async getMembers() {
+    return {
+      chair: this.chairEl.members,
+      members: this.membersEl.members
+    };
+  }
 
   render() {
     return (
@@ -21,6 +26,8 @@ export class DcCouncilCommitteeMemberList {
           id="chair"
           max={1}
           position="chair"
+          ref={el => (this.chairEl = el as HTMLDcCouncilMemberListElement)}
+
         >
          Chair
         </dc-council-member-list>
@@ -28,6 +35,7 @@ export class DcCouncilCommitteeMemberList {
         <dc-council-member-list
           id="members"
           position="members"
+          ref={el => (this.membersEl = el as HTMLDcCouncilMemberListElement)}
         >
           Members
         </dc-council-member-list>

@@ -19,11 +19,13 @@ export namespace Components {
          */
         "agencies": any[];
         "committee": any;
+        "members": { chair: any[]; members: any[]; };
     }
     interface DcCouncilCommitteeList {
         "committees": any[];
     }
     interface DcCouncilCommitteeMemberList {
+        "getMembers": () => Promise<{ chair: import("/Users/andr7059/Projects/ggwash/dc-council/src/utils/types").IMember[]; members: import("/Users/andr7059/Projects/ggwash/dc-council/src/utils/types").IMember[]; }>;
     }
     interface DcCouncilCommitteePlaceholder {
         "committee": any;
@@ -72,6 +74,10 @@ export interface DcCouncilCommitteePlaceholderCustomEvent<T> extends CustomEvent
 export interface DcCouncilDropzoneCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLDcCouncilDropzoneElement;
+}
+export interface DcCouncilMemberListCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLDcCouncilMemberListElement;
 }
 declare global {
     interface HTMLDcCouncilAgencyCardElement extends Components.DcCouncilAgencyCard, HTMLStencilElement {
@@ -160,6 +166,7 @@ declare namespace LocalJSX {
          */
         "agencies"?: any[];
         "committee"?: any;
+        "members"?: { chair: any[]; members: any[]; };
         "onRemoveCommittee"?: (event: DcCouncilCommitteeCardCustomEvent<any>) => void;
     }
     interface DcCouncilCommitteeList {
@@ -202,6 +209,7 @@ declare namespace LocalJSX {
           * Array of people in this list
          */
         "members"?: Array<IMember>;
+        "onMembersAdded"?: (event: DcCouncilMemberListCustomEvent<any>) => void;
         "position"?: string;
     }
     interface IntrinsicElements {
