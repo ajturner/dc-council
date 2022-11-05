@@ -1,5 +1,5 @@
-import { Component, Host, h, Prop } from '@stencil/core';
-
+import { Component, Host, h, Prop, Watch, Listen } from '@stencil/core';
+import { IMember } from '../../utils/types';
 @Component({
   tag: 'dc-council-member-list',
   styleUrl: 'dc-council-member-list.css',
@@ -7,9 +7,40 @@ import { Component, Host, h, Prop } from '@stencil/core';
 })
 export class DcCouncilMemberList {
 
-  @Prop() members = [];
+  /**
+   * Maximum number of members allowed. Null or -1 means unlimited
+   */
+  @Prop() max:number = null;
+
+  /**
+   * Array of people in this list
+   */
+  @Prop({ mutable:true, reflect: true }) members:Array<IMember> = [];
   
+  @Watch('members')
+  membersUpdated(newMembers:Array<IMember>, _oldMembers:Array<IMember>) {
+    debugger;
+    console.log("membersUpdated", newMembers)
+    const newSize:number = this.members.length + newMembers.length;
+    if(newSize > this.max) {
+      this.members = newMembers.slice(0,this.max)
+    } else {
+      this.members = newMembers;
+    }
+  }
+
+  @Listen('addedElement')
+  addedElement(evt) {
+    console.log("dc-council-member-list addedElement", {
+      evt,
+      card: evt.detail.item,
+      
+    })
+
+  }
+
   render() {
+    console.log("member-list render", this.members)
     return (
       <Host>
         <slot></slot>

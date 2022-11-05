@@ -1,5 +1,6 @@
 import { Component, Host, h, State, Prop } from '@stencil/core';
 import { loadAgencies, loadCommittees, loadMembers } from '../../utils/data';
+import { IMember } from '../../utils/types';
 
 @Component({
   tag: 'dc-council-game',
@@ -17,7 +18,7 @@ export class DcCouncilGame {
 
   @State() agencies = [];
   @State() committees = [{name:'committee A'}];
-  @State() members = [{name:'member A'}];
+  @State() members:Array<IMember> = [];
 
   async componentWillLoad() {
     this.agencies = await loadAgencies(this.agencyFilename);

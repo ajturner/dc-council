@@ -5,6 +5,7 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { IMember } from "./utils/types";
 export namespace Components {
     interface DcCouncilAgencyCard {
         "agency": any;
@@ -45,8 +46,19 @@ export namespace Components {
         "member": any;
     }
     interface DcCouncilMemberList {
-        "members": any[];
+        /**
+          * Maximum number of members allowed. Null or -1 means unlimited
+         */
+        "max": number;
+        /**
+          * Array of people in this list
+         */
+        "members": Array<IMember>;
     }
+}
+export interface DcCouncilDropzoneCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLDcCouncilDropzoneElement;
 }
 declare global {
     interface HTMLDcCouncilAgencyCardElement extends Components.DcCouncilAgencyCard, HTMLStencilElement {
@@ -149,6 +161,7 @@ declare namespace LocalJSX {
           * Drag + Drop group name
          */
         "group"?: string;
+        "onAddedElement"?: (event: DcCouncilDropzoneCustomEvent<any>) => void;
     }
     interface DcCouncilGame {
         /**
@@ -162,7 +175,14 @@ declare namespace LocalJSX {
         "member"?: any;
     }
     interface DcCouncilMemberList {
-        "members"?: any[];
+        /**
+          * Maximum number of members allowed. Null or -1 means unlimited
+         */
+        "max"?: number;
+        /**
+          * Array of people in this list
+         */
+        "members"?: Array<IMember>;
     }
     interface IntrinsicElements {
         "dc-council-agency-card": DcCouncilAgencyCard;

@@ -11,6 +11,15 @@ export class DcCouncilCommitteeMemberList {
     return (
       <Host>
         <slot></slot>
+        <h3>Chair</h3>
+        <dc-council-member-list
+          id="chair"
+          max={1}
+        ></dc-council-member-list>
+        <h3>Members</h3>
+        <dc-council-member-list
+          id="members"
+        ></dc-council-member-list>
       </Host>
     );
   }

@@ -9,6 +9,10 @@
 :host(.ghost) {
   background: rgba(76, 72, 255, 0.75);
 }
+:host(.selected) {
+  border: 1px solid red;
+  background-color: red;
+}
 .details {
   display: none;
 }

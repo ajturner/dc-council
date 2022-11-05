@@ -1,4 +1,5 @@
 import * as Papa from 'papaparse';
+import { IMember } from './types';
 
 async function loadFile(filename:string, parser) {
 
@@ -36,7 +37,7 @@ export async function loadCommittees(filename:string) {
   const committees = loadFile(filename, simpleParse)
   return committees; 
 }
-export async function loadMembers(filename:string) {
-  const members = loadFile(filename, simpleParse)
+export async function loadMembers(filename:string):Promise<Array<IMember>> {
+  const members:Array<IMember> = await loadFile(filename, simpleParse)
   return members;   
 }

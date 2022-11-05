@@ -1,6 +1,7 @@
-import { Component, Host, h, Prop } from '@stencil/core';
-import Sortable from 'sortablejs';
+import { Component, Host, h, Prop, Listen, Event, EventEmitter } from '@stencil/core';
+import {Sortable, MultiDrag} from 'sortablejs';
 // https://ionic.io/blog/building-with-stencil-drag-and-drop-components
+Sortable.mount(new MultiDrag());
 
 @Component({
   tag: 'dc-council-dropzone',
@@ -14,11 +15,26 @@ export class DcCouncilDropzone {
    */
   @Prop() group: string;
 
+  @Event() addedElement : EventEmitter<any>;
+
+  @Listen('onEnd') 
+  dragEnd(evt) {
+    console.log("draggable onEnd", evt);
+    this.addedElement.emit(evt);
+  }
+
+
+
   componentDidLoad() {
+
     Sortable.create(this.container, {
       animation: 150,
       group: this.group,
       ghostClass: 'ghost',
+      multiDrag: true,
+      fallbackTolerance: 3, // So that we can select items on mobile
+     	selectedClass: 'selected', // The class applied to the selected items
+      onEnd: this.dragEnd.bind(this)
     });
   }
   private container: HTMLElement;
