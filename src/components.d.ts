@@ -60,6 +60,17 @@ export namespace Components {
         "members": Array<IMember>;
         "position": string;
     }
+    interface DcCouncilShare {
+        "hideModal": () => Promise<void>;
+        "open": boolean;
+        "showModal": () => Promise<void>;
+    }
+    interface DcCouncilTemplate {
+        "hideModal": () => Promise<void>;
+        "open": boolean;
+        "showModal": () => Promise<void>;
+        "template": string;
+    }
 }
 export interface DcCouncilAgencyListCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -80,6 +91,10 @@ export interface DcCouncilDropzoneCustomEvent<T> extends CustomEvent<T> {
 export interface DcCouncilMemberListCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLDcCouncilMemberListElement;
+}
+export interface DcCouncilTemplateCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLDcCouncilTemplateElement;
 }
 declare global {
     interface HTMLDcCouncilAgencyCardElement extends Components.DcCouncilAgencyCard, HTMLStencilElement {
@@ -142,6 +157,18 @@ declare global {
         prototype: HTMLDcCouncilMemberListElement;
         new (): HTMLDcCouncilMemberListElement;
     };
+    interface HTMLDcCouncilShareElement extends Components.DcCouncilShare, HTMLStencilElement {
+    }
+    var HTMLDcCouncilShareElement: {
+        prototype: HTMLDcCouncilShareElement;
+        new (): HTMLDcCouncilShareElement;
+    };
+    interface HTMLDcCouncilTemplateElement extends Components.DcCouncilTemplate, HTMLStencilElement {
+    }
+    var HTMLDcCouncilTemplateElement: {
+        prototype: HTMLDcCouncilTemplateElement;
+        new (): HTMLDcCouncilTemplateElement;
+    };
     interface HTMLElementTagNameMap {
         "dc-council-agency-card": HTMLDcCouncilAgencyCardElement;
         "dc-council-agency-list": HTMLDcCouncilAgencyListElement;
@@ -153,6 +180,8 @@ declare global {
         "dc-council-game": HTMLDcCouncilGameElement;
         "dc-council-member-card": HTMLDcCouncilMemberCardElement;
         "dc-council-member-list": HTMLDcCouncilMemberListElement;
+        "dc-council-share": HTMLDcCouncilShareElement;
+        "dc-council-template": HTMLDcCouncilTemplateElement;
     }
 }
 declare namespace LocalJSX {
@@ -214,6 +243,14 @@ declare namespace LocalJSX {
         "onMembersAdded"?: (event: DcCouncilMemberListCustomEvent<any>) => void;
         "position"?: string;
     }
+    interface DcCouncilShare {
+        "open"?: boolean;
+    }
+    interface DcCouncilTemplate {
+        "onTemplateSelected"?: (event: DcCouncilTemplateCustomEvent<string>) => void;
+        "open"?: boolean;
+        "template"?: string;
+    }
     interface IntrinsicElements {
         "dc-council-agency-card": DcCouncilAgencyCard;
         "dc-council-agency-list": DcCouncilAgencyList;
@@ -225,6 +262,8 @@ declare namespace LocalJSX {
         "dc-council-game": DcCouncilGame;
         "dc-council-member-card": DcCouncilMemberCard;
         "dc-council-member-list": DcCouncilMemberList;
+        "dc-council-share": DcCouncilShare;
+        "dc-council-template": DcCouncilTemplate;
     }
 }
 export { LocalJSX as JSX };
@@ -241,6 +280,8 @@ declare module "@stencil/core" {
             "dc-council-game": LocalJSX.DcCouncilGame & JSXBase.HTMLAttributes<HTMLDcCouncilGameElement>;
             "dc-council-member-card": LocalJSX.DcCouncilMemberCard & JSXBase.HTMLAttributes<HTMLDcCouncilMemberCardElement>;
             "dc-council-member-list": LocalJSX.DcCouncilMemberList & JSXBase.HTMLAttributes<HTMLDcCouncilMemberListElement>;
+            "dc-council-share": LocalJSX.DcCouncilShare & JSXBase.HTMLAttributes<HTMLDcCouncilShareElement>;
+            "dc-council-template": LocalJSX.DcCouncilTemplate & JSXBase.HTMLAttributes<HTMLDcCouncilTemplateElement>;
         }
     }
 }

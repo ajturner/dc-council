@@ -73,7 +73,6 @@ export class DcCouncilMemberList {
   }
 
   render() {
-    console.log("member-list render", this.members)
     return (
       <Host>
           <span id="title">

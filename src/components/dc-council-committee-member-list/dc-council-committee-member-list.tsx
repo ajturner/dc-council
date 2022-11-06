@@ -15,12 +15,13 @@ export class DcCouncilCommitteeMemberList {
   @Method()
   public async getMembers():Promise<ICommitteeMembers> {
     return {
-      chair: this.chairEl.members[0], // TODO: consider multiple chairs
+      chair: this.chairEl.members,
       members: this.membersEl.members
     };
   }
 
   render() {
+    console.log("committee-member list", this.members)
     return (
       <Host>
         <slot></slot>
@@ -29,7 +30,7 @@ export class DcCouncilCommitteeMemberList {
           id="chair"
           max={1}
           position="chair"
-          members={[this.members?.chair]}
+          members={this.members?.chair}
           ref={el => (this.chairEl = el as HTMLDcCouncilMemberListElement)}
 
         >

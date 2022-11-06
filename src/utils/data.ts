@@ -1,5 +1,5 @@
 import * as Papa from 'papaparse';
-import { ICommittee, IMember } from './types';
+import { IAgency, ICommittee, IMember } from './types';
 
 // https://github.com/andreasonny83/unique-names-generator
 import { uniqueNamesGenerator, animals } from 'unique-names-generator';
@@ -36,8 +36,34 @@ export async function loadAgencies(filename:string) {
   const agencies = loadFile(filename, simpleParse)
   return agencies;
 }
-export async function loadCommittees(filename:string):Promise<Array<ICommittee>> {
-  const committees = loadFile(filename, simpleParse)
+// When Loading Committees, we have member names and agency codes. We need to join to objects
+export async function loadCommittees(filename:string, members:Array<IMember>, agencies: Array<IAgency>):Promise<Array<ICommittee>> {
+  let committeesData = await loadFile(filename, simpleParse)
+
+  // Build a complete committee
+  const committees = committeesData.map((row) => {
+    const committee:ICommittee = {
+      id: row.id,
+      name: row.name,
+      description: row.description,
+      link: row.link,
+      members: {}
+    }
+
+    const loadedMembers = row.members.split(",")
+    const loadedAgencies = row.agencies.split(",")
+    committee.members.chair = members.filter(m => m.name === row.chair)
+    committee.members.members = members.filter(m => {
+      return loadedMembers.includes(m.name);
+    })
+
+    committee.agencies = agencies.filter(a => {
+      return loadedAgencies.includes(a.name)
+    })
+    
+    return committee;
+  })
+
   return committees; 
 }
 export async function loadMembers(filename:string):Promise<Array<IMember>> {
@@ -58,7 +84,8 @@ function toTitleCase(str) {
 export function createCommittee(values = {}): ICommittee {
   const defaultCommittee:ICommittee = {
     id: String(Math.floor(Math.random() * 1000)),
-    name: toTitleCase(generateName() + " Committee")
+    name: toTitleCase(generateName() + " Committee"),
+    members: {}
   };
   const committee = {
     ...values,

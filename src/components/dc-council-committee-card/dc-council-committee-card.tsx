@@ -1,5 +1,5 @@
 import { Component, Host, h, Listen, Prop, Event, EventEmitter, State } from '@stencil/core';
-import { IAgency, ICommittee, ICommitteeMembers, IMember } from '../../utils/types';
+import { IAgency, ICommittee, IMember } from '../../utils/types';
 
 @Component({
   tag: 'dc-council-committee-card',
@@ -22,7 +22,7 @@ export class DcCouncilCommitteeCard {
 
   componentWillLoad() {
     // TODO: Figure out if this can be removed + still update render with nested children in committee.members.members
-    this.members = this.committee.members.members;
+    this.members = this.committee.members?.members;
     this.agencies = this.committee.agencies;
   }
 
@@ -48,12 +48,16 @@ export class DcCouncilCommitteeCard {
     // debugger;
       return sum += Number(agency.budget);
     }, 0);
-    const budgetString = new Intl.NumberFormat('en-US', 
+
+    // if budgetSum is null then set to $0
+    // Round to Millions
+    const budgetString = !!budgetSum ? new Intl.NumberFormat('en-US', 
       { 
         style: 'currency', 
         currency: 'USD',
-        maximumFractionDigits: 0, 
-      }).format(budgetSum);
+        maximumFractionDigits: 0,
+        maximumSignificantDigits: 3
+      }).format(budgetSum / 1_000_000) : "$0";
     return budgetString;
   }
 
@@ -90,7 +94,7 @@ export class DcCouncilCommitteeCard {
         </span>
         <span slot="subtitle">
           {this.agencies?.length} agencies, 
-          {this.calculateBudget()} budget,
+          {this.calculateBudget()}m budget,
           {this.members?.length} members
           {/* {this.membersEl.getMembers().length} */}
 

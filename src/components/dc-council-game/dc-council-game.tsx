@@ -1,6 +1,6 @@
 import { Component, Host, h, State, Prop, Listen } from '@stencil/core';
 import { loadAgencies, loadCommittees, loadMembers } from '../../utils/data';
-import state, { getBookmark, setBookmark } from '../../utils/state';
+import state, {  } from '../../utils/state';
 import { ICommittee, IMember } from '../../utils/types';
 
 @Component({
@@ -10,7 +10,7 @@ import { ICommittee, IMember } from '../../utils/types';
 })
 export class DcCouncilGame {
 
-  @Prop({ mutable:true, reflect: true }) template:"current" | "blank" | "saved" = "saved";
+  @Prop({ mutable:true, reflect: true }) template:"current" | "blank" | "saved" = "blank";
 
   /**
    * URL to Agency spreadsheet
@@ -25,18 +25,35 @@ export class DcCouncilGame {
   @State() committees:Array<ICommittee> = [];
   @State() members:Array<IMember> = [];
 
+  // is sharing visible?
+  @State() share:boolean = false;
+
   async componentWillLoad() {
     this.members = await loadMembers(this.memberFilename);
     this.agencies = await loadAgencies(this.agencyFilename);
-
-    if(this.template === "current") {
-      this.committees = await loadCommittees(this.committeeFilename);  
-    } else if (this.template === "saved") {
-      this.committees = getBookmark();
-    } // else blank
-    state.committees = this.committees;
+    this.committees = await this.loadTemplate(this.template);
   }
 
+  async loadTemplate(template:string = "saved"): Promise<Array<ICommittee>> {
+    let committees:Array<ICommittee> = [];
+
+    if(template === "current") {
+      committees = await loadCommittees(this.committeeFilename, this.members, this.agencies);
+    } else if (template === "saved") {
+      // committees = getBookmark();
+    } else { // blank
+      committees = [];
+    }
+    state.committees = committees;
+
+    // debugger
+    return committees;
+  }
+
+  @Listen('templateSelected')
+  async templateSelected(evt) {
+    this.committees = await this.loadTemplate(evt.detail);
+  }
 
   @Listen('calciteRadioGroupChange')
   selectorChanged(evt) {
@@ -62,24 +79,6 @@ export class DcCouncilGame {
 
   }
 
-  saveButtonClicked() {
-    setBookmark(state.committees);
-    // debugger
-  }
-
-  renderSaveButton() {
-      return(<calcite-button
-          alignment="start"
-          appearance="solid"
-          color="blue"
-          icon-start="plus"
-          scale="m"
-          onClick={this.saveButtonClicked.bind(this)}
-        >
-          Share
-        </calcite-button>
-      )
-  }
   render() {
     return (
       <Host>
@@ -87,7 +86,17 @@ export class DcCouncilGame {
         <div id="gameboard" class={`display-${this.selectedPieces}`}>
           <div id="header">
             <slot name="header"></slot>
-            {this.renderSaveButton()}
+            <dc-council-share
+              open={this.share}
+            >
+              Share
+            </dc-council-share>
+
+            <dc-council-template
+              open={this.share}
+            >
+              Start Again
+            </dc-council-template>
           </div>
           <div id="pieces">
             <div id="selector">{this.renderSelector()}</div>

@@ -17,7 +17,7 @@ export interface ICommittee {
   members?: ICommitteeMembers
 }
 export interface ICommitteeMembers {
-  chair?: IMember
+  chair?: Array<IMember>
   members?: Array<IMember>
 }
 export interface IAgency {
