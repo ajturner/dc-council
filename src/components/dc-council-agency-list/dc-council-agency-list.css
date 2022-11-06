@@ -24,9 +24,9 @@
   min-height: 75px;
   background-color: #CCC;
 }
-.dropzone:empty::after {
-  content: 'Add Agencies here'
-}
 :host(.spots-available) .dropzone::after {
   content: "More agencies allowed..."
+}
+.dropzone:empty::after {
+  content: 'Add Agencies here'
 }
