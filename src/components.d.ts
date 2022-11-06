@@ -64,6 +64,10 @@ export namespace Components {
         "position": string;
     }
 }
+export interface DcCouncilAgencyListCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLDcCouncilAgencyListElement;
+}
 export interface DcCouncilCommitteeCardCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLDcCouncilCommitteeCardElement;
@@ -160,6 +164,7 @@ declare namespace LocalJSX {
     }
     interface DcCouncilAgencyList {
         "agencies"?: any[];
+        "onAgenciesAdded"?: (event: DcCouncilAgencyListCustomEvent<any>) => void;
     }
     interface DcCouncilCommitteeCard {
         /**

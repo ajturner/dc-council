@@ -13,10 +13,10 @@
 .dropzone {
   width: 100%;
 }
-:host(.members-available) .dropzone {
+:host(.spots-available) .dropzone {
   padding-bottom: 10px;
 }
-:host(.members-available) .dropzone::after {
+:host(.spots-available) .dropzone::after {
   content: "More members allowed..."
 }
 
@@ -32,4 +32,7 @@
   margin: 0;
   font-size: 1.1rem;
   font-weight: 400;
+}
+.drag-over {
+  border: 1px dashed red ;
 }

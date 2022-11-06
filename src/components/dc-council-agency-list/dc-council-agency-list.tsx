@@ -1,4 +1,4 @@
-import { Component, Host, h, Prop } from '@stencil/core';
+import { Component, Host, h, Listen, Prop, Event, EventEmitter } from '@stencil/core';
 
 @Component({
   tag: 'dc-council-agency-list',
@@ -7,27 +7,45 @@ import { Component, Host, h, Prop } from '@stencil/core';
 })
 export class DcCouncilAgencyList {
   @Prop() agencies = [];
+  @Event() agenciesAdded: EventEmitter<any>;
+
+  addAgency(newAgency) {
+    this.agencies = [...this.agencies, newAgency]
+  }
+
+  @Listen('addedElement')
+  addedElement(evt) {
+    evt.preventDefault();
+    var data = evt.dataTransfer.getData("text");
+    const newAgency = JSON.parse(data);
+    this.addAgency(newAgency);
+
+    this.agenciesAdded.emit([newAgency]);
+  }
+
+  allowDrop(evt) {
+    evt.preventDefault();
+  }
 
   render() {
     return (
-      <Host>
-          <span id="title">
-            <slot></slot>
-          </span>
+      <Host
+        class="spots-available"
+      >
+        <span id="title">
+          <slot></slot>
+        </span>
 
-          <div 
-            id="agencies" 
-            
-          >
-          <dc-council-dropzone
-            group="agency"
-            class="container">
-          {this.agencies.map((agency) => {
-            return (
-              <dc-council-agency-card agency={agency}></dc-council-agency-card>
-            )
-          })}
-          </dc-council-dropzone>
+        <div 
+          class="dropzone"
+          onDrop={this.addedElement.bind(this)}
+          onDragOver={this.allowDrop.bind(this)}
+        >
+        {this.agencies.map((agency) => {
+          return (
+            <dc-council-agency-card agency={agency}></dc-council-agency-card>
+          )
+        })}
         </div>
       </Host>
     );

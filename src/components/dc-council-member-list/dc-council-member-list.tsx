@@ -1,4 +1,4 @@
-import { Component, Host, h, Prop, Watch, Listen, Element, Event, EventEmitter } from '@stencil/core';
+import { Component, Host, h, Prop, Listen, Element, Event, EventEmitter } from '@stencil/core';
 import { IMember } from '../../utils/types';
 @Component({
   tag: 'dc-council-member-list',
@@ -47,9 +47,9 @@ export class DcCouncilMemberList {
 
     // Adds prompts for adding more members
     if(this.members.length < this.max) {
-      this.el.classList.add('members-available');
+      this.el.classList.add('spots-available');
     } else {
-      this.el.classList.remove('members-available');
+      this.el.classList.remove('spots-available');
     }
     // Event up for other components
     this.membersAdded.emit(this.members);
@@ -58,21 +58,17 @@ export class DcCouncilMemberList {
   @Listen('addedElement')
   addedElement(evt) {
     evt.preventDefault();
-
-    // debugger;
-    // console.log("dc-council-member-list addedElement", {
-    //   members: this.members,
-    //   evt,
-    //   card: evt.detail.item,
-    //   to: evt.detail.to,
-    // })
-    
     var data = evt.dataTransfer.getData("text");
     const newMember = JSON.parse(data);
     this.addMembers([newMember]);
   }
 
+  // TODO - prevent allow agency onto members
   allowDrop(evt) {
+    // evt.target.classList.add('drag-over');
+    // debugger;
+    // const possibleElement = JSON.parse(data);
+
     evt.preventDefault();
   }
 
@@ -83,11 +79,6 @@ export class DcCouncilMemberList {
           <span id="title">
             <slot></slot>
           </span>
-          {/* <dc-council-dropzone
-            group="member"
-            position={this.position}
-            class="container"> */}
-
           <div 
             class="dropzone"
             onDrop={this.addedElement.bind(this)}
@@ -99,7 +90,6 @@ export class DcCouncilMemberList {
             )
           })}
           </div>
-        {/* </dc-council-dropzone> */}
       </Host>
     );
   }

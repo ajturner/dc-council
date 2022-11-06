@@ -10,6 +10,7 @@ export class DcCouncilCommitteeCard {
   @Prop() committee;
   
   private membersEl:HTMLDcCouncilCommitteeMemberListElement;
+  private agenciesEl:HTMLDcCouncilAgencyListElement;
   
   /**
    * Agencies that are managed by this committee
@@ -24,7 +25,24 @@ export class DcCouncilCommitteeCard {
   async membersAdded(_evt) {
     this.members = await this.membersEl.getMembers();
   }
+  @Listen('agenciesAdded')
+  async agenciesAdded(_evt) {
+    this.agencies = this.agenciesEl.agencies;
+  } 
 
+  calculateBudget() {
+    const budgetSum = this.agencies.reduce((sum, agency) => {
+    // debugger;
+      return sum += Number(agency.budget);
+    }, 0);
+    const budgetString = new Intl.NumberFormat('en-US', 
+      { 
+        style: 'currency', 
+        currency: 'USD',
+        maximumFractionDigits: 0, 
+      }).format(budgetSum);
+    return budgetString;
+  }
 
   deleteButton() {
     console.log(this.membersEl);
@@ -59,7 +77,7 @@ export class DcCouncilCommitteeCard {
         </span>
         <span slot="subtitle">
           {this.agencies.length} agencies, 
-          $0 budget,
+          {this.calculateBudget()} budget,
           {this.members?.members.length} members
           {/* {this.membersEl.getMembers().length} */}
 
@@ -68,7 +86,9 @@ export class DcCouncilCommitteeCard {
         ></dc-council-committee-member-list>
 
         
-        <dc-council-agency-list>
+        <dc-council-agency-list
+          ref={el => (this.agenciesEl = el as HTMLDcCouncilAgencyListElement)}
+        >
           Agencies
         </dc-council-agency-list>          
         </span>

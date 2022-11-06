@@ -16,3 +16,17 @@
   font-size: 1.1rem;
   font-weight: 400;
 }
+
+.dropzone {
+  width: 100%;
+}
+.dropzone:empty {
+  min-height: 75px;
+  background-color: #CCC;
+}
+.dropzone:empty::after {
+  content: 'Add Agencies here'
+}
+:host(.spots-available) .dropzone::after {
+  content: "More agencies allowed..."
+}

@@ -9,10 +9,25 @@ export class DcCouncilAgencyCard {
 
   @Prop() agency;
 
+  dragStart(ev) {
+    console.log("dragStart");
+    // Change the source element's background color
+    // to show that drag has started
+    ev.currentTarget.classList.add("dragging");
+    // Clear the drag data cache (for all formats/types)
+    ev.dataTransfer.clearData();
+    // Set the drag's format and data.
+    // Use the event target's id for the data
+    ev.dataTransfer.setData("text/plain", JSON.stringify(this.agency));
+
+  }
 
   render() {
     return (
-      <Host>
+      <Host
+        draggable="true" 
+        onDragStart={this.dragStart.bind(this)}      
+      >
           <slot></slot>
           <calcite-card draggable="true">
             <span slot="title" class="title">
