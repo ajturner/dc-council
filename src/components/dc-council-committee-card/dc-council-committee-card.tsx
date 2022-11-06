@@ -8,35 +8,28 @@ import { ICommittee } from '../../utils/types';
 })
 export class DcCouncilCommitteeCard {
 
-  @Prop() committee;
+  @Prop() committee: ICommittee;
   
   private membersEl:HTMLDcCouncilCommitteeMemberListElement;
   private agenciesEl:HTMLDcCouncilAgencyListElement;
   
-  /**
-   * Agencies that are managed by this committee
-   */
-  @Prop() agencies = [];
-
-  @Prop() members = {chair: [], members: []};
-
   @Event() removeCommittee: EventEmitter<any>;
   @Event() committeeUpdated: EventEmitter<ICommittee>;
 
   @Listen('membersAdded')
   async membersAdded(_evt) {
-    this.members = await this.membersEl.getMembers();
+    this.committee.members = await this.membersEl.getMembers();
     this.committeeUpdated.emit( this.committee );
   }
   @Listen('agenciesAdded')
   async agenciesAdded(_evt) {
-    this.agencies = this.agenciesEl.agencies;
+    this.committee.agencies = this.agenciesEl.agencies;
     
     this.committeeUpdated.emit( this.committee );
   } 
 
   calculateBudget() {
-    const budgetSum = this.agencies.reduce((sum, agency) => {
+    const budgetSum = this.committee.agencies?.reduce((sum, agency) => {
     // debugger;
       return sum += Number(agency.budget);
     }, 0);
@@ -81,17 +74,19 @@ export class DcCouncilCommitteeCard {
           
         </span>
         <span slot="subtitle">
-          {this.agencies.length} agencies, 
+          {this.committee.agencies?.length} agencies, 
           {this.calculateBudget()} budget,
-          {this.members?.members.length} members
+          {this.committee.members?.members?.length} members
           {/* {this.membersEl.getMembers().length} */}
 
         <dc-council-committee-member-list
+          members={this.committee.members}
           ref={el => (this.membersEl = el as HTMLDcCouncilCommitteeMemberListElement)}
         ></dc-council-committee-member-list>
 
         
         <dc-council-agency-list
+          agencies={this.committee.agencies}
           ref={el => (this.agenciesEl = el as HTMLDcCouncilAgencyListElement)}
         >
           Agencies

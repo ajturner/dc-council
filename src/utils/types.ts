@@ -12,12 +12,14 @@ export interface ICommittee {
   id:string
   name?:string
   description?:string
-  agencies?:Array<string>
-  chair?: string
-  members?: Array<string>
+  agencies?:Array<IAgency>
   link?:string
+  members?: ICommitteeMembers
 }
-
+export interface ICommitteeMembers {
+  chair?: IMember
+  members?: Array<IMember>
+}
 export interface IAgency {
   code:string
   name:string

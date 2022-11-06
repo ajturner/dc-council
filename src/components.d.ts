@@ -5,7 +5,7 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { ICommittee, IMember } from "./utils/types";
+import { ICommittee, ICommitteeMembers, IMember } from "./utils/types";
 export namespace Components {
     interface DcCouncilAgencyCard {
         "agency": any;
@@ -14,18 +14,14 @@ export namespace Components {
         "agencies": any[];
     }
     interface DcCouncilCommitteeCard {
-        /**
-          * Agencies that are managed by this committee
-         */
-        "agencies": any[];
-        "committee": any;
-        "members": { chair: any[]; members: any[]; };
+        "committee": ICommittee;
     }
     interface DcCouncilCommitteeList {
         "committees": Array<ICommittee>;
     }
     interface DcCouncilCommitteeMemberList {
-        "getMembers": () => Promise<{ chair: import("/Users/andr7059/Projects/ggwash/dc-council/src/utils/types").IMember[]; members: import("/Users/andr7059/Projects/ggwash/dc-council/src/utils/types").IMember[]; }>;
+        "getMembers": () => Promise<ICommitteeMembers>;
+        "members": ICommitteeMembers;
     }
     interface DcCouncilCommitteePlaceholder {
         "committee": any;
@@ -168,12 +164,7 @@ declare namespace LocalJSX {
         "onAgenciesAdded"?: (event: DcCouncilAgencyListCustomEvent<any>) => void;
     }
     interface DcCouncilCommitteeCard {
-        /**
-          * Agencies that are managed by this committee
-         */
-        "agencies"?: any[];
-        "committee"?: any;
-        "members"?: { chair: any[]; members: any[]; };
+        "committee"?: ICommittee;
         "onCommitteeUpdated"?: (event: DcCouncilCommitteeCardCustomEvent<ICommittee>) => void;
         "onRemoveCommittee"?: (event: DcCouncilCommitteeCardCustomEvent<any>) => void;
     }
@@ -181,6 +172,7 @@ declare namespace LocalJSX {
         "committees"?: Array<ICommittee>;
     }
     interface DcCouncilCommitteeMemberList {
+        "members"?: ICommitteeMembers;
     }
     interface DcCouncilCommitteePlaceholder {
         "committee"?: any;

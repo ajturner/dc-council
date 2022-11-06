@@ -64,7 +64,7 @@ export class DcCouncilGame {
 
   saveButtonClicked() {
     setBookmark(state.committees);
-    debugger
+    // debugger
   }
 
   renderSaveButton() {
