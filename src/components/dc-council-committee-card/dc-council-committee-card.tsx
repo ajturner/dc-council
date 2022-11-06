@@ -1,5 +1,5 @@
-import { Component, Host, h, Listen, Prop, Event, EventEmitter } from '@stencil/core';
-import { ICommittee } from '../../utils/types';
+import { Component, Host, h, Listen, Prop, Event, EventEmitter, State } from '@stencil/core';
+import { IAgency, ICommittee, ICommitteeMembers, IMember } from '../../utils/types';
 
 @Component({
   tag: 'dc-council-committee-card',
@@ -16,14 +16,29 @@ export class DcCouncilCommitteeCard {
   @Event() removeCommittee: EventEmitter<any>;
   @Event() committeeUpdated: EventEmitter<ICommittee>;
 
+  // Stores from committee.members for re-render
+  @State() members: Array<IMember>;
+  @State() agencies: Array<IAgency>;
+
+  componentWillLoad() {
+    // TODO: Figure out if this can be removed + still update render with nested children in committee.members.members
+    this.members = this.committee.members.members;
+    this.agencies = this.committee.agencies;
+  }
+
   @Listen('membersAdded')
   async membersAdded(_evt) {
     this.committee.members = await this.membersEl.getMembers();
+    // State for re-render
+    this.members = this.committee.members?.members;
     this.committeeUpdated.emit( this.committee );
   }
   @Listen('agenciesAdded')
   async agenciesAdded(_evt) {
     this.committee.agencies = this.agenciesEl.agencies;
+    
+    // State for re-render
+    this.agencies = this.committee.agencies;
     
     this.committeeUpdated.emit( this.committee );
   } 
@@ -74,9 +89,9 @@ export class DcCouncilCommitteeCard {
           
         </span>
         <span slot="subtitle">
-          {this.committee.agencies?.length} agencies, 
+          {this.agencies?.length} agencies, 
           {this.calculateBudget()} budget,
-          {this.committee.members?.members?.length} members
+          {this.members?.length} members
           {/* {this.membersEl.getMembers().length} */}
 
         <dc-council-committee-member-list
