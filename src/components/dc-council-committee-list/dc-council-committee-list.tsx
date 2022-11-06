@@ -1,5 +1,7 @@
 import { Component, Host, h, Prop, Listen } from '@stencil/core';
 import { createCommittee } from '../../utils/data';
+import state from '../../utils/state';
+import { ICommittee } from '../../utils/types';
 
 @Component({
   tag: 'dc-council-committee-list',
@@ -8,13 +10,16 @@ import { createCommittee } from '../../utils/data';
 })
 export class DcCouncilCommitteeList {
 
-  @Prop({ mutable: true, reflect: true }) committees = [];
+  @Prop({ mutable: true, reflect: true }) committees:Array<ICommittee> = [];
   
   @Listen('addCommittee')
   addCommittee(_evt) {
     const newCommittee = createCommittee();
     console.log("addCommittee", newCommittee);
     this.committees = [...this.committees, newCommittee];
+
+    state.committees = this.committees;
+
   }
 
   // TODO: Replace Agencies to available
@@ -23,6 +28,12 @@ export class DcCouncilCommitteeList {
     this.committees = this.committees.filter(c => {
       return c.id !== evt.detail.id
     })
+    state.committees = this.committees;
+  }
+
+  @Listen('committeeUpdated')
+  committeeUpdated(_evt) {
+    state.committees = this.committees;
   }
 
   render() {

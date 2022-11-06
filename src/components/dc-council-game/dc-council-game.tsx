@@ -1,6 +1,7 @@
 import { Component, Host, h, State, Prop, Listen } from '@stencil/core';
 import { loadAgencies, loadCommittees, loadMembers } from '../../utils/data';
-import { IMember } from '../../utils/types';
+import state, { getBookmark, setBookmark } from '../../utils/state';
+import { ICommittee, IMember } from '../../utils/types';
 
 @Component({
   tag: 'dc-council-game',
@@ -8,6 +9,8 @@ import { IMember } from '../../utils/types';
   scoped: true,
 })
 export class DcCouncilGame {
+
+  @Prop({ mutable:true, reflect: true }) template:"current" | "blank" | "saved" = "saved";
 
   /**
    * URL to Agency spreadsheet
@@ -19,13 +22,19 @@ export class DcCouncilGame {
   @Prop({ mutable:true, reflect: true }) selectedPieces:string = "agencies";
 
   @State() agencies = [];
-  @State() committees = [{name:'committee A'}];
+  @State() committees:Array<ICommittee> = [];
   @State() members:Array<IMember> = [];
 
   async componentWillLoad() {
-    this.agencies = await loadAgencies(this.agencyFilename);
-    this.committees = await loadCommittees(this.committeeFilename);
     this.members = await loadMembers(this.memberFilename);
+    this.agencies = await loadAgencies(this.agencyFilename);
+
+    if(this.template === "current") {
+      this.committees = await loadCommittees(this.committeeFilename);  
+    } else if (this.template === "saved") {
+      this.committees = getBookmark();
+    } // else blank
+    state.committees = this.committees;
   }
 
 
@@ -52,6 +61,25 @@ export class DcCouncilGame {
     );
 
   }
+
+  saveButtonClicked() {
+    setBookmark(state.committees);
+    debugger
+  }
+
+  renderSaveButton() {
+      return(<calcite-button
+          alignment="start"
+          appearance="solid"
+          color="blue"
+          icon-start="plus"
+          scale="m"
+          onClick={this.saveButtonClicked.bind(this)}
+        >
+          Share
+        </calcite-button>
+      )
+  }
   render() {
     return (
       <Host>
@@ -59,6 +87,7 @@ export class DcCouncilGame {
         <div id="gameboard" class={`display-${this.selectedPieces}`}>
           <div id="header">
             <slot name="header"></slot>
+            {this.renderSaveButton()}
           </div>
           <div id="pieces">
             <div id="selector">{this.renderSelector()}</div>

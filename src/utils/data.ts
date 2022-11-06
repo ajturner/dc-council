@@ -1,5 +1,5 @@
 import * as Papa from 'papaparse';
-import { IMember } from './types';
+import { ICommittee, IMember } from './types';
 
 // https://github.com/andreasonny83/unique-names-generator
 import { uniqueNamesGenerator, animals } from 'unique-names-generator';
@@ -36,7 +36,7 @@ export async function loadAgencies(filename:string) {
   const agencies = loadFile(filename, simpleParse)
   return agencies;
 }
-export async function loadCommittees(filename:string) {
+export async function loadCommittees(filename:string):Promise<Array<ICommittee>> {
   const committees = loadFile(filename, simpleParse)
   return committees; 
 }
@@ -55,9 +55,9 @@ function toTitleCase(str) {
   );
 }
 
-export function createCommittee(values = {}) {
-  const defaultCommittee = {
-    id: Math.floor(Math.random() * 1000),
+export function createCommittee(values = {}): ICommittee {
+  const defaultCommittee:ICommittee = {
+    id: String(Math.floor(Math.random() * 1000)),
     name: toTitleCase(generateName() + " Committee")
   };
   const committee = {

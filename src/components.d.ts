@@ -5,7 +5,7 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { IMember } from "./utils/types";
+import { ICommittee, IMember } from "./utils/types";
 export namespace Components {
     interface DcCouncilAgencyCard {
         "agency": any;
@@ -22,7 +22,7 @@ export namespace Components {
         "members": { chair: any[]; members: any[]; };
     }
     interface DcCouncilCommitteeList {
-        "committees": any[];
+        "committees": Array<ICommittee>;
     }
     interface DcCouncilCommitteeMemberList {
         "getMembers": () => Promise<{ chair: import("/Users/andr7059/Projects/ggwash/dc-council/src/utils/types").IMember[]; members: import("/Users/andr7059/Projects/ggwash/dc-council/src/utils/types").IMember[]; }>;
@@ -48,6 +48,7 @@ export namespace Components {
         "committeeFilename": string;
         "memberFilename": string;
         "selectedPieces": string;
+        "template": "current" | "blank" | "saved";
     }
     interface DcCouncilMemberCard {
         "member": any;
@@ -173,10 +174,11 @@ declare namespace LocalJSX {
         "agencies"?: any[];
         "committee"?: any;
         "members"?: { chair: any[]; members: any[]; };
+        "onCommitteeUpdated"?: (event: DcCouncilCommitteeCardCustomEvent<ICommittee>) => void;
         "onRemoveCommittee"?: (event: DcCouncilCommitteeCardCustomEvent<any>) => void;
     }
     interface DcCouncilCommitteeList {
-        "committees"?: any[];
+        "committees"?: Array<ICommittee>;
     }
     interface DcCouncilCommitteeMemberList {
     }
@@ -203,6 +205,7 @@ declare namespace LocalJSX {
         "committeeFilename"?: string;
         "memberFilename"?: string;
         "selectedPieces"?: string;
+        "template"?: "current" | "blank" | "saved";
     }
     interface DcCouncilMemberCard {
         "member"?: any;
