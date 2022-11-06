@@ -5,16 +5,23 @@
 }
 .sc-dc-council-dropzone, .dropzone {
   display: grid;
-  grid-template-columns: repeat(auto-fill,minmax(160px,1fr));
-  grid-auto-flow: column;
-  grid-auto-columns: minmax(160px,1fr);
+  grid-template-rows: repeat(auto-fill,minmax(75px,1fr));
+  grid-auto-flow: rows;
+  grid-auto-rows: minmax(75px,1fr);
   overflow-x: auto;
 }
 .dropzone {
   width: 100%;
-  min-height: 100px;
 }
+:host(.members-available) .dropzone {
+  padding-bottom: 10px;
+}
+:host(.members-available) .dropzone::after {
+  content: "More members allowed..."
+}
+
 .dropzone:empty {
+  min-height: 75px;
   background-color: #CCC;
 }
 .dropzone:empty::after {

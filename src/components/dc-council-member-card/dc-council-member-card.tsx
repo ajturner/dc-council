@@ -24,12 +24,12 @@ export class DcCouncilMemberCard {
   }
   render() {
     return (
-      <Host>
+      <Host
+        draggable="true" 
+        onDragStart={this.dragStart.bind(this)}
+      >
         <slot></slot>
-        <calcite-card 
-          draggable="true"
-          onDragStart={this.dragStart.bind(this)}
-        >
+        <calcite-card>
           <span slot="title" class="title">
           <calcite-icon icon="user" scale="m" aria-hidden="true"></calcite-icon>
             {this.member?.name}

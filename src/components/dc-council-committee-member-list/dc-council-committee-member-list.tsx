@@ -35,6 +35,7 @@ export class DcCouncilCommitteeMemberList {
         <dc-council-member-list
           id="members"
           position="members"
+          max={4}
           ref={el => (this.membersEl = el as HTMLDcCouncilMemberListElement)}
         >
           Members

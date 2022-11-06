@@ -1,4 +1,4 @@
-import { Component, Host, h, State, Prop } from '@stencil/core';
+import { Component, Host, h, State, Prop, Listen } from '@stencil/core';
 import { loadAgencies, loadCommittees, loadMembers } from '../../utils/data';
 import { IMember } from '../../utils/types';
 
@@ -15,6 +15,8 @@ export class DcCouncilGame {
   @Prop() agencyFilename:string = "assets/2022/agencies.csv";
   @Prop() committeeFilename:string = "assets/2022/committees.csv";
   @Prop() memberFilename:string = "assets/2022/members.csv";
+  
+  @Prop({ mutable:true, reflect: true }) selectedPieces:string = "agencies";
 
   @State() agencies = [];
   @State() committees = [{name:'committee A'}];
@@ -27,34 +29,54 @@ export class DcCouncilGame {
   }
 
 
+  @Listen('calciteRadioGroupChange')
+  selectorChanged(evt) {
+    this.selectedPieces = evt.detail;
+  }
 
+  renderSelector() {
+    return (
+      <calcite-radio-group
+        layout="horizontal"
+        appearance="solid"
+        scale="l"
+        width="full"
+      >
+        <calcite-radio-group-item value="agencies" checked="">
+          Agencies
+        </calcite-radio-group-item>
+        <calcite-radio-group-item value="members" >
+          Members
+        </calcite-radio-group-item>
+      </calcite-radio-group>
+    );
 
+  }
   render() {
     return (
       <Host>
         
-        <div id="gameboard">
+        <div id="gameboard" class={`display-${this.selectedPieces}`}>
           <div id="header">
             <slot name="header"></slot>
           </div>
-          <dc-council-agency-list
+          <div id="pieces">
+            <div id="selector">{this.renderSelector()}</div>
+            <dc-council-member-list
+              members={this.members}
+              >
+            </dc-council-member-list>
+                      <dc-council-agency-list
             agencies={this.agencies}
             class="pieces"
             >
-              Agencies
             </dc-council-agency-list>
-          
-          <dc-council-member-list
-            members={this.members}
-            class="pieces"
-            >
-            DC Council Members
-          </dc-council-member-list>
+          </div>
           <dc-council-committee-list 
-            committees={this.committees}
-            >
-            Committees
-          </dc-council-committee-list>
+              committees={this.committees}
+              >
+              Committees
+          </dc-council-committee-list>          
           <div id="footer">
             <slot name="footer"></slot>
           </div>          

@@ -24,16 +24,33 @@ export class DcCouncilMemberList {
 
   // @Watch('members')
   addMembers(newMembers:Array<IMember>, _oldMembers:Array<IMember> = []) {
-    
-    console.log("membersUpdated", [this.position, newMembers])
-    // debugger;
+    // Don't add duplicate members
+    const existingMembers = this.members.map(m => m.name);
+    newMembers = newMembers.filter(member => {
+      return !existingMembers.includes(member.name);
+    })
+
+    // Limit size by max
     const newSize:number = this.members.length + newMembers.length;
     if(!!this.max && newSize > this.max) {
-      this.members = newMembers.slice(0,this.max)
+      // newMembers = newMembers.slice(0,this.max)
+      
+      const removeMembers = newSize - this.max;
+      this.members = [
+        ...this.members.slice(removeMembers,this.members.length), 
+        ...newMembers
+      ];
     } else {
       this.members = [...this.members, ...newMembers];
     }
     
+
+    // Adds prompts for adding more members
+    if(this.members.length < this.max) {
+      this.el.classList.add('members-available');
+    } else {
+      this.el.classList.remove('members-available');
+    }
     // Event up for other components
     this.membersAdded.emit(this.members);
   }

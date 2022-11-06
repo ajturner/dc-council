@@ -37,17 +37,25 @@ export class DcCouncilCommitteeCard {
         <slot></slot>
         <calcite-card>
           <span slot="title" class="title">
-          <calcite-icon icon="group" scale="m" aria-hidden="true"></calcite-icon>
+          {/* <calcite-icon icon="group" scale="m" aria-hidden="true"></calcite-icon> */}
+            <calcite-inline-editable
+              scale="l"
+              intl-cancel-editing="Cancelar"
+              intl-enable-editing="Haga clic para editar"
+              intl-confirm-changes="Guardar"
+            >
+              <calcite-input-text
+                
+                scale="l"
+                status="idle"
+                alignment="start"
+                prefix-text=""
+                suffix-text=""
+                value={this.committee?.name}
+                placeholder="Committee Name"
+              ></calcite-input-text>
+        </calcite-inline-editable>
           
-          <calcite-input-text
-            scale="m"
-            status="idle"
-            alignment="start"
-            prefix-text=""
-            suffix-text=""
-            value={this.committee?.name}
-            placeholder="Committee Name"
-          ></calcite-input-text>
         </span>
         <span slot="subtitle">
           {this.agencies.length} agencies, 
@@ -70,22 +78,20 @@ export class DcCouncilCommitteeCard {
           })}
           <li><a href={this.committee.link} target="_new">Website</a></li>
         </ul> */}
-      <div slot="footer-trailing">
-        <calcite-button
-          id="card-icon-test-6"
-          scale="s"
-          appearance="transparent"
-          color="red"
-          icon-start="x"
-          alignment="center"
-          type="button"
-          width="auto"
-          onClick={this.deleteButton.bind(this)}
-        >Delete Committee</calcite-button>
-      </div>        
+        <div slot="footer-trailing">
+          <calcite-button
+            id="card-icon-test-6"
+            scale="s"
+            appearance="transparent"
+            color="red"
+            icon-start="x"
+            alignment="center"
+            type="button"
+            width="auto"
+            onClick={this.deleteButton.bind(this)}
+          >Delete Committee</calcite-button>
+        </div>        
         </calcite-card>
-
-
       </Host>
     );
   }

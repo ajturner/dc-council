@@ -47,6 +47,7 @@ export namespace Components {
         "agencyFilename": string;
         "committeeFilename": string;
         "memberFilename": string;
+        "selectedPieces": string;
     }
     interface DcCouncilMemberCard {
         "member": any;
@@ -196,6 +197,7 @@ declare namespace LocalJSX {
         "agencyFilename"?: string;
         "committeeFilename"?: string;
         "memberFilename"?: string;
+        "selectedPieces"?: string;
     }
     interface DcCouncilMemberCard {
         "member"?: any;
