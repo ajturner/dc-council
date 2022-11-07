@@ -1,7 +1,7 @@
 import { Component, Host, h, State, Prop, Listen } from '@stencil/core';
 import { loadAgencies, loadCommittees, loadMembers } from '../../utils/data';
-import state, {  } from '../../utils/state';
-import { ICommittee, IMember } from '../../utils/types';
+import state, { getTemplateParam, getVersion } from '../../utils/state';
+import { CouncilTemplate, ICommittee, IMember } from '../../utils/types';
 
 @Component({
   tag: 'dc-council-game',
@@ -10,7 +10,7 @@ import { ICommittee, IMember } from '../../utils/types';
 })
 export class DcCouncilGame {
 
-  @Prop({ mutable:true, reflect: true }) template:"current" | "blank" | "saved" = "blank";
+  @Prop({ mutable:true, reflect: true }) template:CouncilTemplate = CouncilTemplate.current;
 
   /**
    * URL to Agency spreadsheet
@@ -25,10 +25,10 @@ export class DcCouncilGame {
   @State() committees:Array<ICommittee> = [];
   @State() members:Array<IMember> = [];
 
-  // is sharing visible?
-  @State() share:boolean = false;
 
   async componentWillLoad() {
+    this.template = getTemplateParam(this.template);
+
     this.members = await loadMembers(this.memberFilename);
     this.agencies = await loadAgencies(this.agencyFilename);
     this.committees = await this.loadTemplate(this.template);
@@ -37,13 +37,20 @@ export class DcCouncilGame {
   async loadTemplate(template:string = "saved"): Promise<Array<ICommittee>> {
     let committees:Array<ICommittee> = [];
 
-    if(template === "current") {
-      committees = await loadCommittees(this.committeeFilename, this.members, this.agencies);
-    } else if (template === "saved") {
-      // committees = getBookmark();
-    } else { // blank
-      committees = [];
+    switch(template) {
+      case CouncilTemplate.current: {
+        committees = await loadCommittees(this.committeeFilename, this.members, this.agencies);
+        break;
+      } 
+      case CouncilTemplate.saved: {
+        committees = getVersion();
+        break;
+      }
+      default: { // blank
+        committees = [];
+      }
     }
+    
     state.committees = committees;
 
     // debugger
@@ -86,15 +93,11 @@ export class DcCouncilGame {
         <div id="gameboard" class={`display-${this.selectedPieces}`}>
           <div id="header">
             <slot name="header"></slot>
-            <dc-council-share
-              open={this.share}
-            >
+            <dc-council-share>
               Share
             </dc-council-share>
 
-            <dc-council-template
-              open={this.share}
-            >
+            <dc-council-template>
               Start Again
             </dc-council-template>
           </div>

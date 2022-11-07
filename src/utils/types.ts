@@ -27,3 +27,9 @@ export interface IAgency {
   budget:string
   link:string
 }
+
+export enum CouncilTemplate {
+  current = 'current',
+  blank = 'blank',
+  saved = 'saved',
+}

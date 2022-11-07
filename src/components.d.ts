@@ -5,7 +5,7 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { ICommittee, ICommitteeMembers, IMember } from "./utils/types";
+import { CouncilTemplate, ICommittee, ICommitteeMembers, IMember } from "./utils/types";
 export namespace Components {
     interface DcCouncilAgencyCard {
         "agency": any;
@@ -44,7 +44,7 @@ export namespace Components {
         "committeeFilename": string;
         "memberFilename": string;
         "selectedPieces": string;
-        "template": "current" | "blank" | "saved";
+        "template": CouncilTemplate;
     }
     interface DcCouncilMemberCard {
         "member": any;
@@ -226,7 +226,7 @@ declare namespace LocalJSX {
         "committeeFilename"?: string;
         "memberFilename"?: string;
         "selectedPieces"?: string;
-        "template"?: "current" | "blank" | "saved";
+        "template"?: CouncilTemplate;
     }
     interface DcCouncilMemberCard {
         "member"?: any;
