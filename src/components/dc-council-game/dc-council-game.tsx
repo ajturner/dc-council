@@ -34,7 +34,7 @@ export class DcCouncilGame {
     this.committees = await this.loadTemplate(this.template);
   }
 
-  async loadTemplate(template:string = "saved"): Promise<Array<ICommittee>> {
+  async loadTemplate(template:CouncilTemplate = CouncilTemplate.saved): Promise<Array<ICommittee>> {
     let committees:Array<ICommittee> = [];
 
     switch(template) {
@@ -93,13 +93,13 @@ export class DcCouncilGame {
         <div id="gameboard" class={`display-${this.selectedPieces}`}>
           <div id="header">
             <slot name="header"></slot>
-            <dc-council-share>
-              Share
-            </dc-council-share>
+              <dc-council-share class="control">
+                Share
+              </dc-council-share>
 
-            <dc-council-template>
-              Start Again
-            </dc-council-template>
+              <dc-council-template class="control">
+                Start Again
+              </dc-council-template>
           </div>
           <div id="pieces">
             <div id="selector">{this.renderSelector()}</div>
