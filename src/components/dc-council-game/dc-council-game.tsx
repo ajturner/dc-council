@@ -89,7 +89,6 @@ export class DcCouncilGame {
   render() {
     return (
       <Host>
-        
         <div id="gameboard" class={`display-${this.selectedPieces}`}>
           <div id="header">
             <slot name="header"></slot>

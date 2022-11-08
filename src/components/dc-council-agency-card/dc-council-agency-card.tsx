@@ -40,6 +40,7 @@ export class DcCouncilAgencyCard {
               <li>Budget: {this.agency.budget}</li>
               <li><a href={this.agency.link} target="_new">Website</a></li>
             </ul>
+            
           </calcite-card>
       </Host>
     );

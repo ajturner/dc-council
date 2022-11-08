@@ -8,21 +8,92 @@ import state, { setVersion } from '../../utils/state';
 })
 export class DcCouncilShare {
   // modalEl: HTMLCalciteModalElement; 
+  inputEl: HTMLInputElement;
 
-  @Prop({mutable: true, reflect: true}) open:boolean = false
+  @Prop({ mutable: true, reflect: true }) open: boolean = false
+  @Prop({ mutable: true, reflect: true }) url: string = "";
 
   @Method()
   public async showModal() {
-    setVersion(state.committees);
+    this.url = setVersion(state.committees);
     this.open = true;
   }
-  @Method() 
+  @Method()
   public async hideModal() {
     this.open = false;
-  }  
+  }
   @Listen('calciteModalClose')
   close() {
     this.open = false;
+  }
+
+  renderFacebook(url: string = "") {
+    return (
+      <div class="shareButton">
+      <calcite-button
+        color="blue"
+        appearance="primary"
+        icon="chevron-left"
+        width="full"
+        href={`https://www.facebook.com/sharer/sharer.php?u=${url}`}
+      >
+        Share on Facebook
+      </calcite-button>
+      </div>
+    )
+  }
+  renderTwitter(url: string = "") {
+    return (
+      <div class="shareButton">
+      <calcite-button
+        color="blue"
+        appearance="primary"
+        icon="chevron-left"
+        width="full"
+        href={`https://twitter.com/intent/tweet?text=${url}`}
+      >
+        Share on Twitter
+      </calcite-button>
+      </div>
+    )
+  }  
+
+  renderCopy(url:string = "") {
+    return (
+      <span>
+      <calcite-input 
+        type="text" 
+        class="code" 
+        ref={(el: HTMLInputElement) => this.inputEl = el} 
+        value={url}
+        readonly>
+
+        <calcite-button
+          slot="action"
+          alignment="center"
+          appearance="solid"
+          color="blue"
+          scale="m"
+          type="button"
+          width="auto"
+          onClick={(_ev: Event) => this.copyText()}
+        >
+          Copy
+        </calcite-button>
+      </calcite-input>
+      <calcite-input-message status="idle">
+        Share this URL via email or any other social media.
+      </calcite-input-message>
+      </span>
+    )
+  }
+  copyText() {
+    /* Select the text field */
+    this.inputEl.select();
+    this.inputEl.setSelectionRange(0, 99999); /*For mobile devices*/
+
+    /* Copy the text inside the text field */
+    document.execCommand("copy");
   }
 
   render() {
@@ -54,21 +125,16 @@ export class DcCouncilShare {
               Thank you for crafting your proposal for DC Council Committees! Now share your lineup on social media and invite your friends to make their own!
             </p>
             <p>
-                <calcite-button
-                color="neutral"
-                appearance="outline"
-                icon="chevron-left"
-                width="full"
-              >
-                Share on Facebook
-              </calcite-button>
+              {this.renderCopy(this.url)}
+              {this.renderTwitter(this.url)}
+              {this.renderFacebook(this.url)}
             </p>
           </div>
-          <calcite-button 
-            slot="primary" 
+          <calcite-button
+            slot="primary"
             width="full"
             onClick={this.hideModal.bind(this)}
-            >
+          >
             Done
           </calcite-button>
         </calcite-modal>

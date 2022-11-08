@@ -64,6 +64,7 @@ export namespace Components {
         "hideModal": () => Promise<void>;
         "open": boolean;
         "showModal": () => Promise<void>;
+        "url": string;
     }
     interface DcCouncilTemplate {
         "hideModal": () => Promise<void>;
@@ -245,6 +246,7 @@ declare namespace LocalJSX {
     }
     interface DcCouncilShare {
         "open"?: boolean;
+        "url"?: string;
     }
     interface DcCouncilTemplate {
         "onTemplateSelected"?: (event: DcCouncilTemplateCustomEvent<string>) => void;

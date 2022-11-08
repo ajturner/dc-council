@@ -50,7 +50,7 @@ export function getVersion():Array<ICommittee> {
   // window.location.search = searchParams;
 }
 
-export function setVersion(committees: Array<ICommittee>) {
+export function setVersion(committees: Array<ICommittee>):string {
   //@ts-ignore
   const url = new URL(window.location);
 
@@ -60,4 +60,6 @@ export function setVersion(committees: Array<ICommittee>) {
   url.searchParams.set(committeesStateParameter, binary);
   url.searchParams.set(templateStateParameter, 'saved');
   window.history.pushState({}, '', url);  
+
+  return url.href;
 }
