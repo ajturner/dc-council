@@ -2,11 +2,16 @@ import { createStore } from "@stencil/store";
 import { CouncilTemplate, ICommittee } from "./types";
 
 const { state, onChange } = createStore({
-  committees: []
+  committees: [],
+  action: ""
 });
 
 onChange('committees', value => {
   state.committees = value;
+});
+
+onChange('action', value => {
+  state.action = value;
 });
 
 export default state;

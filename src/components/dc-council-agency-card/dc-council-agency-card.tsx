@@ -1,4 +1,5 @@
 import { Component, Host, h, Prop } from '@stencil/core';
+import state from '../../utils/state';
 
 @Component({
   tag: 'dc-council-agency-card',
@@ -8,9 +9,13 @@ import { Component, Host, h, Prop } from '@stencil/core';
 export class DcCouncilAgencyCard {
 
   @Prop() agency;
-
+  dragEnd(ev) {
+    state.action = "";
+  }
   dragStart(ev) {
     console.log("dragStart");
+    state.action = "agency";
+
     // Change the source element's background color
     // to show that drag has started
     ev.currentTarget.classList.add("dragging");
@@ -27,6 +32,7 @@ export class DcCouncilAgencyCard {
       <Host
         draggable="true" 
         onDragStart={this.dragStart.bind(this)}      
+        onDragEnd={this.dragEnd.bind(this)}      
       >
           <slot></slot>
           <calcite-card draggable="true">

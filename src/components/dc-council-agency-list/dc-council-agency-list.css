@@ -2,6 +2,10 @@
   display: block;
   min-height: 75px;
 }
+:host(.action-agency) .dropzone {
+  border: 1px dashed green;
+  background-color: lightgreen;
+}
 /* TODO: Remove need to style a hidden sortable class */
 .sc-dc-council-dropzone {
   display: grid;
@@ -22,7 +26,6 @@
 }
 .dropzone:empty {
   min-height: 75px;
-  background-color: #CCC;
 }
 :host(.spots-available) .dropzone::after {
   content: "More agencies allowed..."

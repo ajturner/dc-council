@@ -1,5 +1,6 @@
 import { Component, Host, h, Prop } from '@stencil/core';
 import "@esri/calcite-components/dist/calcite/calcite.css";
+import state from '../../utils/state';
 
 @Component({
   tag: 'dc-council-member-card',
@@ -10,8 +11,13 @@ export class DcCouncilMemberCard {
 
   @Prop() member;
 
+  dragEnd(ev) {
+    state.action = "";
+  }
   dragStart(ev) {
     console.log("dragStart");
+    state.action = "member";
+
     // Change the source element's background color
     // to show that drag has started
     ev.currentTarget.classList.add("dragging");
@@ -25,8 +31,9 @@ export class DcCouncilMemberCard {
   render() {
     return (
       <Host
-        draggable="true" 
+        draggable="true"
         onDragStart={this.dragStart.bind(this)}
+        onDragEnd={this.dragEnd.bind(this)}
       >
         <slot></slot>
         <calcite-card>

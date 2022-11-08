@@ -1,4 +1,5 @@
-import { Component, Host, h, Prop, Listen, Element, Event, EventEmitter } from '@stencil/core';
+import { Component, Host, h, Prop, Listen, Element, Event, EventEmitter, State } from '@stencil/core';
+import state from '../../utils/state';
 import { IMember } from '../../utils/types';
 @Component({
   tag: 'dc-council-member-list',
@@ -68,13 +69,17 @@ export class DcCouncilMemberList {
     // evt.target.classList.add('drag-over');
     // debugger;
     // const possibleElement = JSON.parse(data);
-
-    evt.preventDefault();
+    if(state.action === "member") {
+      evt.preventDefault();
+    }
   }
 
   render() {
     return (
-      <Host>
+      <Host
+        class={`action-${state.action}`}
+
+      >
           <span id="title">
             <slot></slot>
           </span>

@@ -1,4 +1,5 @@
 import { Component, Host, h, Listen, Prop, Event, EventEmitter } from '@stencil/core';
+import state from '../../utils/state';
 
 @Component({
   tag: 'dc-council-agency-list',
@@ -24,13 +25,15 @@ export class DcCouncilAgencyList {
   }
 
   allowDrop(evt) {
-    evt.preventDefault();
+    if(state.action === "agency") {
+      evt.preventDefault();
+    }
   }
 
   render() {
     return (
       <Host
-        class="spots-available"
+        class={`spots-available action-${state.action}`}
       >
         <span id="title">
           <slot></slot>
