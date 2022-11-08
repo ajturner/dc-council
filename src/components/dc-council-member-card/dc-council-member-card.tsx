@@ -11,7 +11,7 @@ export class DcCouncilMemberCard {
 
   @Prop() member;
 
-  dragEnd(ev) {
+  dragEnd(_ev) {
     state.action = "";
   }
   dragStart(ev) {
