@@ -32,6 +32,9 @@ export class DcCouncilGame {
     this.members = await loadMembers(this.memberFilename);
     this.agencies = await loadAgencies(this.agencyFilename);
     this.committees = await this.loadTemplate(this.template);
+
+    // what agencies are available
+    state.agencies = this.agencies;
   }
 
   async loadTemplate(template:CouncilTemplate = CouncilTemplate.saved): Promise<Array<ICommittee>> {

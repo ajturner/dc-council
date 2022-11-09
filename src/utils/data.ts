@@ -51,15 +51,20 @@ export async function loadCommittees(filename:string, members:Array<IMember>, ag
     }
 
     const loadedMembers = row.members.split(",")
-    const loadedAgencies = row.agencies.split(",")
     committee.members.chair = members.filter(m => m.name === row.chair)
     committee.members.members = members.filter(m => {
       return loadedMembers.includes(m.name);
-    })
+    });
 
-    committee.agencies = agencies.filter(a => {
-      return loadedAgencies.includes(a.name)
-    })
+    committee.agencies = agencies.filter((agency) => {
+      return agency.committee === committee.name;
+    });
+
+    // Old Code when table had agencies in committees
+    // const loadedAgencies = row.agencies.split(",")
+    // committee.agencies = agencies.filter(a => {
+    //   return loadedAgencies.includes(a.name)
+    // })
     
     return committee;
   })

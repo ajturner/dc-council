@@ -3,7 +3,8 @@ import { CouncilTemplate, ICommittee } from "./types";
 
 const { state, onChange } = createStore({
   committees: [],
-  action: ""
+  action: "",
+  agencies: []
 });
 
 onChange('committees', value => {
@@ -12,6 +13,10 @@ onChange('committees', value => {
 
 onChange('action', value => {
   state.action = value;
+});
+
+onChange('agencies', value => {
+  state.agencies = value;
 });
 
 export default state;

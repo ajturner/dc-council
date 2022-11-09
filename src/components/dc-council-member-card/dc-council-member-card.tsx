@@ -1,4 +1,4 @@
-import { Component, Host, h, Prop } from '@stencil/core';
+import { Component, Host, h, Prop, getAssetPath } from '@stencil/core';
 import "@esri/calcite-components/dist/calcite/calcite.css";
 import state from '../../utils/state';
 
@@ -6,6 +6,7 @@ import state from '../../utils/state';
   tag: 'dc-council-member-card',
   styleUrl: 'dc-council-member-card.css',
   shadow: true,
+  assetsDirs: ['assets'],
 })
 export class DcCouncilMemberCard {
 
@@ -29,6 +30,8 @@ export class DcCouncilMemberCard {
 
   }
   render() {
+    const imageSrc = getAssetPath(`../assets/2022/photos/${this.member.photo}`);
+
     return (
       <Host
         draggable="true"
@@ -38,7 +41,9 @@ export class DcCouncilMemberCard {
         <slot></slot>
         <calcite-card>
           <span slot="title" class="title">
-          <calcite-icon icon="user" scale="m" aria-hidden="true"></calcite-icon>
+            {this.member.photo 
+              ? <img src={imageSrc} alt={`Photograph of ${this.member.name}`} />
+              : null}
             {this.member?.name}
           </span>
             

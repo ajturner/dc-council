@@ -6,6 +6,7 @@ export interface IMember {
   termend: number
   affiliation: string
   link:string
+  photo:string
 }
 
 export interface ICommittee {
@@ -23,9 +24,13 @@ export interface ICommitteeMembers {
 export interface IAgency {
   code:string
   name:string
+  acronym:string
   cluster:string
   budget:string
   link:string
+  group:string
+  committee?:string // ref which committee manages this agency
+  chair:string
 }
 
 export enum CouncilTemplate {

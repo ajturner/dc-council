@@ -1,6 +1,6 @@
 :host {
   display: block;
-  height: 75px;
+  height: 100px;
 }
 :host(:hover) {
   /* border: 1px solid #0f9535; */
@@ -10,8 +10,14 @@
   display: none;
 }
 .title {
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 500;
+}
+img {
+  width: 50px;
+  border-radius: 50%;
+  vertical-align: middle;
+  margin-right: 5px;
 }
 /* TODO: consolidate this styling across components */
 :host(.ghost) {
