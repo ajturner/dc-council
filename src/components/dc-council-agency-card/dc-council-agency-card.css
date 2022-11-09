@@ -1,6 +1,6 @@
 :host {
   display: block;
-  height: 75px;
+  height: 100px;
 }
 :host(:hover) {
   cursor: pointer;
