@@ -8,6 +8,7 @@
   /* align-items: left; */
   clear: both;
   margin: 20px 0;
+  margin-left: 10px;
 }
 #title {
   margin: 0;
@@ -29,4 +30,5 @@
   grid-auto-columns: minmax(250px,1fr);
   overflow-x: auto;
   grid-gap: 12px;
+  padding-left: 10px;
 }
