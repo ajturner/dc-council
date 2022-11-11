@@ -19,18 +19,27 @@ export class DcCouncilTemplate {
   public async hideModal() {
     this.open = false;
   }
+
   @Listen('calciteModalClose')
   saveChoice() {
     this.templateSelected.emit(this.template);
     this.hideModal();
   }
-  @Listen('calciteTileSelectChange')
+  // @Listen('calciteTileSelectChange')
   changeChoice(evt) {
-    debugger;
+    // TODO: figure out why calciteTileSelectChange doesn't have a target value
     const choice = evt.path[0].value;
     this.template = choice;
   }
 
+  // TODO: added until calciteTileSelectChange includes target value
+  templateBlank() {
+    this.template = 'blank';
+  }
+  templateCurrent() {
+    this.template = 'current';
+  }
+  
   // Reference to tile select
   tileSelectEl: HTMLInputElement;
 
@@ -50,6 +59,7 @@ export class DcCouncilTemplate {
           width="auto"
           type="radio"
           value="blank"
+          onClick={this.templateBlank.bind(this)}
         >
           <calcite-radio-button
             id="blankrb"
@@ -67,6 +77,7 @@ export class DcCouncilTemplate {
           width="auto"
           type="radio"
           value="current"
+          onClick={this.templateCurrent.bind(this)}
         >
           <calcite-radio-button
             id="currentrb"
