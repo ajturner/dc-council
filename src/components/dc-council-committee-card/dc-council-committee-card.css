@@ -8,7 +8,23 @@
 .details {
   display: none;
 }
-.title {
-  font-size: 1.3rem;
+#title {
+  font-size: 1.1rem;
   font-weight: 700;
+  min-height: 50px;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+#titleEdit {
+  display: none;
+}
+:host(.editing) #titleEdit {
+  display: block;
+}
+:host(.editing) #titleView {
+  display: none;
 }

@@ -16,7 +16,6 @@ export class DcCouncilMemberCard {
     state.action = "";
   }
   dragStart(ev) {
-    console.log("dragStart");
     state.action = "member";
 
     // Change the source element's background color
@@ -44,15 +43,14 @@ export class DcCouncilMemberCard {
             {this.member.photo 
               ? <img src={imageSrc} alt={`Photograph of ${this.member.name}`} />
               : null}
-            {this.member?.name}
+            <span id="name">{this.member?.name}</span><br/>
+            <span id="role">{this.member?.role}</span> 
           </span>
+
+          <div slot="subtitle" id="details">
+            <span id="term">({`${this.member.termstart}-${this.member.termend}`})</span>
+          </div>            
             
-            <ul class="details subtitle">
-            {Object.keys(this.member).map(key => {
-              return <li>{key}: {this.member[key]}</li>
-            })}
-            <li><a href={this.member.link} target="_new">Website</a></li>
-          </ul>
         </calcite-card>
       </Host>
     );

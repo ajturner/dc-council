@@ -108,3 +108,21 @@ export function generateName() {
   });
   return randomName;
 }
+
+export function calculateBudget(agencies: Array<IAgency>) {
+    const budgetSum = agencies?.reduce((sum, agency) => {
+    // debugger;
+      return sum += Number(agency.budget);
+    }, 0);
+
+    // if budgetSum is null then set to $0
+    // Round to Millions
+    const budgetString = !!budgetSum ? new Intl.NumberFormat('en-US', 
+      { 
+        style: 'currency', 
+        currency: 'USD',
+        maximumFractionDigits: 0,
+        maximumSignificantDigits: 3
+      }).format(budgetSum / 1_000_000) : "$0";
+    return budgetString;
+  }

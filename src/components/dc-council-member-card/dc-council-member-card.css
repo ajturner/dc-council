@@ -2,19 +2,33 @@
   display: block;
   height: 100px;
 }
+calcite-card {
+  height: 98px;
+}
 :host(:hover) {
   /* border: 1px solid #0f9535; */
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-}
-.details {
-  display: none;
 }
 .title {
   font-size: 1rem;
   font-weight: 500;
 }
+#name {
+  font-weight: 700;
+  font-size: 1rem;
+  clear:right;
+}
+#role, #details {
+  margin-left: 45px;
+}
+
+#term {
+  margin-left: 3px;
+  font-size: 0.8rem;
+  font-weight: 300;
+}
 img {
-  width: 50px;
+  width: 40px;
   border-radius: 50%;
   vertical-align: middle;
   margin-right: 5px;

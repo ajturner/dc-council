@@ -24,9 +24,6 @@ export class DcCouncilDropzone {
 
   @Listen('onAdd') 
   elemendAdded(evt) {
-    console.log("draggable onEnd", evt);
-    // debugger;
-
     // We could have an array of items
     const items = evt.items.length > 0 ? evt.items : [evt.item];
     this.addedElement.emit( items );

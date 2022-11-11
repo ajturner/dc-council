@@ -15,7 +15,7 @@ export class DcCouncilCommitteeList {
   @Listen('addCommittee')
   addCommittee(_evt) {
     const newCommittee = createCommittee();
-    console.log("addCommittee", newCommittee);
+
     this.committees = [...this.committees, newCommittee];
 
     state.committees = this.committees;

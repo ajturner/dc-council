@@ -1,124 +1,67 @@
-code,name,acronym,cluster,budget,link,group,committee,chair
-,Office of the Chief Financial Officer,OCFO,Governmental Direction and Support,203000000,,,Business and Economic Development,Kenyan McDuffie
-,Department of For-Hire Vehicles,DFHV,Operations and Infrastructure,23000000,,,Business and Economic Development,Kenyan McDuffie
-,Deputy Mayor for Planning and Economic Development,DMPED,Economic Development and Regulation,142000000,,,Business and Economic Development,Kenyan McDuffie
-,Office of Lottery and Gaming,,Enterprise and Other Funds,544000000,,,Business and Economic Development,Kenyan McDuffie
-,Department of Small and Local Business Development,SLBD,?,0,,,Business and Economic Development,Kenyan McDuffie
-,Office of the Chief Finanical Officer,CFO,?,0,,,Business and Economic Development,Kenyan McDuffie
-,Alcoholic Beverage Regulation Authority,ABRA,?,0,,,Business and Economic Development,Kenyan McDuffie
-,"Department of Insurance, Securities and Banking",,?,0,,,Business and Economic Development,Kenyan McDuffie
-,Office of Finance & Resource Management,,?,0,,,Business and Economic Development,Kenyan McDuffie
-,Office of Peoples Council,,?,0,,,Business and Economic Development,Kenyan McDuffie
-,Public Service Commission,,?,0,,,Business and Economic Development,Kenyan McDuffie
-,DC Public Schools,DCPS,Public Education,3900000000,,Education,Committee of the Whole,Phil Mendelson
-,DC Public Charter Schools,DCPCS,Public Education,1000000000,,Education,Committee of the Whole,Phil Mendelson
-,Office of the State Superintendent of Education,OSSE,Public Education,743000000,,Education,Committee of the Whole,Phil Mendelson
-,University of the District of Columbia,UDC,Public Education,92000000,,Education,Committee of the Whole,Phil Mendelson
-,DC Auditor,,Governmental Direction and Support,7000000,,,Committee of the Whole,Phil Mendelson
-,Washington Metropolitan Area Transit Authority,WMATA,Operations and Infrastructure,457000000,,,Committee of the Whole,Phil Mendelson
-,Department of Consumer and Regulatory Affairs,DCRA,Operations and Infrastructure,90000000,,,Committee of the Whole,Phil Mendelson
-,Department of Buildings,DOB,Operations and Infrastructure,0,,,Committee of the Whole,Phil Mendelson
-,Department of Licensing and Consumer Protection,DLCP,Operations and Infrastructure,0,,,Committee of the Whole,Phil Mendelson
-,Office of Planning,OP,Economic Development and Regulation,18000000,,,Committee of the Whole,Phil Mendelson
-,DC Retirement Board,,Enterprise and Other Funds,49000000,,,Committee of the Whole,Phil Mendelson
-,Events DC,,Enterprise and Other Funds,228000000,,,Committee of the Whole,Phil Mendelson
-,Office of Zoning,,?,0,,,Committee of the Whole,Phil Mendelson
-,Metropolitan Washington Airports Authority,,?,0,,,Committee of the Whole,Phil Mendelson
-,Office of Budget and Planning,,?,0,,,Committee of the Whole,Phil Mendelson
-,Office of the Deputy Mayor for Eduction,,?,0,,Education,Committee of the Whole,Phil Mendelson
-,Office of the Ombudsman for Public Education,,?,0,,Education,Committee of the Whole,Phil Mendelson
-,Office of the Student Advocate,,?,0,,Education,Committee of the Whole,Phil Mendelson
-,State Board of Education,,?,0,,Education,Committee of the Whole,Phil Mendelson
-,Special Education Transportation,,?,0,,Education,Committee of the Whole,Phil Mendelson
-,Department of General Services,DGS,Governmental Direction and Support,494000000,,,Government Operations and Facilities,Robert White
-,Office of the Inspector General,OIG,Governmental Direction and Support,23000000,,,Government Operations and Facilities,Robert White
-,Advisory Neighborhood Commissions,ANCs,Governmental Direction and Support,1900000,,,Government Operations and Facilities,Robert White
-,Office of Veterans Affairs,,?,0,,,Government Operations and Facilities,Robert White
-,Office of Returning Citizen Affairs,,?,0,,,Government Operations and Facilities,Robert White
-,Department of Health Care Finance,DHCF,Human Support Services,3700000000,,Health,Health,Vince Gray
-,Department of Health,DOH,Human Support Services,282000000,,Health,Health,Vince Gray
-,Department of Behavioral Helath,DBH,Human Support Services,356000000,,Health,Health,Vince Gray
-,Health Benefit Exchange Authority,,Enterprise and Other Funds,33000000,,Health,Health,Vince Gray
-,Not-for-Profit Hospital Corporation,,Enterprise and Other Funds,155000000,,Health,Health,Vince Gray
-,Deputy Mayor for Health & Human Service,,?,0,,Health,Health,Vince Gray
-,Office of the Mayor,EOM,Governmental Direction and Support,18000000,,Executive,Housing and Executive Administration,Anita Bonds
-,Office of the City Administrator,,Governmental Direction and Support,11000000,,Executive,Housing and Executive Administration,Anita Bonds
-,DC Housing Authority,DCHA,?,0,,Housing,Housing and Executive Administration,Anita Bonds
-,Deparment of Housing and Community Development,DHCD,Economic Development and Regulation,150000000,,Housing,Housing and Executive Administration,Anita Bonds
-,Office of the Tenant Advocate,OTA,Economic Development and Regulation,4000000,,Housing,Housing and Executive Administration,Anita Bonds
-,Housing Finance Agency,,Enterprise and Other Funds,15000000,,Housing,Housing and Executive Administration,Anita Bonds
-,Deparment of Aging and Community Living,,?,0,,,Housing and Executive Administration,Anita Bonds
-,Rental Housing Commission,,?,0,,Housing,Housing and Executive Administration,Anita Bonds
-,Real Property Tax Appeals Commission,,?,0,,Housing,Housing and Executive Administration,Anita Bonds
-,Mayor’s Office of Legal Counsel,,?,0,,Executive,Housing and Executive Administration,Anita Bonds
-,Office of the Secretary of the District of Columbia,,?,0,,Executive,Housing and Executive Administration,Anita Bonds
-,Office of the Senior Advisor,,?,0,,Executive,Housing and Executive Administration,Anita Bonds
-,Department of Human Services,DHS,Human Support Services,723000000,,Human Services,Human Services,Brianne Nadeau
-,Child and Family Services,CFS,Human Support Services,220000000,,Human Services,Human Services,Brianne Nadeau
-,Department of Disability Services,DDS,Human Support Services,197000000,,Human Services,Human Services,Brianne Nadeau
-,Board of Ethics and Government Accountability,,?,0,,,Human Services,Brianne Nadeau
-,Interagency Council on Homelessness,,?,0,,,Human Services,Brianne Nadeau
-,Office of Disability Rights,,?,0,,,Human Services,Brianne Nadeau
-,"Office on Deaf and Hard of Hearing
-",,?,0,,,Human Services,Brianne Nadeau
-,Metropolitan Police Department,MPD,Public Safety and Justice,517000000,,Public Safety,Judiciary and Public Safety,Charles Allen
-,DC Fire and Emergency Services,DC FEMS,Public Safety and Justice,307000000,,,Judiciary and Public Safety,Charles Allen
-,Homeland Security Emergency Managment Agency,HSEMA,Public Safety and Justice,108000000,,,Judiciary and Public Safety,Charles Allen
-,Department of Corrections,DOC,Public Safety and Justice,188000000,,Judicial,Judiciary and Public Safety,Charles Allen
-,Office of Unified Communications,OUC,Public Safety and Justice,55000000,,,Judiciary and Public Safety,Charles Allen
-,Office of the Attorney General,OAG,Governmental Direction and Support,147000000,,,Judiciary and Public Safety,Charles Allen
-,Board of Elections,BOE,Governmental Direction and Support,12000000,,Elections,Judiciary and Public Safety,Charles Allen
-,Office of Campaign Finance,OCF,Governmental Direction and Support,23000000,,Elections,Judiciary and Public Safety,Charles Allen
-,Commission on Judicial Disabilities and Tenure,,?,0,,Judicial,Judiciary and Public Safety,Charles Allen
-,Corrections Information Council,,?,0,,Judicial,Judiciary and Public Safety,Charles Allen
-,Criminal Code Reform Commission,,?,0,,Judicial,Judiciary and Public Safety,Charles Allen
-,Criminal Justice Coordinating Council,,?,0,,Judicial,Judiciary and Public Safety,Charles Allen
-,Department of Forensic Sciences,,?,0,,Public Safety,Judiciary and Public Safety,Charles Allen
-,Judicial Nomination Commission,,?,0,,Judicial,Judiciary and Public Safety,Charles Allen
-,Office of Police Complaints,,?,0,,Public Safety,Judiciary and Public Safety,Charles Allen
-,Office of the Chief Medical Examiner,,?,0,,Public Safety,Judiciary and Public Safety,Charles Allen
-,Sentencing Commission,,?,0,,Judicial,Judiciary and Public Safety,Charles Allen
-,"District of Columbia National Guard
-",,?,0,,,Judiciary and Public Safety,Charles Allen
-,"Office of Neighborhood Safety and Engagement
-",,?,0,,Public Safety,Judiciary and Public Safety,Charles Allen
-,Office of Victim Services and Justice Grants,,?,0,,,Judiciary and Public Safety,Charles Allen
-,Department of Employment Services,DOES,Public Education?,226000000,,Labor,Labor and Workforce Development,Elissa Silverman
-,Department of Human Resources,,?,0,,Labor,Labor and Workforce Development,Elissa Silverman
-,Office Of Employee Appeals,,?,0,,Labor,Labor and Workforce Development,Elissa Silverman
-,Office of Labor Relations and Collective Bargaining,,?,0,,Labor,Labor and Workforce Development,Elissa Silverman
-,Public Employee Relations Board,,?,0,,Labor,Labor and Workforce Development,Elissa Silverman
-,Workforce Investment Council,,?,0,,Labor,Labor and Workforce Development,Elissa Silverman
-,DC Public Library,DCPL,Public Education,75000000,,,"Recreation, Libraries and Youth Affairs",Trayon White
-,Department of Parks and Recreation,DPR,Public Education?,72000000,,,"Recreation, Libraries and Youth Affairs",Trayon White
-,"Commission on Fathers, Men and Boys",,?,0,,,"Recreation, Libraries and Youth Affairs",Trayon White
-,Commission on Latino Community Development,,?,0,,,"Recreation, Libraries and Youth Affairs",Trayon White
-,Department of Youth Rehabilitation Services,,?,0,,,"Recreation, Libraries and Youth Affairs",Trayon White
-,"Office of Cable Television, Film, Music and Entertainment",,?,0,,,"Recreation, Libraries and Youth Affairs",Trayon White
-,Office on African Affairs,,?,0,,,"Recreation, Libraries and Youth Affairs",Trayon White
-,Office on African American Affairs,,?,0,,,"Recreation, Libraries and Youth Affairs",Trayon White
-,Office on Asian and Pacific Islanders Affairs,,?,0,,,"Recreation, Libraries and Youth Affairs",Trayon White
-,Office on Latino Affairs,,?,0,,,"Recreation, Libraries and Youth Affairs",Trayon White
-,Serve DC,,?,0,,,"Recreation, Libraries and Youth Affairs",Trayon White
-,District Department of Transportation,DDOT,Operations and Infrastructure,170000000,,Transportation,Transportation and the Environment,Mary Cheh
-,Department of Public Works,DPW,Operations and Infrastructure,207000000,,,Transportation and the Environment,Mary Cheh
-,Department of Energy and the Environment,DOEE,Operations and Infrastructure,242000000,,,Transportation and the Environment,Mary Cheh
-,Department of Motor Vehicles,DMV,Operations and Infrastructure,49000000,,Transportation,Transportation and the Environment,Mary Cheh
-,Water and Sewer Authority,,Enterprise and Other Funds,658000000,,,Transportation and the Environment,Mary Cheh
-,Green Finance Authority,,Enterprise and Other Funds,31000000,,,Transportation and the Environment,Mary Cheh
-,Commission on Climate Change and Resiliency,,?,0,,,Transportation and the Environment,Mary Cheh
-,Deputy Mayor for Operations and Infrastructure,,?,0,,,Transportation and the Environment,Mary Cheh
-,Food Policy Council,,?,0,,,Transportation and the Environment,Mary Cheh
-,Pedestrian Advisory Council,,?,0,,Transportation,Transportation and the Environment,Mary Cheh
-,Bicylce Advisory Council,,?,0,,Transportation,Transportation and the Environment,Mary Cheh
-,Financing,,Financing,1900000000,,,Committee of the Whole,
-,DC Council,,Governmental Direction and Support,31000000,,,Committee of the Whole,
-,DC Commission on the Arts and Humanities,DCAH,Economic Development and Regulation,38000000,,,Committee of the Whole,
-,Ballpark Revenue Fund,,Enterprise and Other Funds,31000000,,,Committee of the Whole,
-,Housing Protection Trust Fund,HPTF,Enterprise and Other Funds,250000000,,Housing,Committee of the Whole,
-,Other Post-Employment Benefits Administration,,Enterprise and Other Funds,10000000,,,Committee of the Whole,
-,Repayment of PILOT Financing,,Enterprise and Other Funds,48000000,,,Committee of the Whole,
-,Tax Increment Financing,TIF,Enterprise and Other Funds,42000000,,,Committee of the Whole,
-,Unemployment Insurance Trust Fund,,Enterprise and Other Funds,267000000,,,Committee of the Whole,
-,Universal Paid Leave Fund,,Enterprise and Other Funds,340000000,,,Committee of the Whole,
-,Washington Acqueduct,,Enterprise and Other Funds,71000000,,,Committee of the Whole,
+code,name,budget,link,committee,chair
+,Department of Licensing and Consumer Protection,37844000,,Committee of the Whole,Phil Mendelson
+,Department of Buildings,64376000,,Committee of the Whole,Phil Mendelson
+,District of Columbia Public Charter School Board,12100000,,Committee of the Whole,Phil Mendelson
+,District of Columbia Public Schools,1162122000,,Committee of the Whole,Phil Mendelson
+,Office of Budget and Planning,6657000,,Committee of the Whole,Phil Mendelson
+,Office of Planning,15577000,,Committee of the Whole,Phil Mendelson
+,Office of the Deputy Mayor for Education,49728000,,Committee of the Whole,Phil Mendelson
+,Office of the State Superintendent of Education,1061502000,,Committee of the Whole,Phil Mendelson
+,Tax Revision Commission,0,,Committee of the Whole,Phil Mendelson
+,University of the District of Columbia,195084000,,Committee of the Whole,Phil Mendelson
+,Washington Metropolitan Area Transit Authority,481169000,,Committee of the Whole,Phil Mendelson
+,Zoning Commission/Office of Zoning,4142000,,Committee of the Whole,Phil Mendelson
+,Alcoholic Beverage Regulation Administration,10879724,,Business and Economic Development,Kenyan McDuffie
+,Department of For-Hire Vehicles,22683000,,Business and Economic Development,Kenyan McDuffie
+,"Department of Insurance, Securities and Banking",37098000,,Business and Economic Development,Kenyan McDuffie
+,Department of Small and Local Business Development,21439000,,Business and Economic Development,Kenyan McDuffie
+,Deputy Mayor for Planning and Economic Development,108674000,,Business and Economic Development,Kenyan McDuffie
+,District of Columbia Lottery and Charitable Games,360000000,,Business and Economic Development,Kenyan McDuffie
+,Office of Nightlife and Culture,0,,Business and Economic Development,Kenyan McDuffie
+,Office of the Chief Financial Officer (not including the Office of Budget and Planning),231305000,,Business and Economic Development,Kenyan McDuffie
+,Washington Convention and Sports Authority/Events DC,0,,Business and Economic Development,Kenyan McDuffie
+,Advisory Neighborhood Commissions,2575153,,Government Operations and Facilities,Kenyan McDuffie
+,Department of General Services,385326000,,Government Operations and Facilities,Kenyan McDuffie
+,Office of Community Affairs (inclusive of offices under it),837552,,Government Operations and Facilities,Kenyan McDuffie
+,Office of Contracting and Procurement,31432381,,Government Operations and Facilities,Kenyan McDuffie
+,Office of Human Rights,9224237,,Government Operations and Facilities,Kenyan McDuffie
+,Office of Risk Management,4092910,,Government Operations and Facilities,Kenyan McDuffie
+,Office of the Chief Technology Officer,91023000,,Government Operations and Facilities,Kenyan McDuffie
+,Office on Returning Citizen Affairs,2751096,,Government Operations and Facilities,Kenyan McDuffie
+,Department of Behavioral Health,356384637,,Health,Vince Gray
+,Department of Health,253802271,,Health,Vince Gray
+,Department of Health Care Finance,3709130390,,Health,Vince Gray
+,Deputy Mayor for Health and Human Services,2861218,,Health,Vince Gray
+,Department of Aging and Community Living,66609910,,Housing and Executive Administration,Anita Bonds
+,Department of Housing and Community Development,99592720,,Housing and Executive Administration,Anita Bonds
+,District of Columbia Housing Authority,184335591,,Housing and Executive Administration,Anita Bonds
+,Executive Office of the Mayor,8403129,,Housing and Executive Administration,Anita Bonds
+,Housing Finance Agency,0,,Housing and Executive Administration,Anita Bonds
+,Office of the City Administrator,12211189,,Housing and Executive Administration,Anita Bonds
+,Office of the Tenant Advocate,4421256,,Housing and Executive Administration,Anita Bonds
+,Board of Ethics and Government Accountability,3977407,,Human Services,Brianne Nadeau
+,Child and Family Services Agency,222082224,,Human Services,Brianne Nadeau
+,Department of Human Services,851484947,,Human Services,Brianne Nadeau
+,Department on Disability Services,197975632,,Human Services,Brianne Nadeau
+,Department of Corrections,200116000,,Judiciary and Public Safety,Charles Allen
+,Deputy Mayor for Public Safety and Justice,2989000,,Judiciary and Public Safety,Charles Allen
+,District of Columbia Board of Elections,11869756,,Judiciary and Public Safety,Charles Allen
+,Fire and Emergency Medical Services Department,316397000,,Judiciary and Public Safety,Charles Allen
+,Homeland Security and Emergency Management Agency,190048784,,Judiciary and Public Safety,Charles Allen
+,Metropolitan Police Department,525952233,,Judiciary and Public Safety,Charles Allen
+,Office of Campaign Finance,15400000,,Judiciary and Public Safety,Charles Allen
+,Office of the Attorney General for the District of Columbia,147830658,,Judiciary and Public Safety,Charles Allen
+,Office of Neighborhood Safety and Engagement,34007928,,Judiciary and Public Safety,Charles Allen
+,Office of Unified Communications,61125000,,Judiciary and Public Safety,Charles Allen
+,Department of Employment Services,236390000,,Labor and Workforce Development,VACANT
+,Department of Human Resources,22149000,,Labor and Workforce Development,VACANT
+,Department of Parks and Recreation,84087144,,"Recreation, Libraries and Youth Affairs",Trayon White
+,Department of Youth Rehabilitation Services,89585847,,"Recreation, Libraries and Youth Affairs",Trayon White
+,District of Columbia Public Library System,77025000,,"Recreation, Libraries and Youth Affairs",Trayon White
+,"Office of Cable Television, Film, Music and Entertainment",15697188,,"Recreation, Libraries and Youth Affairs",Trayon White
+,Department of Energy and Environment,220681000,,Transportation and the Environment,VACANT
+,Department of Motor Vehicles,55000000,,Transportation and the Environment,VACANT
+,Department of Public Works,188618856,,Transportation and the Environment,VACANT
+,Deputy Mayor for Operations and Infrastructure,1282808,,Transportation and the Environment,VACANT
+,District Department of Transportation,192205336,,Transportation and the Environment,VACANT
+,DC Water,686403000,,Transportation and the Environment,VACANT

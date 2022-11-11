@@ -21,7 +21,6 @@ export class DcCouncilCommitteeMemberList {
   }
 
   render() {
-    console.log("committee-member list", this.members)
     return (
       <Host>
         <slot></slot>

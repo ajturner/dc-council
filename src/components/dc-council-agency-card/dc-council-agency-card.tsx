@@ -1,4 +1,5 @@
 import { Component, Host, h, Prop } from '@stencil/core';
+import { calculateBudget } from '../../utils/data';
 import state from '../../utils/state';
 
 @Component({
@@ -13,7 +14,6 @@ export class DcCouncilAgencyCard {
     state.action = "";
   }
   dragStart(ev) {
-    console.log("dragStart");
     state.action = "agency";
 
     // Change the source element's background color
@@ -41,11 +41,11 @@ export class DcCouncilAgencyCard {
               {this.agency?.name}
             </span>
 
-            <ul class="details subtitle">
-              <li>Cluster: {this.agency.cluster}</li>
-              <li>Budget: {this.agency.budget}</li>
-              <li><a href={this.agency.link} target="_new">Website</a></li>
-            </ul>
+            <div slot="subtitle" class="details">
+              <span id="cluster">Cluster: {this.agency.cluster}</span>
+              <span id="budget">{calculateBudget([this.agency])}m budget</span>
+              <a id="link" href={this.agency.link} target="_new">Website</a>
+            </div>
             
           </calcite-card>
       </Host>

@@ -1,4 +1,5 @@
-import { Component, Host, h, Listen, Prop, Event, EventEmitter, State } from '@stencil/core';
+import { Component, Host, h, Listen, Prop, Event, EventEmitter, State, Element } from '@stencil/core';
+import { calculateBudget } from '../../utils/data';
 import { IAgency, ICommittee, IMember } from '../../utils/types';
 
 @Component({
@@ -7,6 +8,7 @@ import { IAgency, ICommittee, IMember } from '../../utils/types';
   scoped: true,
 })
 export class DcCouncilCommitteeCard {
+  @Element() el: HTMLElement;
 
   @Prop() committee: ICommittee;
   
@@ -43,27 +45,25 @@ export class DcCouncilCommitteeCard {
     this.committeeUpdated.emit( this.committee );
   } 
 
-  calculateBudget() {
-    const budgetSum = this.committee.agencies?.reduce((sum, agency) => {
-    // debugger;
-      return sum += Number(agency.budget);
-    }, 0);
-
-    // if budgetSum is null then set to $0
-    // Round to Millions
-    const budgetString = !!budgetSum ? new Intl.NumberFormat('en-US', 
-      { 
-        style: 'currency', 
-        currency: 'USD',
-        maximumFractionDigits: 0,
-        maximumSignificantDigits: 3
-      }).format(budgetSum / 1_000_000) : "$0";
-    return budgetString;
+  deleteButton() {
+    this.removeCommittee.emit(this.committee);
   }
 
-  deleteButton() {
-    console.log(this.membersEl);
-    this.removeCommittee.emit(this.committee);
+  renderStats() {
+    return (
+      <ul id="stats">
+        <li>{calculateBudget(this.committee.agencies)}m budget</li>
+        <li>{this.agencies?.length} agencies</li>
+        <li>{this.committee.members.members?.length + this.committee.members.chair.length} members</li>
+      </ul>
+    )
+  }
+  editMode(editing:boolean = true) {
+    if(editing) {
+      this.el.classList.add("editing");
+    } else {
+      this.el.classList.remove("editing");
+    }
   }
 
   render() {
@@ -71,13 +71,18 @@ export class DcCouncilCommitteeCard {
       <Host>
         <slot></slot>
         <calcite-card>
-          <span slot="title" class="title">
+          <span slot="title" id="title"
+            onClick={this.editMode.bind(this)}
+          >
+          <span id="titleView">{this.committee?.name}</span>
           {/* <calcite-icon icon="group" scale="m" aria-hidden="true"></calcite-icon> */}
             <calcite-inline-editable
+              id="titleEdit"
               scale="l"
               intl-cancel-editing="Cancelar"
               intl-enable-editing="Haga clic para editar"
               intl-confirm-changes="Guardar"
+              // editing-enabled="true"
             >
               <calcite-input-text
                 
@@ -89,15 +94,11 @@ export class DcCouncilCommitteeCard {
                 value={this.committee?.name}
                 placeholder="Committee Name"
               ></calcite-input-text>
-        </calcite-inline-editable>
+          </calcite-inline-editable>
           
         </span>
         <span slot="subtitle">
-          {this.agencies?.length} agencies, 
-          {this.calculateBudget()}m budget,
-          {this.members?.length} members
-          {/* {this.membersEl.getMembers().length} */}
-
+          {this.renderStats()}
         <dc-council-committee-member-list
           members={this.committee.members}
           ref={el => (this.membersEl = el as HTMLDcCouncilCommitteeMemberListElement)}

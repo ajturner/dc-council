@@ -26,6 +26,7 @@ export class DcCouncilTemplate {
   }
   @Listen('calciteTileSelectChange')
   changeChoice(evt) {
+    debugger;
     const choice = evt.path[0].value;
     this.template = choice;
   }
@@ -40,7 +41,7 @@ export class DcCouncilTemplate {
           layout="horizontal" 
           dir="ltr">
         <calcite-tile-select
-          checked=""
+          checked={true}
           description="Start from scratch and create your Committees from the ground up."
           heading="Blank"
           icon="add-in-new"
@@ -51,8 +52,8 @@ export class DcCouncilTemplate {
           value="blank"
         >
           <calcite-radio-button
-            id=""
-            checked=""
+            id="blankrb"
+            checked={true}
             name="light"
             scale="m"
           ></calcite-radio-button>
@@ -68,7 +69,8 @@ export class DcCouncilTemplate {
           value="current"
         >
           <calcite-radio-button
-            id="calcite-tile-select-e2c35742-9769-3cea-b569-e9fb2c2a2729"
+            id="currentrb"
+            value="currentrb"
             name="light"
             scale="m"
           ></calcite-radio-button>
