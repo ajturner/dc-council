@@ -5,13 +5,15 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { CouncilTemplate, ICommittee, ICommitteeMembers, IMember } from "./utils/types";
+import { CouncilTemplate, IAgency, ICommittee, ICommitteeMembers, IMember } from "./utils/types";
 export namespace Components {
     interface DcCouncilAgencyCard {
         "agency": any;
     }
     interface DcCouncilAgencyList {
+        "addAgency": (newAgencies: Array<IAgency>) => Promise<void>;
         "agencies": any[];
+        "removeAgency": (removedAgency: IAgency) => Promise<void>;
     }
     interface DcCouncilCommitteeCard {
         "committee": ICommittee;
@@ -191,7 +193,7 @@ declare namespace LocalJSX {
     }
     interface DcCouncilAgencyList {
         "agencies"?: any[];
-        "onAgenciesAdded"?: (event: DcCouncilAgencyListCustomEvent<any>) => void;
+        "onAgenciesChanged"?: (event: DcCouncilAgencyListCustomEvent<any>) => void;
     }
     interface DcCouncilCommitteeCard {
         "committee"?: ICommittee;

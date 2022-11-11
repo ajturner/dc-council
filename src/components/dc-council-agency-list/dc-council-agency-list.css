@@ -25,7 +25,7 @@
   width: 100%;
 }
 .dropzone:empty {
-  min-height: 75px;
+  min-height: 100px;
 }
 :host(.spots-available) .dropzone::after {
   content: "More agencies allowed..."

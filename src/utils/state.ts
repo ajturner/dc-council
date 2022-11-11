@@ -4,7 +4,8 @@ import { CouncilTemplate, ICommittee } from "./types";
 const { state, onChange } = createStore({
   committees: [],
   action: "",
-  agencies: []
+  agencies: [],
+  draggable: null
 });
 
 onChange('committees', value => {
@@ -17,6 +18,10 @@ onChange('action', value => {
 
 onChange('agencies', value => {
   state.agencies = value;
+});
+
+onChange('draggable', value => {
+  state.draggable = value;
 });
 
 export default state;

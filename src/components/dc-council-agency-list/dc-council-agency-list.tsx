@@ -1,4 +1,4 @@
-import { Component, Host, h, Listen, Prop, Event, EventEmitter } from '@stencil/core';
+import { Component, Host, h, Listen, Prop, Event, EventEmitter, Method } from '@stencil/core';
 import state from '../../utils/state';
 import { IAgency } from '../../utils/types';
 
@@ -9,8 +9,9 @@ import { IAgency } from '../../utils/types';
 })
 export class DcCouncilAgencyList {
   @Prop() agencies = [];
-  @Event() agenciesAdded: EventEmitter<any>;
+  @Event() agenciesChanged: EventEmitter<any>;
 
+  @Method()
   addAgency(newAgencies: Array<IAgency>) {
     // Don't add duplicate members
     const existingAgencies = this.agencies.map(m => m.name);
@@ -19,16 +20,32 @@ export class DcCouncilAgencyList {
     })
 
     this.agencies = [...this.agencies, ...newAgencies]
+    this.agenciesChanged.emit( newAgencies );
   }
 
+  @Method()
+  public async removeAgency(removedAgency:IAgency) {
+    // debugger;
+    this.agencies = this.agencies.filter((agency) => {
+      return agency.name !== removedAgency.name;
+    })
+    // notify cards for updating summary stats
+    this.agenciesChanged.emit( );
+
+  }
   @Listen('addedElement')
   addedElement(evt) {
+    console.log(`drop: effectAllowed = ${evt.dataTransfer.effectAllowed}`);
+
     evt.preventDefault();
+    // debugger
     var data = evt.dataTransfer.getData("text");
     const newAgency = JSON.parse(data);
     this.addAgency([ newAgency ]);
 
-    this.agenciesAdded.emit([ newAgency ]);
+
+    // Storing so we can remove later
+    state.draggable = newAgency;
   }
 
   allowDrop(evt) {
@@ -36,20 +53,34 @@ export class DcCouncilAgencyList {
       evt.preventDefault();
     }
   }
+  dragEnd(evt) {
+    evt.preventDefault();
+    // debugger;
+    if(!!state.draggable) {
+      // remove the dragged element
+      evt.target.removeAgency(state.draggable);//removeChild(evt.target);
+
+    }
+
+    state.draggable = null;
+
+  }
 
   render() {
     return (
       <Host
-        class={`spots-available action-${state.action}`}
+        class={`dropzone spots-available action-${state.action}`}
+        
+          onDrop={this.addedElement.bind(this)}
+          onDragOver={this.allowDrop.bind(this)}
+          onDragEnd={this.dragEnd.bind(this)}
       >
         <span id="title">
           <slot></slot>
         </span>
 
         <div 
-          class="dropzone"
-          onDrop={this.addedElement.bind(this)}
-          onDragOver={this.allowDrop.bind(this)}
+          
         >
         {this.agencies.map((agency) => {
           return (

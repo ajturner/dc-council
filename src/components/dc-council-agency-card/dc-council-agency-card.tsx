@@ -10,7 +10,7 @@ import state from '../../utils/state';
 export class DcCouncilAgencyCard {
 
   @Prop() agency;
-  dragEnd(_ev) {
+  dragEnd(ev) {
     state.action = "";
   }
   dragStart(ev) {
@@ -24,6 +24,7 @@ export class DcCouncilAgencyCard {
     // Set the drag's format and data.
     // Use the event target's id for the data
     ev.dataTransfer.setData("text/plain", JSON.stringify(this.agency));
+    ev.dataTransfer.effectAllowed = "move";
 
   }
 
