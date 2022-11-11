@@ -1,5 +1,6 @@
 import { Component, Host, h, Listen, Prop, Event, EventEmitter } from '@stencil/core';
 import state from '../../utils/state';
+import { IAgency } from '../../utils/types';
 
 @Component({
   tag: 'dc-council-agency-list',
@@ -10,8 +11,14 @@ export class DcCouncilAgencyList {
   @Prop() agencies = [];
   @Event() agenciesAdded: EventEmitter<any>;
 
-  addAgency(newAgency) {
-    this.agencies = [...this.agencies, newAgency]
+  addAgency(newAgencies: Array<IAgency>) {
+    // Don't add duplicate members
+    const existingAgencies = this.agencies.map(m => m.name);
+    newAgencies = newAgencies.filter(agency => {
+      return !existingAgencies.includes(agency.name);
+    })
+
+    this.agencies = [...this.agencies, ...newAgencies]
   }
 
   @Listen('addedElement')
@@ -19,9 +26,9 @@ export class DcCouncilAgencyList {
     evt.preventDefault();
     var data = evt.dataTransfer.getData("text");
     const newAgency = JSON.parse(data);
-    this.addAgency(newAgency);
+    this.addAgency([ newAgency ]);
 
-    this.agenciesAdded.emit([newAgency]);
+    this.agenciesAdded.emit([ newAgency ]);
   }
 
   allowDrop(evt) {
