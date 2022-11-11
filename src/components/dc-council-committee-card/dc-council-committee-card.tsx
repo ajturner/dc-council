@@ -54,7 +54,7 @@ export class DcCouncilCommitteeCard {
       <ul id="stats">
         <li>{calculateBudget(this.committee.agencies)}m budget</li>
         <li>{this.agencies?.length} agencies</li>
-        <li>{this.committee.members.members?.length + this.committee.members.chair.length} members</li>
+        <li>{this.committee.members?.members?.length + this.committee.members?.chair?.length} members</li>
       </ul>
     )
   }
