@@ -20,7 +20,8 @@ calcite-card {
 #cluster, #link {
   display: none;
 }
-.title {
-  font-size: 1.1rem;
-  font-weight: 500;
+#name {
+  font-weight: 700;
+  font-size: 1rem;
+  clear:right;
 }

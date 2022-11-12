@@ -10,21 +10,23 @@ import { CouncilTemplate, ICommittee, IMember } from '../../utils/types';
 })
 export class DcCouncilGame {
 
-  @Prop({ mutable:true, reflect: true }) template:CouncilTemplate = CouncilTemplate.current;
+  @Prop({ mutable: true, reflect: true }) template: CouncilTemplate = CouncilTemplate.current;
 
   /**
    * URL to Agency spreadsheet
    */
-  @Prop() agencyFilename:string = "assets/2022/agencies.csv";
-  @Prop() committeeFilename:string = "assets/2022/committees.csv";
-  @Prop() memberFilename:string = "assets/2022/members.csv";
-  
-  @Prop({ mutable:true, reflect: true }) selectedPieces:string = "agencies";
+  @Prop() agencyFilename: string = "assets/2022/agencies.csv";
+  @Prop() committeeFilename: string = "assets/2022/committees.csv";
+  @Prop() memberFilename: string = "assets/2022/members.csv";
+
+  @Prop({ mutable: true, reflect: true }) selectedPieces: string = "agencies";
 
   @State() agencies = [];
-  @State() committees:Array<ICommittee> = [];
-  @State() members:Array<IMember> = [];
-
+  @State() committees: Array<ICommittee> = [];
+  @State() members: Array<IMember> = [];
+  
+  // Show/hide sidebar
+  @State() sidebar: boolean = true;
 
   async componentWillLoad() {
     this.template = getTemplateParam(this.template);
@@ -48,15 +50,15 @@ export class DcCouncilGame {
     return availableAgencies;
   }
 
-  async loadTemplate(template:CouncilTemplate = CouncilTemplate.saved): Promise<Array<ICommittee>> {
-    let committees:Array<ICommittee> = [];
+  async loadTemplate(template: CouncilTemplate = CouncilTemplate.saved): Promise<Array<ICommittee>> {
+    let committees: Array<ICommittee> = [];
 
-    switch(template) {
+    switch (template) {
       case CouncilTemplate.current: {
         // this.agencies = await loadAgencies(this.agencyFilename);
         committees = await loadCommittees(this.committeeFilename, this.members, state.agencies);
         break;
-      } 
+      }
       case CouncilTemplate.saved: {
         committees = getVersion();
         break;
@@ -65,7 +67,7 @@ export class DcCouncilGame {
         committees = [];
       }
     }
-    
+
     this.agencies = this.availableAgencies(committees);
     state.committees = committees;
 
@@ -104,38 +106,50 @@ export class DcCouncilGame {
   render() {
     return (
       <Host>
-        <div id="gameboard" class={`display-${this.selectedPieces}`}>
+        <div id="gameboard" class={`display-${this.selectedPieces} sidebar-${this.sidebar ? 'visible' : 'hidden'}`}>
           <div id="header">
             <slot name="header"></slot>
-              <dc-council-share class="control">
-                Share
-              </dc-council-share>
+            <dc-council-share class="control">
+              Share
+            </dc-council-share>
 
-              <dc-council-template class="control">
-                Start Again
-              </dc-council-template>
+            <dc-council-template class="control">
+              Start Again
+            </dc-council-template>
           </div>
-          <div id="pieces">
+          <div id="sidebar"
+            class={{
+              hidden: this.sidebar
+            }}
+          >
             <div id="selector">{this.renderSelector()}</div>
-            <dc-council-member-list
-              members={this.members}
+            <div id="pieces">
+              <dc-council-member-list
+                members={this.members}
               >
-            </dc-council-member-list>
-                      <dc-council-agency-list
-            agencies={this.agencies}
-            class="pieces"
-            >
-            </dc-council-agency-list>
+              </dc-council-member-list>
+              <dc-council-agency-list
+                agencies={this.agencies}
+                class="pieces"
+              >
+              </dc-council-agency-list>
+            </div>
           </div>
-          <dc-council-committee-list 
+          <div id="board">
+            <span id="sidebar-tab" onClick={() => this.sidebar = this.sidebar ? false : true}>
+              <calcite-icon icon={this.sidebar ? 'chevronLeft' : 'chevronRight' } scale="m"></calcite-icon>
+            </span>
+            <dc-council-committee-list
               committees={this.committees}
-              >
-              Committees
-          </dc-council-committee-list>          
+            >
+              <span>Committees</span>
+            </dc-council-committee-list>
+
+          </div>
           <div id="footer">
             <slot name="footer"></slot>
-          </div>          
-        </div>  
+          </div>
+        </div>
       </Host>
     );
   }

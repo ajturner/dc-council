@@ -15,7 +15,6 @@
 #header {
   grid-area: header;
   background-color: #BBB;
-  margin-bottom: 10px;
   padding: 0 10px;
   font-size: 1.3em;
   display: flex;
@@ -24,14 +23,22 @@
 .control {
   margin: 20px 0 0 20px;
 }
-dc-council-committee-list {
+#board {
   grid-area: committees;
   width: 80vw;
   overflow: scroll;
   height: 100vh;
+
+  /* keep sidebar-tab within space */
+  position: relative;
+
   /* border-left: thin solid #CCC;
   padding-left: 10px; */
   /* max-height: 600px; */
+}
+.sidebar-hidden #board {
+  width: 100vw;
+  
 }
 
 dc-council-member-list {
@@ -40,7 +47,6 @@ dc-council-member-list {
 dc-council-agency-list {
   grid-area: agencies;
   height: 100vw;
-
 }
 
 .display-members dc-council-agency-list {
@@ -50,19 +56,40 @@ dc-council-agency-list {
   display: none;
 }
 
-#pieces {
+#sidebar {
+  transition: all 0.25s;
+  margin-left: 0;
+
   z-index: 100;
   width: 300px;
   height: 100vh;
-  overflow: auto;
   padding-right: 10px;
   /* margin-right: 10px; */
   box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;  
 }
-/* #pieces:after {
-  content: "";
-  background-image: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255, 1) 90%);
-} */
+.sidebar-hidden #sidebar {
+  /* display: none; */
+  margin-left: -299px;
+}
+#sidebar-tab {
+  font-size: 0.6rem;
+  font-weight: 300;
+  margin-right: 200px;
+  display: block;
+  position: absolute;
+  top: 0;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  z-index: 101;
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;  
+}
+
+#pieces {
+  overflow: auto;
+}
+
 #selector {
+  margin-top: 10px;
   margin-bottom: 20px;
 }

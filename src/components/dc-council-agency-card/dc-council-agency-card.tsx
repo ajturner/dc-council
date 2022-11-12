@@ -39,7 +39,7 @@ export class DcCouncilAgencyCard {
           <calcite-card draggable="true">
             <span slot="title" class="title">
               <calcite-icon icon="organization" scale="m" aria-hidden="true"></calcite-icon>
-              {this.agency?.name}
+               <span id="name">{this.agency?.name}</span>
             </span>
 
             <div slot="subtitle" class="details">
