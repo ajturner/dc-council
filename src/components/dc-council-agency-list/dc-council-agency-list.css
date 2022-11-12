@@ -38,9 +38,7 @@
 :host(.dropzone):empty {
   min-height: 100px;
 }
-:host(.spots-available)::after {
-  content: "More agencies allowed..."
-}
+
 :host(.dropzone) div:empty::after {
   content: 'Add Agencies here';
   margin-top: 40px;

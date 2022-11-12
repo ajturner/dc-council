@@ -15,11 +15,7 @@
   font-weight: 600;
 }
 #newCommitteeButton {
-  /* align-self: flex-end; */
-  /* margin-left: auto; */
-  /* float: right; */
   display: inline;
-  margin-left: 50px;
 }
 .container {
   display: grid;

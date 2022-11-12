@@ -41,8 +41,8 @@ export class DcCouncilGame {
   }
 
   availableAgencies(committees: Array<ICommittee>) {
-    const usedAgencies = committees.map(committee => committee.agencies.map(agency => agency.name)).flat()
     // debugger;
+    const usedAgencies = committees.map(committee => committee.agencies?.map(agency => agency.name)).flat()
 
     const availableAgencies = this.agencies.filter(agency => {
       return !usedAgencies.includes(agency.name);
