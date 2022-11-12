@@ -10,7 +10,7 @@ import state from '../../utils/state';
 export class DcCouncilAgencyCard {
 
   @Prop() agency;
-  dragEnd(ev) {
+  dragEnd(_ev) {
     state.action = "";
   }
   dragStart(ev) {
