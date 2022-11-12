@@ -31,10 +31,21 @@ export class DcCouncilGame {
 
     this.members = await loadMembers(this.memberFilename);
     this.agencies = await loadAgencies(this.agencyFilename);
-    this.committees = await this.loadTemplate(this.template);
-
     // what agencies are available
     state.agencies = this.agencies;
+
+    this.committees = await this.loadTemplate(this.template);
+
+  }
+
+  availableAgencies(committees: Array<ICommittee>) {
+    const usedAgencies = committees.map(committee => committee.agencies.map(agency => agency.name)).flat()
+    // debugger;
+
+    const availableAgencies = state.agencies.filter(agency => {
+      return !usedAgencies.includes(agency.name);
+    })
+    return availableAgencies;
   }
 
   async loadTemplate(template:CouncilTemplate = CouncilTemplate.saved): Promise<Array<ICommittee>> {
@@ -42,7 +53,8 @@ export class DcCouncilGame {
 
     switch(template) {
       case CouncilTemplate.current: {
-        committees = await loadCommittees(this.committeeFilename, this.members, this.agencies);
+        // this.agencies = await loadAgencies(this.agencyFilename);
+        committees = await loadCommittees(this.committeeFilename, this.members, state.agencies);
         break;
       } 
       case CouncilTemplate.saved: {
@@ -54,9 +66,9 @@ export class DcCouncilGame {
       }
     }
     
+    this.agencies = this.availableAgencies(committees);
     state.committees = committees;
 
-    // debugger
     return committees;
   }
 

@@ -3,11 +3,14 @@
   cursor: pointer;
   min-height: 75px;
 }
-:host(.action-member) .dropzone {
+:host(.action-agency) div  {
+  opacity: 0.2;
+}
+:host(.action-member) div  {
   border: 1px dashed green;
   background-color: lightgreen;
 }
-.sc-dc-council-dropzone, .dropzone {
+:host(.dropzone) div:empty {
   display: grid;
   grid-template-rows: repeat(auto-fill,minmax(100px,1fr));
   grid-auto-flow: rows;
@@ -22,20 +25,18 @@
     rgb(191, 244, 191) 20px
   )
 }
-.dropzone {
-  width: 100%;
-}
-:host(.spots-available) .dropzone {
+
+:host(.spots-available) {
   padding-bottom: 10px;
 }
-:host(.spots-available) .dropzone::after {
+:host(.spots-available)::after {
   content: "More members allowed..."
 }
 
-.dropzone:empty {
-  min-height: 75px;
+:host(.dropzone):empty {
+  min-height: 100px;
 }
-.dropzone:empty::after {
+:host(.dropzone) div:empty::after {
   content: 'Vacant - Add Members here';
   margin-top: 40px;
   text-align: center;
@@ -46,7 +47,4 @@
   margin: 0;
   font-size: 1.1rem;
   font-weight: 400;
-}
-.drag-over {
-  border: 1px dashed red ;
 }

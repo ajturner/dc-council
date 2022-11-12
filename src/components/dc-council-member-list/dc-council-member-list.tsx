@@ -46,12 +46,7 @@ export class DcCouncilMemberList {
     }
     
 
-    // Adds prompts for adding more members
-    if(this.members.length < this.max) {
-      this.el.classList.add('spots-available');
-    } else {
-      this.el.classList.remove('spots-available');
-    }
+
     // Event up for other components
     this.membersAdded.emit(this.members);
   }
@@ -75,19 +70,21 @@ export class DcCouncilMemberList {
   }
 
   render() {
+    const classes = ['dropzone', `action-${state.action}`];
+        // Adds prompts for adding more members
+    if(this.members.length < this.max) {
+      classes.push('spots-available');
+    }
     return (
       <Host
-        class={`action-${state.action}`}
-
+        class={classes.join(' ')}
+        onDrop={this.addedElement.bind(this)}
+        onDragOver={this.allowDrop.bind(this)}
       >
           <span id="title">
             <slot></slot>
           </span>
-          <div 
-            class="dropzone"
-            onDrop={this.addedElement.bind(this)}
-            onDragOver={this.allowDrop.bind(this)}
-          >
+          <div>
           {this.members.map((member) => {
             return (
               <dc-council-member-card member={member}></dc-council-member-card>
