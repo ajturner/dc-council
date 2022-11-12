@@ -9,7 +9,7 @@ import { CardAction, IMember } from '../../utils/types';
 export class DcCouncilMemberList {
   @Element() el: HTMLElement;
 
-  @Event() membersAdded: EventEmitter<any>;
+  @Event() membersChanged: EventEmitter<any>;
 
   /**
    * Maximum number of members allowed. Null or -1 means unlimited
@@ -49,7 +49,7 @@ export class DcCouncilMemberList {
     }
   
     // Event up for other components
-    this.membersAdded.emit(this.members);
+    this.membersChanged.emit(this.members);
   }
 
   @Listen('addedElement')
@@ -65,6 +65,9 @@ export class DcCouncilMemberList {
     this.members = this.members.filter((member) => {
       return member.name !== evt.detail.name;
     })
+
+    this.membersChanged.emit(this.members);
+
   }
 
   // TODO - prevent allow agency onto members

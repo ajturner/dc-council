@@ -34,7 +34,7 @@ export class DcCouncilGame {
     this.members = await loadMembers(this.memberFilename);
     this.agencies = await loadAgencies(this.agencyFilename);
     // what agencies are available
-    state.agencies = this.agencies;
+     state.agencies = this.agencies;
 
     this.committees = await this.loadTemplate(this.template);
 
@@ -44,7 +44,7 @@ export class DcCouncilGame {
     const usedAgencies = committees.map(committee => committee.agencies.map(agency => agency.name)).flat()
     // debugger;
 
-    const availableAgencies = state.agencies.filter(agency => {
+    const availableAgencies = this.agencies.filter(agency => {
       return !usedAgencies.includes(agency.name);
     })
     return availableAgencies;
@@ -55,8 +55,7 @@ export class DcCouncilGame {
 
     switch (template) {
       case CouncilTemplate.current: {
-        // this.agencies = await loadAgencies(this.agencyFilename);
-        committees = await loadCommittees(this.committeeFilename, this.members, state.agencies);
+        committees = await loadCommittees(this.committeeFilename, this.members, this.agencies);
         break;
       }
       case CouncilTemplate.saved: {
@@ -68,7 +67,7 @@ export class DcCouncilGame {
       }
     }
 
-    this.agencies = this.availableAgencies(committees);
+    state.agencies = this.availableAgencies(committees);
     state.committees = committees;
 
     return committees;
@@ -129,7 +128,7 @@ export class DcCouncilGame {
               >
               </dc-council-member-list>
               <dc-council-agency-list
-                agencies={this.agencies}
+                agencies={state.agencies}
                 class="pieces"
               >
               </dc-council-agency-list>

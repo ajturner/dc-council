@@ -1,6 +1,7 @@
-import { Component, Host, h, Prop } from '@stencil/core';
+import { Component, Host, h, Prop, Event, EventEmitter } from '@stencil/core';
 import { calculateBudget } from '../../utils/data';
 import state from '../../utils/state';
+import { CardAction, IAgency } from '../../utils/types';
 
 @Component({
   tag: 'dc-council-agency-card',
@@ -10,6 +11,11 @@ import state from '../../utils/state';
 export class DcCouncilAgencyCard {
 
   @Prop() agency;
+  // Should this member be removable (show action)
+  @Prop() action:CardAction = null;
+
+  @Event() agencyRemove: EventEmitter<IAgency>;
+
   dragEnd(_ev) {
     state.action = "";
   }
@@ -37,6 +43,9 @@ export class DcCouncilAgencyCard {
       >
           <slot></slot>
           <dc-council-card>
+            <span slot="action">
+              {this.renderAction(this.action)}
+            </span>          
             <span slot="title" class="title">
                <span id="name">{this.agency?.name}</span>
             </span>
@@ -50,5 +59,13 @@ export class DcCouncilAgencyCard {
           </dc-council-card>
       </Host>
     );
+  }
+
+  private renderAction(action:CardAction) {
+    if(action === CardAction.remove) {
+      return <calcite-icon icon="x" scale="m" aria-hidden="true"
+        onClick={(_evt) => this.agencyRemove.emit(this.agency)}
+      ></calcite-icon>;
+    }
   }
 }

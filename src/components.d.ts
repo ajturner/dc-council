@@ -8,6 +8,7 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { CardAction, CouncilTemplate, IAgency, ICommittee, ICommitteeMembers, IMember } from "./utils/types";
 export namespace Components {
     interface DcCouncilAgencyCard {
+        "action": CardAction;
         "agency": any;
     }
     interface DcCouncilAgencyList {
@@ -81,6 +82,10 @@ export namespace Components {
         "showModal": () => Promise<void>;
         "template": string;
     }
+}
+export interface DcCouncilAgencyCardCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLDcCouncilAgencyCardElement;
 }
 export interface DcCouncilAgencyListCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -207,7 +212,9 @@ declare global {
 }
 declare namespace LocalJSX {
     interface DcCouncilAgencyCard {
+        "action"?: CardAction;
         "agency"?: any;
+        "onAgencyRemove"?: (event: DcCouncilAgencyCardCustomEvent<IAgency>) => void;
     }
     interface DcCouncilAgencyList {
         "agencies"?: any[];
@@ -266,7 +273,7 @@ declare namespace LocalJSX {
           * Array of people in this list
          */
         "members"?: Array<IMember>;
-        "onMembersAdded"?: (event: DcCouncilMemberListCustomEvent<any>) => void;
+        "onMembersChanged"?: (event: DcCouncilMemberListCustomEvent<any>) => void;
         /**
           * Name of position for this to show
          */

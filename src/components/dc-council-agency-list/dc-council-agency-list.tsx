@@ -1,6 +1,6 @@
 import { Component, Host, h, Listen, Prop, Event, EventEmitter, Method } from '@stencil/core';
 import state from '../../utils/state';
-import { IAgency } from '../../utils/types';
+import { CardAction, IAgency } from '../../utils/types';
 
 @Component({
   tag: 'dc-council-agency-list',
@@ -8,7 +8,8 @@ import { IAgency } from '../../utils/types';
   shadow: true,
 })
 export class DcCouncilAgencyList {
-  @Prop() agencies = [];
+  
+  @Prop({ mutable:true, reflect: true }) agencies = [];
   @Event() agenciesChanged: EventEmitter<any>;
 
   @Method()
@@ -21,6 +22,12 @@ export class DcCouncilAgencyList {
 
     this.agencies = [...this.agencies, ...newAgencies]
     this.agenciesChanged.emit( newAgencies );
+  }
+
+  @Listen('agencyRemove')
+  onAgencyRemove(evt) {
+    state.agencies = [...state.agencies, evt.detail];
+    this.removeAgency(evt.detail);
   }
 
   @Method()
@@ -82,7 +89,10 @@ export class DcCouncilAgencyList {
         <div id="agencies">
         {this.agencies.map((agency) => {
           return (
-            <dc-council-agency-card agency={agency}></dc-council-agency-card>
+            <dc-council-agency-card 
+              agency={agency}
+              action={CardAction.remove}
+            ></dc-council-agency-card>
           )
         })}
         </div>

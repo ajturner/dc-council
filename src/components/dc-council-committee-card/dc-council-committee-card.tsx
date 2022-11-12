@@ -28,8 +28,8 @@ export class DcCouncilCommitteeCard {
     this.agencies = this.committee.agencies;
   }
 
-  @Listen('membersAdded')
-  async membersAdded(_evt) {
+  @Listen('membersChanged')
+  async membersChanged(_evt) {
     this.committee.members = await this.membersEl.getMembers();
     // State for re-render
     this.members = this.committee.members?.members;

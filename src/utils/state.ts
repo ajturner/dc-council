@@ -2,10 +2,10 @@ import { createStore } from "@stencil/store";
 import { CouncilTemplate, ICommittee } from "./types";
 
 const { state, onChange } = createStore({
-  committees: [],
-  action: "",
-  agencies: [],
-  draggable: null
+  committees: [], // current committees
+  action: "", // which entites are being dragged: agency, member
+  agencies: [], // agencies available to be places
+  draggable: null 
 });
 
 onChange('committees', value => {
