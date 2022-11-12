@@ -5,7 +5,7 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { CouncilTemplate, IAgency, ICommittee, ICommitteeMembers, IMember } from "./utils/types";
+import { CardAction, CouncilTemplate, IAgency, ICommittee, ICommitteeMembers, IMember } from "./utils/types";
 export namespace Components {
     interface DcCouncilAgencyCard {
         "agency": any;
@@ -14,6 +14,9 @@ export namespace Components {
         "addAgency": (newAgencies: Array<IAgency>) => Promise<void>;
         "agencies": any[];
         "removeAgency": (removedAgency: IAgency) => Promise<void>;
+    }
+    interface DcCouncilCard {
+        "thumbnail": string;
     }
     interface DcCouncilCommitteeCard {
         "committee": ICommittee;
@@ -49,6 +52,7 @@ export namespace Components {
         "template": CouncilTemplate;
     }
     interface DcCouncilMemberCard {
+        "action": CardAction;
         "member": any;
     }
     interface DcCouncilMemberList {
@@ -60,6 +64,9 @@ export namespace Components {
           * Array of people in this list
          */
         "members": Array<IMember>;
+        /**
+          * Name of position for this to show
+         */
         "position": string;
     }
     interface DcCouncilShare {
@@ -91,6 +98,10 @@ export interface DcCouncilDropzoneCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLDcCouncilDropzoneElement;
 }
+export interface DcCouncilMemberCardCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLDcCouncilMemberCardElement;
+}
 export interface DcCouncilMemberListCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLDcCouncilMemberListElement;
@@ -111,6 +122,12 @@ declare global {
     var HTMLDcCouncilAgencyListElement: {
         prototype: HTMLDcCouncilAgencyListElement;
         new (): HTMLDcCouncilAgencyListElement;
+    };
+    interface HTMLDcCouncilCardElement extends Components.DcCouncilCard, HTMLStencilElement {
+    }
+    var HTMLDcCouncilCardElement: {
+        prototype: HTMLDcCouncilCardElement;
+        new (): HTMLDcCouncilCardElement;
     };
     interface HTMLDcCouncilCommitteeCardElement extends Components.DcCouncilCommitteeCard, HTMLStencilElement {
     }
@@ -175,6 +192,7 @@ declare global {
     interface HTMLElementTagNameMap {
         "dc-council-agency-card": HTMLDcCouncilAgencyCardElement;
         "dc-council-agency-list": HTMLDcCouncilAgencyListElement;
+        "dc-council-card": HTMLDcCouncilCardElement;
         "dc-council-committee-card": HTMLDcCouncilCommitteeCardElement;
         "dc-council-committee-list": HTMLDcCouncilCommitteeListElement;
         "dc-council-committee-member-list": HTMLDcCouncilCommitteeMemberListElement;
@@ -194,6 +212,9 @@ declare namespace LocalJSX {
     interface DcCouncilAgencyList {
         "agencies"?: any[];
         "onAgenciesChanged"?: (event: DcCouncilAgencyListCustomEvent<any>) => void;
+    }
+    interface DcCouncilCard {
+        "thumbnail"?: string;
     }
     interface DcCouncilCommitteeCard {
         "committee"?: ICommittee;
@@ -232,7 +253,9 @@ declare namespace LocalJSX {
         "template"?: CouncilTemplate;
     }
     interface DcCouncilMemberCard {
+        "action"?: CardAction;
         "member"?: any;
+        "onMemberRemove"?: (event: DcCouncilMemberCardCustomEvent<any>) => void;
     }
     interface DcCouncilMemberList {
         /**
@@ -244,6 +267,9 @@ declare namespace LocalJSX {
          */
         "members"?: Array<IMember>;
         "onMembersAdded"?: (event: DcCouncilMemberListCustomEvent<any>) => void;
+        /**
+          * Name of position for this to show
+         */
         "position"?: string;
     }
     interface DcCouncilShare {
@@ -258,6 +284,7 @@ declare namespace LocalJSX {
     interface IntrinsicElements {
         "dc-council-agency-card": DcCouncilAgencyCard;
         "dc-council-agency-list": DcCouncilAgencyList;
+        "dc-council-card": DcCouncilCard;
         "dc-council-committee-card": DcCouncilCommitteeCard;
         "dc-council-committee-list": DcCouncilCommitteeList;
         "dc-council-committee-member-list": DcCouncilCommitteeMemberList;
@@ -276,6 +303,7 @@ declare module "@stencil/core" {
         interface IntrinsicElements {
             "dc-council-agency-card": LocalJSX.DcCouncilAgencyCard & JSXBase.HTMLAttributes<HTMLDcCouncilAgencyCardElement>;
             "dc-council-agency-list": LocalJSX.DcCouncilAgencyList & JSXBase.HTMLAttributes<HTMLDcCouncilAgencyListElement>;
+            "dc-council-card": LocalJSX.DcCouncilCard & JSXBase.HTMLAttributes<HTMLDcCouncilCardElement>;
             "dc-council-committee-card": LocalJSX.DcCouncilCommitteeCard & JSXBase.HTMLAttributes<HTMLDcCouncilCommitteeCardElement>;
             "dc-council-committee-list": LocalJSX.DcCouncilCommitteeList & JSXBase.HTMLAttributes<HTMLDcCouncilCommitteeListElement>;
             "dc-council-committee-member-list": LocalJSX.DcCouncilCommitteeMemberList & JSXBase.HTMLAttributes<HTMLDcCouncilCommitteeMemberListElement>;

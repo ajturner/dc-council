@@ -1,6 +1,6 @@
 import { Component, Host, h, Prop, Listen, Element, Event, EventEmitter } from '@stencil/core';
 import state from '../../utils/state';
-import { IMember } from '../../utils/types';
+import { CardAction, IMember } from '../../utils/types';
 @Component({
   tag: 'dc-council-member-list',
   styleUrl: 'dc-council-member-list.css',
@@ -21,6 +21,9 @@ export class DcCouncilMemberList {
    */
   @Prop({ mutable:true, reflect: true }) members:Array<IMember> = [];
   
+  /**
+  * Name of position for this to show
+   */
   @Prop() position:string;
 
   // @Watch('members')
@@ -44,9 +47,7 @@ export class DcCouncilMemberList {
     } else {
       this.members = [...this.members, ...newMembers];
     }
-    
-
-
+  
     // Event up for other components
     this.membersAdded.emit(this.members);
   }
@@ -57,6 +58,13 @@ export class DcCouncilMemberList {
     var data = evt.dataTransfer.getData("text");
     const newMember = JSON.parse(data);
     this.addMembers([newMember]);
+  }
+
+  @Listen('memberRemove')
+  removeMember(evt) {
+    this.members = this.members.filter((member) => {
+      return member.name !== evt.detail.name;
+    })
   }
 
   // TODO - prevent allow agency onto members
@@ -84,10 +92,13 @@ export class DcCouncilMemberList {
           <span id="title">
             <slot></slot>
           </span>
-          <div>
+          <div id="members">
           {this.members.map((member) => {
             return (
-              <dc-council-member-card member={member}></dc-council-member-card>
+              <dc-council-member-card 
+                member={member}
+                action={!!this.position ? CardAction.remove : null}
+              ></dc-council-member-card>
             )
           })}
           </div>

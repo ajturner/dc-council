@@ -38,3 +38,9 @@ export enum CouncilTemplate {
   blank = 'blank',
   saved = 'saved',
 }
+
+export enum CardAction {
+  add = 'add',
+  remove = 'remove',
+  none = 'none'
+}

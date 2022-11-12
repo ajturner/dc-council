@@ -41,9 +41,7 @@ export class DcCouncilCommitteeList {
       <Host>
         <div class="head">
           <span id="title"><slot></slot></span>
-          <dc-council-committee-placeholder
-            id="newCommitteeButton"
-          ></dc-council-committee-placeholder>
+
         </div>
         <div id="committees" class="container">
           {this.committees.map((committee) => {
@@ -54,7 +52,10 @@ export class DcCouncilCommitteeList {
                 committee={committee}
               ></dc-council-committee-card>
             )
-          })}          
+          })}
+          <dc-council-committee-placeholder
+            id="newCommitteeButton"
+          ></dc-council-committee-placeholder>                    
         </div> 
       </Host>
     );

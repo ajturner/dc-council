@@ -1,6 +1,6 @@
 :host {
   display: block;
-  height: 100px;
+  /* height: 100px; */
 }
 calcite-card {
   height: 98px;
@@ -18,21 +18,13 @@ calcite-card {
   font-size: 1rem;
   clear:right;
 }
-#role, #details {
-  margin-left: 45px;
-}
 
 #term {
   margin-left: 3px;
   font-size: 0.8rem;
   font-weight: 300;
 }
-img {
-  width: 40px;
-  border-radius: 50%;
-  vertical-align: middle;
-  margin-right: 5px;
-}
+
 /* TODO: consolidate this styling across components */
 :host(.ghost) {
   background: #0f9535;

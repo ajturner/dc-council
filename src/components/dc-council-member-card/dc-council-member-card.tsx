@@ -1,6 +1,7 @@
-import { Component, Host, h, Prop, getAssetPath } from '@stencil/core';
+import { Component, Host, h, Prop, getAssetPath, EventEmitter, Event } from '@stencil/core';
 import "@esri/calcite-components/dist/calcite/calcite.css";
 import state from '../../utils/state';
+import { CardAction } from '../../utils/types';
 
 @Component({
   tag: 'dc-council-member-card',
@@ -11,6 +12,10 @@ import state from '../../utils/state';
 export class DcCouncilMemberCard {
 
   @Prop() member;
+
+  // Should this member be removable (show action)
+  @Prop() action:CardAction = null;
+  @Event() memberRemove: EventEmitter<any>;
 
   dragEnd(_ev) {
     state.action = "";
@@ -38,21 +43,31 @@ export class DcCouncilMemberCard {
         onDragEnd={this.dragEnd.bind(this)}
       >
         <slot></slot>
-        <calcite-card>
+        <dc-council-card
+          thumbnail={this.member.photo ? imageSrc : null}
+        >
+          <span slot="action">
+            {this.renderAction(this.action)}
+          </span>
           <span slot="title" class="title">
-            {this.member.photo 
-              ? <img src={imageSrc} alt={`Photograph of ${this.member.name}`} />
-              : null}
+            
             <span id="name">{this.member?.name}</span><br/>
             <span id="role">{this.member?.role}</span> 
           </span>
 
           <div slot="subtitle" id="details">
-            <span id="term">({`${this.member.termstart}-${this.member.termend}`})</span>
           </div>            
             
-        </calcite-card>
+        </dc-council-card>
       </Host>
     );
+  }
+
+  private renderAction(action:CardAction) {
+    if(action === CardAction.remove) {
+      return <calcite-icon icon="x" scale="m" aria-hidden="true"
+        onClick={(_evt) => this.memberRemove.emit(this.member)}
+      ></calcite-icon>;
+    }
   }
 }

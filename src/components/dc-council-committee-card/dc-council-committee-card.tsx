@@ -74,6 +74,8 @@ export class DcCouncilCommitteeCard {
           <span slot="title" id="title"
             onClick={this.editMode.bind(this)}
           >
+          
+          
           <span id="titleView">{this.committee?.name}</span>
           {/* <calcite-icon icon="group" scale="m" aria-hidden="true"></calcite-icon> */}
             <calcite-inline-editable
@@ -95,7 +97,7 @@ export class DcCouncilCommitteeCard {
                 placeholder="Committee Name"
               ></calcite-input-text>
           </calcite-inline-editable>
-          
+          {this.renderDelete()}
         </span>
         <span slot="subtitle">
           {this.renderStats()}
@@ -119,21 +121,25 @@ export class DcCouncilCommitteeCard {
           <li><a href={this.committee.link} target="_new">Website</a></li>
         </ul> */}
         <div slot="footer-trailing">
-          <calcite-button
-            id="card-icon-test-6"
-            scale="s"
-            appearance="transparent"
-            color="red"
-            icon-start="x"
-            alignment="center"
-            type="button"
-            width="auto"
-            onClick={this.deleteButton.bind(this)}
-          >Delete Committee</calcite-button>
+          
         </div>        
         </calcite-card>
       </Host>
     );
   }
 
+
+  private renderDelete() {
+    return <calcite-button
+      id="card-icon-test-6"
+      scale="s"
+      appearance="transparent"
+      color="red"
+      icon-start="x"
+      alignment="center"
+      type="button"
+      width="auto"
+      onClick={this.deleteButton.bind(this)}
+    >Delete Committee</calcite-button>;
+  }
 }
