@@ -2,6 +2,8 @@
   display: block;
   margin: 0;
   padding: 0;
+  --calcite-ui-brand: #0f9535;
+  --calcite-ui-text-2: #9db2a3
 }
 #gameboard {
   display: grid;
@@ -14,7 +16,7 @@
 }
 #header {
   grid-area: header;
-  background-color: #BBB;
+  background-color: #white;
   padding: 0 10px;
   font-size: 1.3em;
   display: flex;
