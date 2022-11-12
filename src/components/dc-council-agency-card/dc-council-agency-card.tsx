@@ -36,19 +36,18 @@ export class DcCouncilAgencyCard {
         onDragEnd={this.dragEnd.bind(this)}      
       >
           <slot></slot>
-          <calcite-card draggable="true">
+          <dc-council-card>
             <span slot="title" class="title">
-              <calcite-icon icon="organization" scale="m" aria-hidden="true"></calcite-icon>
                <span id="name">{this.agency?.name}</span>
             </span>
 
-            <div slot="subtitle" class="details">
+            <div slot="details" class="details">
               <span id="cluster">Cluster: {this.agency.cluster}</span>
               <span id="budget">{calculateBudget([this.agency])}m budget</span>
               <a id="link" href={this.agency.link} target="_new">Website</a>
             </div>
             
-          </calcite-card>
+          </dc-council-card>
       </Host>
     );
   }

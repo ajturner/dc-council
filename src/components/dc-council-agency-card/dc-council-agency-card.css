@@ -1,9 +1,6 @@
 :host {
   display: block;
-  height: 100px;
-}
-calcite-card {
-  height: 98px;
+  height: 80px;
 }
 :host(:hover) {
   cursor: pointer;
@@ -21,7 +18,7 @@ calcite-card {
   display: none;
 }
 #name {
-  font-weight: 700;
-  font-size: 1rem;
+  font-weight: 600;
+  font-size: 0.9rem;
   clear:right;
 }

@@ -79,7 +79,7 @@ export class DcCouncilAgencyList {
           <slot></slot>
         </span>
 
-        <div>
+        <div id="agencies">
         {this.agencies.map((agency) => {
           return (
             <dc-council-agency-card agency={agency}></dc-council-agency-card>
