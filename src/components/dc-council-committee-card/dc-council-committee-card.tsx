@@ -53,11 +53,21 @@ export class DcCouncilCommitteeCard {
     return (
       <ul id="stats">
         <li>{calculateBudget(this.committee.agencies)}m budget</li>
-        <li>{this.agencies?.length} agencies</li>
-        <li>{this.committee.members?.members?.length + this.committee.members?.chair?.length} members</li>
+        <li>{this.countAgencies()} agencies</li>
+        <li>{this.countMembers()} members</li>
       </ul>
     )
   }
+
+  private countAgencies() {
+    return this.agencies?.length;
+  }
+
+  private countMembers() {
+    let count = this.committee.members?.members?.length + this.committee.members?.chair?.length;
+    return !!count ? count : 0;
+  }
+
   editMode(editing:boolean = true) {
     if(editing) {
       this.el.classList.add("editing");
@@ -74,8 +84,6 @@ export class DcCouncilCommitteeCard {
           <span slot="title" id="title"
             onClick={this.editMode.bind(this)}
           >
-          
-          
           <span id="titleView">{this.committee?.name}</span>
           {/* <calcite-icon icon="group" scale="m" aria-hidden="true"></calcite-icon> */}
             <calcite-inline-editable

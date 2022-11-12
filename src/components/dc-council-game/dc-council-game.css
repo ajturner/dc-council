@@ -3,7 +3,8 @@
   margin: 0;
   padding: 0;
   --calcite-ui-brand: #0f9535;
-  --calcite-ui-text-2: #9db2a3
+  --calcite-ui-text-3: #9db2a3;
+  /* https://esri.github.io/calcite-components/?path=/story/theming-custom-theme--interactive */
 }
 #gameboard {
   display: grid;
@@ -16,7 +17,7 @@
 }
 #header {
   grid-area: header;
-  background-color: #white;
+  background-color: white;
   padding: 0 10px;
   font-size: 1.3em;
   display: flex;
