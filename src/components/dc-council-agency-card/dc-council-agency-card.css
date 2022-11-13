@@ -1,6 +1,8 @@
 :host {
   display: block;
-  height: 80px;
+}
+dc-council-card {
+  height: 90px;  
 }
 :host(:hover) {
   cursor: pointer;

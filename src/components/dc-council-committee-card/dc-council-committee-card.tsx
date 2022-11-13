@@ -80,34 +80,36 @@ export class DcCouncilCommitteeCard {
     return (
       <Host>
         <slot></slot>
-        <calcite-card>
+        <dc-council-card>
+          <span slot="action">
+            {this.renderDelete()}
+          </span>
           <span slot="title" id="title"
             onClick={this.editMode.bind(this)}
           >
-          <span id="titleView">{this.committee?.name}</span>
-          {/* <calcite-icon icon="group" scale="m" aria-hidden="true"></calcite-icon> */}
-            <calcite-inline-editable
-              id="titleEdit"
-              scale="l"
-              intl-cancel-editing="Cancelar"
-              intl-enable-editing="Haga clic para editar"
-              intl-confirm-changes="Guardar"
-              // editing-enabled="true"
-            >
-              <calcite-input-text
-                
+            <span id="titleView">{this.committee?.name}</span>
+            {/* <calcite-icon icon="group" scale="m" aria-hidden="true"></calcite-icon> */}
+              <calcite-inline-editable
+                id="titleEdit"
                 scale="l"
-                status="idle"
-                alignment="start"
-                prefix-text=""
-                suffix-text=""
-                value={this.committee?.name}
-                placeholder="Committee Name"
-              ></calcite-input-text>
-          </calcite-inline-editable>
-          {this.renderDelete()}
+                intl-cancel-editing="Cancelar"
+                intl-enable-editing="Haga clic para editar"
+                intl-confirm-changes="Guardar"
+                // editing-enabled="true"
+              >
+                <calcite-input-text
+                  
+                  scale="l"
+                  status="idle"
+                  alignment="start"
+                  prefix-text=""
+                  suffix-text=""
+                  value={this.committee?.name}
+                  placeholder="Committee Name"
+                ></calcite-input-text>
+            </calcite-inline-editable>
         </span>
-        <span slot="subtitle">
+        <span slot="details">
           {this.renderStats()}
         <dc-council-committee-member-list
           members={this.committee.members}
@@ -128,10 +130,8 @@ export class DcCouncilCommitteeCard {
           })}
           <li><a href={this.committee.link} target="_new">Website</a></li>
         </ul> */}
-        <div slot="footer-trailing">
-          
-        </div>        
-        </calcite-card>
+
+        </dc-council-card>
       </Host>
     );
   }
@@ -139,7 +139,7 @@ export class DcCouncilCommitteeCard {
 
   private renderDelete() {
     return <calcite-button
-      id="card-icon-test-6"
+      id="deleteButton"
       scale="s"
       appearance="transparent"
       color="red"
