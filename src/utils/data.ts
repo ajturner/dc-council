@@ -90,7 +90,8 @@ export function createCommittee(values = {}): ICommittee {
   const defaultCommittee:ICommittee = {
     id: String(Math.floor(Math.random() * 1000)),
     name: toTitleCase(generateName() + " Committee"),
-    members: {}
+    members: {chair: [], members:[]},
+    agencies: []
   };
   const committee = {
     ...values,

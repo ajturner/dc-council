@@ -1,5 +1,5 @@
 import { Component, Host, h, State, Prop, Listen } from '@stencil/core';
-import { loadAgencies, loadCommittees, loadMembers } from '../../utils/data';
+import { createCommittee, loadAgencies, loadCommittees, loadMembers } from '../../utils/data';
 import state, { getTemplateParam, getVersion } from '../../utils/state';
 import { CouncilTemplate, ICommittee, IMember } from '../../utils/types';
 
@@ -62,8 +62,9 @@ export class DcCouncilGame {
         committees = getVersion();
         break;
       }
-      default: { // blank
-        committees = [];
+      default: { // blank, but with two placeholder committees
+        const defaultCommittees= [createCommittee(), createCommittee()]
+        committees = defaultCommittees;
       }
     }
 
