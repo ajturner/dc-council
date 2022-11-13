@@ -48,7 +48,7 @@ export async function loadCommittees(filename:string, members:Array<IMember>, ag
       description: row.description,
       link: row.link,
       members: {},
-      editable: row.editable
+      editable: row.editable === "true"
     }
 
     const loadedMembers = row.members.split(",")
@@ -73,8 +73,8 @@ export async function loadCommittees(filename:string, members:Array<IMember>, ag
   return committees; 
 }
 
-export async function loadBlank():Promise<Array<ICommittee>> {
-  const startingCommittees= [createCommittee(), createCommittee()];
+export async function loadBlank(defaultCommittees:Array<ICommittee>):Promise<Array<ICommittee>> {
+  const startingCommittees = [...defaultCommittees, createCommittee(), createCommittee()];
 
   return startingCommittees;
 }

@@ -62,9 +62,10 @@ export class DcCouncilGame {
         committees = getVersion();
         break;
       }
-      default: { // blank, but with two placeholder committees
-        
-        committees = await loadBlank();
+      default: { 
+        // blank, but with placeholder committees
+        const permanentCommittees = this.committees.filter(c => !c.editable);
+        committees = await loadBlank(permanentCommittees);
       }
     }
 
