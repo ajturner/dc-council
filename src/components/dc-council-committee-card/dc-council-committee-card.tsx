@@ -12,6 +12,12 @@ export class DcCouncilCommitteeCard {
 
   @Prop() committee: ICommittee;
   
+  /**
+   * Determines if Members list is editable
+   * used mostly for "Committee of the Whole"
+   */
+  @Prop({ mutable:true, reflect: true }) editable: boolean = true;
+
   private membersEl:HTMLDcCouncilCommitteeMemberListElement;
   private agenciesEl:HTMLDcCouncilAgencyListElement;
   
@@ -26,6 +32,8 @@ export class DcCouncilCommitteeCard {
     // TODO: Figure out if this can be removed + still update render with nested children in committee.members.members
     this.members = this.committee.members?.members;
     this.agencies = this.committee.agencies;
+  
+    this.editable = this.committee.editable
   }
 
   @Listen('membersChanged')
@@ -78,7 +86,11 @@ export class DcCouncilCommitteeCard {
 
   render() {
     return (
-      <Host>
+      <Host
+        class={{
+          'editable': this.editable
+        }}
+      >
         <slot></slot>
         <dc-council-card>
           <span slot="action">
@@ -113,6 +125,7 @@ export class DcCouncilCommitteeCard {
           {this.renderStats()}
         <dc-council-committee-member-list
           members={this.committee.members}
+          editable={this.editable}
           ref={el => (this.membersEl = el as HTMLDcCouncilCommitteeMemberListElement)}
         ></dc-council-committee-member-list>
 
@@ -138,16 +151,30 @@ export class DcCouncilCommitteeCard {
 
 
   private renderDelete() {
-    return <calcite-button
-      id="deleteButton"
-      scale="s"
-      appearance="transparent"
-      color="red"
-      icon-start="x"
-      alignment="center"
-      type="button"
-      width="auto"
-      onClick={this.deleteButton.bind(this)}
-    >Delete Committee</calcite-button>;
+    if(this.editable) {
+      return ( <calcite-button
+          id="deleteButton"
+          scale="s"
+          appearance="transparent"
+          color="red"
+          icon-start="x"
+          alignment="center"
+          type="button"
+          width="auto"
+          onClick={this.deleteButton.bind(this)}
+        >Delete Committee</calcite-button>)
+    } else {
+      return(
+       <calcite-button
+          id="deleteButton"
+          scale="s"
+          appearance="transparent"
+          color="blue"
+          icon-start="circle-disallowed"
+          alignment="center"
+          type="button"
+          width="auto">Permament Committee</calcite-button>
+      )
+    }
   }
 }

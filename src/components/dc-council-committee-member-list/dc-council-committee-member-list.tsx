@@ -12,6 +12,12 @@ export class DcCouncilCommitteeMemberList {
 
   @Prop({ mutable:true, reflect: true}) members: ICommitteeMembers;
 
+  /**
+   * Determines if Members list is editable
+   * used mostly for "Committee of the Whole"
+   */  
+  @Prop() editable:boolean = true;
+
   @Method()
   public async getMembers():Promise<ICommitteeMembers> {
     return {
@@ -29,9 +35,9 @@ export class DcCouncilCommitteeMemberList {
           id="chair"
           max={1}
           position="chair"
+          editable={this.editable}
           members={this.members?.chair}
           ref={el => (this.chairEl = el as HTMLDcCouncilMemberListElement)}
-
         >
          Chair
         </dc-council-member-list>
@@ -39,6 +45,7 @@ export class DcCouncilCommitteeMemberList {
         <dc-council-member-list
           id="members"
           position="members"
+          editable={this.editable}
           members={this.members?.members}
           ref={el => (this.membersEl = el as HTMLDcCouncilMemberListElement)}
         >

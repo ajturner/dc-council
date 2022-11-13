@@ -13,7 +13,15 @@ export class DcCouncilMemberCard {
 
   @Prop() member;
 
-  // Should this member be removable (show action)
+  /**
+   * Determines if Members list is editable
+   * used mostly for "Committee of the Whole"
+   */  
+  @Prop() editable:boolean = true;
+
+  /** 
+   * Should this member be removable (show action)
+   */
   @Prop() action:CardAction = null;
   @Event() memberRemove: EventEmitter<any>;
 
@@ -38,7 +46,7 @@ export class DcCouncilMemberCard {
 
     return (
       <Host
-        draggable="true"
+        draggable={String(this.editable)}
         onDragStart={this.dragStart.bind(this)}
         onDragEnd={this.dragEnd.bind(this)}
       >
@@ -64,7 +72,7 @@ export class DcCouncilMemberCard {
   }
 
   private renderAction(action:CardAction) {
-    if(action === CardAction.remove) {
+    if(this.editable && action === CardAction.remove) {
       return <calcite-icon icon="x" scale="m" aria-hidden="true"
         onClick={(_evt) => this.memberRemove.emit(this.member)}
       ></calcite-icon>;

@@ -21,11 +21,19 @@ export namespace Components {
     }
     interface DcCouncilCommitteeCard {
         "committee": ICommittee;
+        /**
+          * Determines if Members list is editable used mostly for "Committee of the Whole"
+         */
+        "editable": boolean;
     }
     interface DcCouncilCommitteeList {
         "committees": Array<ICommittee>;
     }
     interface DcCouncilCommitteeMemberList {
+        /**
+          * Determines if Members list is editable used mostly for "Committee of the Whole"
+         */
+        "editable": boolean;
         "getMembers": () => Promise<ICommitteeMembers>;
         "members": ICommitteeMembers;
     }
@@ -53,10 +61,21 @@ export namespace Components {
         "template": CouncilTemplate;
     }
     interface DcCouncilMemberCard {
+        /**
+          * Should this member be removable (show action)
+         */
         "action": CardAction;
+        /**
+          * Determines if Members list is editable used mostly for "Committee of the Whole"
+         */
+        "editable": boolean;
         "member": any;
     }
     interface DcCouncilMemberList {
+        /**
+          * Determines if Members list is editable used mostly for "Committee of the Whole"
+         */
+        "editable": boolean;
         /**
           * Maximum number of members allowed. Null or -1 means unlimited
          */
@@ -225,6 +244,10 @@ declare namespace LocalJSX {
     }
     interface DcCouncilCommitteeCard {
         "committee"?: ICommittee;
+        /**
+          * Determines if Members list is editable used mostly for "Committee of the Whole"
+         */
+        "editable"?: boolean;
         "onCommitteeUpdated"?: (event: DcCouncilCommitteeCardCustomEvent<ICommittee>) => void;
         "onRemoveCommittee"?: (event: DcCouncilCommitteeCardCustomEvent<any>) => void;
     }
@@ -232,6 +255,10 @@ declare namespace LocalJSX {
         "committees"?: Array<ICommittee>;
     }
     interface DcCouncilCommitteeMemberList {
+        /**
+          * Determines if Members list is editable used mostly for "Committee of the Whole"
+         */
+        "editable"?: boolean;
         "members"?: ICommitteeMembers;
     }
     interface DcCouncilCommitteePlaceholder {
@@ -260,11 +287,22 @@ declare namespace LocalJSX {
         "template"?: CouncilTemplate;
     }
     interface DcCouncilMemberCard {
+        /**
+          * Should this member be removable (show action)
+         */
         "action"?: CardAction;
+        /**
+          * Determines if Members list is editable used mostly for "Committee of the Whole"
+         */
+        "editable"?: boolean;
         "member"?: any;
         "onMemberRemove"?: (event: DcCouncilMemberCardCustomEvent<any>) => void;
     }
     interface DcCouncilMemberList {
+        /**
+          * Determines if Members list is editable used mostly for "Committee of the Whole"
+         */
+        "editable"?: boolean;
         /**
           * Maximum number of members allowed. Null or -1 means unlimited
          */

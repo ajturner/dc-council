@@ -16,6 +16,7 @@ export interface ICommittee {
   agencies?:Array<IAgency>
   link?:string
   members?: ICommitteeMembers
+  editable?: boolean
 }
 export interface ICommitteeMembers {
   chair?: Array<IMember>

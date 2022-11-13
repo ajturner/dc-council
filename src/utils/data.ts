@@ -47,7 +47,8 @@ export async function loadCommittees(filename:string, members:Array<IMember>, ag
       name: row.name,
       description: row.description,
       link: row.link,
-      members: {}
+      members: {},
+      editable: row.editable
     }
 
     const loadedMembers = row.members.split(",")
@@ -71,6 +72,12 @@ export async function loadCommittees(filename:string, members:Array<IMember>, ag
 
   return committees; 
 }
+
+export async function loadBlank():Promise<Array<ICommittee>> {
+  const startingCommittees= [createCommittee(), createCommittee()];
+
+  return startingCommittees;
+}
 export async function loadMembers(filename:string):Promise<Array<IMember>> {
   const members:Array<IMember> = await loadFile(filename, simpleParse)
   return members;   
@@ -91,6 +98,7 @@ export function createCommittee(values = {}): ICommittee {
     id: String(Math.floor(Math.random() * 1000)),
     name: toTitleCase(generateName() + " Committee"),
     members: {chair: [], members:[]},
+    editable: true,
     agencies: []
   };
   const committee = {

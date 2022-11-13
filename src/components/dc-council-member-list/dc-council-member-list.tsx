@@ -26,6 +26,12 @@ export class DcCouncilMemberList {
    */
   @Prop() position:string;
 
+  /**
+   * Determines if Members list is editable
+   * used mostly for "Committee of the Whole"
+   */  
+  @Prop() editable:boolean = true;
+
   // @Watch('members')
   addMembers(newMembers:Array<IMember>, _oldMembers:Array<IMember> = []) {
     // Don't add duplicate members
@@ -75,17 +81,13 @@ export class DcCouncilMemberList {
     // evt.target.classList.add('drag-over');
     // debugger;
     // const possibleElement = JSON.parse(data);
-    if(state.action === "member") {
+    if(this.editable && state.action === "member") {
       evt.preventDefault();
     }
   }
 
   render() {
-    const classes = ['dropzone', `action-${state.action}`];
-        // Adds prompts for adding more members
-    if(this.members.length < this.max) {
-      classes.push('spots-available');
-    }
+    const classes = this.getClasses();
     return (
       <Host
         class={classes.join(' ')}
@@ -100,6 +102,7 @@ export class DcCouncilMemberList {
             return (
               <dc-council-member-card 
                 member={member}
+                editable={this.editable}
                 action={!!this.position ? CardAction.remove : null}
               ></dc-council-member-card>
             )
@@ -109,4 +112,16 @@ export class DcCouncilMemberList {
     );
   }
 
+
+  private getClasses() {
+    const classes = ['dropzone', `action-${state.action}`];
+    if (this.editable) {
+      classes.push('editable');
+    }
+    // Adds prompts for adding more members
+    if (this.members.length < this.max) {
+      classes.push('spots-available');
+    }
+    return classes;
+  }
 }

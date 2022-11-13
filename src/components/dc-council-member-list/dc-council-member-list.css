@@ -8,7 +8,7 @@
 :host(.action-agency) div  {
   opacity: 0.2;
 }
-:host(.action-member) div  {
+:host(.action-member.editable) div  {
   border: 1px dashed green;
   background-color: lightgreen;
 }
