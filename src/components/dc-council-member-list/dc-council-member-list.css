@@ -42,7 +42,9 @@
   padding-bottom: 10px;
 }
 :host(.spots-available)::after {
-  content: "More members allowed..."
+  content: "More members allowed...";
+  font-weight: 200;
+  font-size: 0.7rem;
 }
 
 :host(.dropzone):empty {

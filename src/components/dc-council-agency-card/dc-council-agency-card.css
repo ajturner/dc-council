@@ -1,5 +1,6 @@
 :host {
   display: block;
+  border: thin solid #bbb;
 }
 dc-council-card {
   height: 90px;  

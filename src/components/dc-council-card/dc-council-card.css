@@ -1,6 +1,5 @@
 :host {
   display: block;
-  border: thin solid #CCC;
   background: white;
   position: relative;
   display: grid;

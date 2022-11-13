@@ -27,3 +27,8 @@
   grid-gap: 12px;
   padding-left: 10px;
 }
+
+.committee-card {
+  border-right: 1px solid #bbb;
+  padding-right: 10px;
+}
