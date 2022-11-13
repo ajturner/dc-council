@@ -1,6 +1,6 @@
 import { Component, Host, h, State, Prop, Listen } from '@stencil/core';
 import { loadAgencies, loadBlank, loadCommittees, loadMembers } from '../../utils/data';
-import state, { getTemplateParam, getVersion } from '../../utils/state';
+import state, { getTemplate, getTemplateParam, getVersion } from '../../utils/state';
 import { CouncilTemplate, ICommittee, IMember } from '../../utils/types';
 
 @Component({
@@ -21,6 +21,11 @@ export class DcCouncilGame {
 
   @Prop({ mutable: true, reflect: true }) selectedPieces: string = "agencies";
 
+  /**
+   * restart - showing template
+   */
+  @Prop() restart: boolean = false; 
+
   @State() agencies = [];
   @State() committees: Array<ICommittee> = [];
   @State() members: Array<IMember> = [];
@@ -29,7 +34,7 @@ export class DcCouncilGame {
   @State() sidebar: boolean = true;
 
   async componentWillLoad() {
-    this.template = getTemplateParam(this.template);
+    this.template = getTemplate(this.template);
 
     this.members = await loadMembers(this.memberFilename);
     this.agencies = await loadAgencies(this.agencyFilename);
@@ -38,6 +43,11 @@ export class DcCouncilGame {
 
     this.committees = await this.loadTemplate(this.template);
 
+  }
+  async componentDidLoad() {
+    if(!getTemplateParam()) {
+      this.restart = true;
+    }
   }
 
   availableAgencies(committees: Array<ICommittee>) {
@@ -114,7 +124,9 @@ export class DcCouncilGame {
               Share
             </dc-council-share>
 
-            <dc-council-template class="control">
+            <dc-council-template 
+              open={this.restart}
+              class="control">
               Start Again
             </dc-council-template>
           </div>

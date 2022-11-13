@@ -57,6 +57,10 @@ export namespace Components {
         "agencyFilename": string;
         "committeeFilename": string;
         "memberFilename": string;
+        /**
+          * restart - showing template
+         */
+        "restart": boolean;
         "selectedPieces": string;
         "template": CouncilTemplate;
     }
@@ -283,6 +287,10 @@ declare namespace LocalJSX {
         "agencyFilename"?: string;
         "committeeFilename"?: string;
         "memberFilename"?: string;
+        /**
+          * restart - showing template
+         */
+        "restart"?: boolean;
         "selectedPieces"?: string;
         "template"?: CouncilTemplate;
     }

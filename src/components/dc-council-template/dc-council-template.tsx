@@ -97,7 +97,7 @@ export class DcCouncilTemplate {
           alignment="start"
           appearance="outline"
           color="red"
-          icon-start="share"
+          icon-start="reset"
           scale="m"
           onClick={this.showModal.bind(this)}
         >

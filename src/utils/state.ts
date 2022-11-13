@@ -29,7 +29,7 @@ export default state;
 const committeesStateParameter = "council";
 const templateStateParameter = "template";
 
-export function getTemplateParam(defaultTemplate: string):CouncilTemplate {
+export function getTemplateParam():string {
   var url = window?.location?.search;
   
   let searchParams = new URLSearchParams(url);
@@ -37,12 +37,23 @@ export function getTemplateParam(defaultTemplate: string):CouncilTemplate {
   // console.debug("getFilterBookmark", {url, value: searchParams.get(filterName), searchParams})
 
   if(searchParams.has(templateStateParameter)) {
-    return CouncilTemplate[searchParams.get(templateStateParameter)];
+    return searchParams.get(templateStateParameter);
+  } else {
+    return null;
+  }
+  
+}
+export function getTemplate(defaultTemplate: string):CouncilTemplate {
+  const templateParam:string = getTemplateParam();
+
+  if(!!templateParam) {
+    return CouncilTemplate[templateParam];
   } else {
     return CouncilTemplate[defaultTemplate];
   }
   
 }
+
 export function getVersion():Array<ICommittee> {
   var url = window?.location?.search;
   
