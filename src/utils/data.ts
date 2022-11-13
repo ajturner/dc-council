@@ -48,7 +48,7 @@ export async function loadCommittees(filename:string, members:Array<IMember>, ag
       description: row.description,
       link: row.link,
       members: {},
-      editable: row.editable === "true"
+      editable: row.permanent.toLowerCase() === "false"
     }
 
     const loadedMembers = row.members.split(",")
