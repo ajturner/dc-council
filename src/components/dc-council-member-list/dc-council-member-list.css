@@ -2,6 +2,8 @@
   display: block;
   cursor: pointer;
   min-height: 75px;
+  border-left: 2px solid var(--calcite-ui-brand);
+  padding-left: 2px;  
 }
 :host(.action-agency) div  {
   opacity: 0.2;
@@ -9,6 +11,12 @@
 :host(.action-member) div  {
   border: 1px dashed green;
   background-color: lightgreen;
+}
+
+#title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
 }
 
 #members {
@@ -45,10 +53,4 @@
   margin-top: 40px;
   text-align: center;
   color: black;
-}
-
-#title {
-  margin: 0;
-  font-size: 1.1rem;
-  font-weight: 00;
 }

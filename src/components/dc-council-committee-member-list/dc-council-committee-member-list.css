@@ -1,3 +1,7 @@
 :host {
   display: block;
 }
+
+dc-council-member-list {
+  margin-top: 15px;
+}
