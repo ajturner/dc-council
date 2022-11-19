@@ -1,5 +1,5 @@
 import { createStore } from "@stencil/store";
-import { CouncilTemplate, ICommittee } from "./types";
+import { CouncilTemplate, IAgency, ICommittee, IMember } from "./types";
 
 const { state, onChange } = createStore({
   committees: [], // current committees
@@ -54,7 +54,7 @@ export function getTemplate(defaultTemplate: string):CouncilTemplate {
   
 }
 
-export function getVersion():Array<ICommittee> {
+export function getVersion(members:Array<IMember>, agencies:Array<IAgency>, committees:Array<ICommittee>):Array<ICommittee> {
   var url = window?.location?.search;
   
   let searchParams = new URLSearchParams(url);
@@ -69,7 +69,7 @@ export function getVersion():Array<ICommittee> {
     // change to use Buffer
     const committeesString = atob(committeesState);
     
-    state.committees = JSON.parse(committeesString);
+    state.committees = deserializeCommittees(committeesString, members, agencies, committees);
   }
   return state.committees;
 
@@ -80,7 +80,7 @@ export function setVersion(committees: Array<ICommittee>):string {
   //@ts-ignore
   const url = new URL(window.location);
 
-  const string = JSON.stringify(committees);
+  const string = serializeCommittees(committees);
   const binary = btoa(string);
     
   url.searchParams.set(committeesStateParameter, binary);
@@ -88,4 +88,67 @@ export function setVersion(committees: Array<ICommittee>):string {
   window.history.pushState({}, '', url);  
 
   return url.href;
+}
+
+const SERIALIZATION_SEPARATOR = ',';
+
+// Creates a minimum-viable Committee string (id, name) that can be used to recreate full object
+function serializeCommittees(committees:Array<ICommittee>): string {
+  const object = committees.reduce((array, committee) => {
+    const members = {
+      chair: committee.members.chair.map(c => c.name).join(SERIALIZATION_SEPARATOR),
+      members: committee.members.members.map(c => c.name).join(SERIALIZATION_SEPARATOR)
+    }
+
+    const agencies = committee.agencies.map(a => a.code).join(SERIALIZATION_SEPARATOR)
+
+    array.push(
+      {
+        id: committee.id,
+        name: committee.name,
+        members: members,
+        agencies: agencies
+      }
+    )
+
+    return array;
+  }, [])
+
+  return JSON.stringify(object);
+}
+
+function deserializeCommittees(serialization:string, members:Array<IMember>, agencies:Array<IAgency>, committees:Array<ICommittee>): Array<ICommittee> {
+  const object = JSON.parse(serialization);
+
+  const loadedCommittees = object.reduce((array, c) => {
+    const chairsArray = c.members.chair.split(SERIALIZATION_SEPARATOR);
+    const membersArray = c.members.members.split(SERIALIZATION_SEPARATOR);
+    const agenciesArray = c.agencies.split(SERIALIZATION_SEPARATOR);
+
+    const loadedMembers = {
+      chair: members.filter(m => chairsArray.includes(m.name) ),
+      members: members.filter(m => membersArray.includes(m.name) )
+    }
+    const loadedAgencies =  agencies.filter(a => agenciesArray.includes(a.code) )
+    const loadedCommittee = committees.find(a => a.id === c.id)
+
+    const committee = {
+      id: c.id,
+      name: c.name,
+      members: loadedMembers,
+      agencies: loadedAgencies,
+      //  if there was a Committee from the CSV add additional metadata
+      description: loadedCommittee?.description,
+      link: loadedCommittee?.link,
+      editable: !!loadedCommittee ? loadedCommittee?.editable : true,
+    };
+
+    
+
+    array.push(committee);
+    return array;
+  }, []);
+  
+
+  return loadedCommittees;
 }

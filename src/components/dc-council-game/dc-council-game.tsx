@@ -69,7 +69,7 @@ export class DcCouncilGame {
         break;
       }
       case CouncilTemplate.saved: {
-        committees = getVersion();
+        committees = getVersion(this.members, this.agencies, this.committees);
         break;
       }
       default: { 

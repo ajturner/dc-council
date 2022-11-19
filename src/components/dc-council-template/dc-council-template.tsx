@@ -51,24 +51,6 @@ export class DcCouncilTemplate {
           dir="ltr">
         <calcite-tile-select
           checked={true}
-          description="Start from scratch and create your Committees from the ground up."
-          heading="Blank"
-          icon="add-in-new"
-          name="light"
-          input-alignment="start"
-          width="auto"
-          type="radio"
-          value="blank"
-          onClick={this.templateBlank.bind(this)}
-        >
-          <calcite-radio-button
-            id="blankrb"
-            checked={true}
-            name="light"
-            scale="m"
-          ></calcite-radio-button>
-        </calcite-tile-select>
-        <calcite-tile-select
           description="Start with the current council committee and Agency Assignments"
           heading="Current Council"
           icon="organization"
@@ -82,6 +64,24 @@ export class DcCouncilTemplate {
           <calcite-radio-button
             id="currentrb"
             value="currentrb"
+            name="light"
+            scale="m"
+          ></calcite-radio-button>
+        </calcite-tile-select>
+        <calcite-tile-select
+          description="Start from scratch and create your Committees from the ground up."
+          heading="Blank"
+          icon="add-in-new"
+          name="light"
+          input-alignment="start"
+          width="auto"
+          type="radio"
+          value="blank"
+          onClick={this.templateBlank.bind(this)}
+        >
+          <calcite-radio-button
+            id="blankrb"
+            checked={true}
             name="light"
             scale="m"
           ></calcite-radio-button>
