@@ -28,6 +28,7 @@ export class DcCouncilCommitteeList {
     this.committees = this.committees.filter(c => {
       return c.id !== evt.detail.id
     })
+    
     state.committees = this.committees;
   }
 

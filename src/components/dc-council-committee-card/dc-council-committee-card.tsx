@@ -74,7 +74,7 @@ export class DcCouncilCommitteeCard {
   }
 
   private countAgencies() {
-    return this.agencies?.length;
+    return this.committee.agencies?.length;
   }
 
   private countMembers() {
