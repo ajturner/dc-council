@@ -147,11 +147,12 @@ export class DcCouncilGame {
               >
               </dc-council-agency-list>
             </div>
-          </div>
-          <div id="board">
             <span id="sidebar-tab" onClick={() => this.sidebar = this.sidebar ? false : true}>
               <calcite-icon icon={this.sidebar ? 'chevronLeft' : 'chevronRight' } scale="m"></calcite-icon>
             </span>
+
+          </div>
+          <div id="board">
             <dc-council-committee-list
               committees={this.committees}
             >
