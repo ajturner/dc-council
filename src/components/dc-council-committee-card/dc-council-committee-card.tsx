@@ -29,6 +29,8 @@ export class DcCouncilCommitteeCard {
 
   // State for updating stats when sub-properties change (member + agency counts)
   @State() stats: {};
+  // Is the title being edited?
+  @State() editing: boolean = false;
 
   componentWillLoad() {  
     this.editable = this.committee.editable;
@@ -77,11 +79,10 @@ export class DcCouncilCommitteeCard {
     return !!count ? count : 0;
   }
 
-  editMode(editing:boolean = true) {
-    if(editing && this.committee.editable) {
+  editMode() {
+    if(!this.editing && this.committee.editable) {
+      this.editing = true;
       this.el.classList.add("editing");
-    } else {
-      // this.el.classList.remove("editing");
     }
   }
 
@@ -91,6 +92,8 @@ export class DcCouncilCommitteeCard {
     this.committee.name = this.titleInputEl.value;
     console.log("titleChanged", {evt:evt, name: this.committee.name , t: this.titleInputEl.value, class: this.el.classList});
     this.el.classList.remove("editing");
+    this.editing = false;
+    console.log("titleChanged 2", {evt:evt, name: this.committee.name , t: this.titleInputEl.value, class: this.el.classList});
   }
   render() {
     return (
@@ -104,10 +107,10 @@ export class DcCouncilCommitteeCard {
           <span slot="action">
             {this.renderDelete()}
           </span>
-          <span slot="title" id="title"
-            onClick={this.editMode.bind(this)}
-          >
-            <span id="titleView">{this.committee?.name}</span>
+          <span slot="title" id="title">
+            <span id="titleView"
+              onClick={this.editMode.bind(this)}
+            >{this.committee?.name}</span>
             {/* <calcite-icon icon="group" scale="m" aria-hidden="true"></calcite-icon> */}
             <calcite-inline-editable
               id="titleEdit"
