@@ -21,6 +21,7 @@ export namespace Components {
     }
     interface DcCouncilCommitteeCard {
         "committee": ICommittee;
+        "deleteCommittee": () => Promise<void>;
         /**
           * Determines if Members list is editable used mostly for "Committee of the Whole"
          */

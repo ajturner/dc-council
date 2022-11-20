@@ -20,12 +20,19 @@ ul {
 #titleEdit {
   display: none;
 }
+:host() #titleEdit {
+  display: none;
+}
+:host() #titleView {
+  display: block;
+}
 :host(.editing) #titleEdit {
   display: block;
 }
 :host(.editing) #titleView {
   display: none;
 }
+
 #deleteButton {
   background-color: white;
 }
