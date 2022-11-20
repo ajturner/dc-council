@@ -1,7 +1,7 @@
-import { Component, Host, h, Listen, Prop, Event, EventEmitter, State, Element, Method } from '@stencil/core';
+import { Component, Host, h, Listen, Prop, Event, EventEmitter, Element, Method, State } from '@stencil/core';
 import { calculateBudget } from '../../utils/data';
 import state from '../../utils/state';
-import { IAgency, ICommittee, IMember } from '../../utils/types';
+import { ICommittee } from '../../utils/types';
 
 @Component({
   tag: 'dc-council-committee-card',
@@ -27,46 +27,41 @@ export class DcCouncilCommitteeCard {
   @Event() removeCommittee: EventEmitter<any>;
   @Event() committeeUpdated: EventEmitter<ICommittee>;
 
-  // Stores from committee.members for re-render
-  @State() members: Array<IMember>;
-  @State() agencies: Array<IAgency>;
+  // State for updating stats when sub-properties change (member + agency counts)
+  @State() stats: {};
 
-  componentWillLoad() {
-    // TODO: Figure out if this can be removed + still update render with nested children in committee.members.members
-    this.members = this.committee.members?.members;
-    this.agencies = this.committee.agencies;
-  
-    this.editable = this.committee.editable
+  componentWillLoad() {  
+    this.editable = this.committee.editable;
+    this.updateStats(this.committee);
   }
 
   @Listen('membersChanged')
   async membersChanged(_evt) {
     this.committee.members = await this.membersEl.getMembers();
-    // State for re-render
-    this.members = this.committee.members?.members;
+    this.updateStats(this.committee);
     this.committeeUpdated.emit( this.committee );
   }
   @Listen('agenciesChanged')
   async agenciesChanged(_evt) {
     this.committee.agencies = this.agenciesEl.agencies;
-    
-    // State for re-render
-    this.agencies = this.committee.agencies;
-    
+    this.updateStats(this.committee);
     this.committeeUpdated.emit( this.committee );
   } 
 
   @Method()
   public async deleteCommittee() {
     // make all agencies available to the game
-    state.agencies = [...state.agencies, ...this.agencies]
+    state.agencies = [...state.agencies, ...this.committee.agencies]
     this.removeCommittee.emit(this.committee);
   }
 
-  renderStats() {
+  updateStats(committee) {
+    this.stats = this.renderStats(committee);
+  }
+  renderStats(committee) {
     return (
       <ul id="stats">
-        <li>{calculateBudget(this.committee.agencies)}m budget</li>
+        <li>{calculateBudget(committee.agencies)}m budget</li>
         <li>{this.countAgencies()} agencies</li>
         <li>{this.countMembers()} members</li>
       </ul>
@@ -137,7 +132,7 @@ export class DcCouncilCommitteeCard {
           </calcite-inline-editable>
         </span>
         <span slot="details">
-          {this.renderStats()}
+          {this.stats}
         <dc-council-committee-member-list
           members={this.committee.members}
           editable={this.editable}
