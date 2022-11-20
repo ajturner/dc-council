@@ -32,7 +32,7 @@ export class DcCouncilCommitteeCard {
   // Is the title being edited?
   @State() editing: boolean = false;
 
-  componentWillLoad() {  
+  componentWillRender() {  
     this.editable = this.committee.editable;
     this.updateStats(this.committee);
   }
