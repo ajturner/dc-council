@@ -60,15 +60,16 @@ export class DcCouncilShare {
 
   renderCopy(url:string = "") {
     return (
-      <span>
-      <calcite-input 
+      <span class="shareurl">
+      <input
         type="text" 
         class="code" 
         ref={(el: HTMLInputElement) => this.inputEl = el} 
         value={url}
         readonly>
-
-        <calcite-button
+      </input>
+      
+      <calcite-button
           slot="action"
           alignment="center"
           appearance="solid"
@@ -78,12 +79,9 @@ export class DcCouncilShare {
           width="auto"
           onClick={(_ev: Event) => this.copyText()}
         >
-          Copy
-        </calcite-button>
-      </calcite-input>
-      <calcite-input-message status="idle">
-        Share this URL via email or any other social media.
-      </calcite-input-message>
+          Copy URL
+      </calcite-button>
+      
       </span>
     )
   }
