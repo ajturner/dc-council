@@ -78,7 +78,7 @@ export class DcCouncilCommitteeCard {
   }
 
   editMode(editing:boolean = true) {
-    if(editing) {
+    if(editing && this.committee.editable) {
       this.el.classList.add("editing");
     } else {
       // this.el.classList.remove("editing");
