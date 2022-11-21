@@ -121,7 +121,7 @@ export class DcCouncilGame {
           <div id="header">
             <slot name="header"></slot>
             <dc-council-info-panel>
-              <span slot="title">about</span>
+              <span slot="title">How to use this Tool</span>
               <div slot="header">How to Use this Tool</div>
               <p slot="content">
                 <ol>

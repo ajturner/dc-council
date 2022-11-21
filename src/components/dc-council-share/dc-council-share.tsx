@@ -120,12 +120,13 @@ export class DcCouncilShare {
           <h3 slot="header">Share your Fantasy Council</h3>
           <div slot="content">
             <p>
-              Thank you for crafting your proposal for DC Council Committees! Now share your lineup on social media and invite your friends to make their own!
+              Thank you for crafting your proposal for DC Council Committees! <br/>
+              You can copy the URL below to share with other people.
             </p>
             <p>
               {this.renderCopy(this.url)}
-              {this.renderTwitter(this.url)}
-              {this.renderFacebook(this.url)}
+              {/* {this.renderTwitter(this.url)}
+              {this.renderFacebook(this.url)} */}
             </p>
           </div>
           <calcite-button
