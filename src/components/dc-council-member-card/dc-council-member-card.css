@@ -1,6 +1,7 @@
 :host {
   display: block;
   height: 70px;
+  border: thin solid #BBB;
 }
 calcite-card {
   height: 98px;

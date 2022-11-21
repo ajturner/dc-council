@@ -1,7 +1,8 @@
 :host {
   display: block;
   min-height: 75px;
-
+  border-left: 2px solid var(--calcite-ui-brand);
+  padding-left: 2px;  
 }
 :host(.action-member) div  {
   opacity: 0.2;
@@ -17,6 +18,12 @@
   grid-auto-rows: minmax(80px,1fr);
   grid-row-gap: 5px;
 }
+#title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
 /* TODO: Remove need to style a hidden sortable class */
 :host(.dropzone) div:empty {
   overflow-x: auto;
@@ -29,11 +36,6 @@
   )  
 }
 
-#title {
-  margin: 0;
-  font-size: 1.1rem;
-  font-weight: 400;
-}
 
 :host(.dropzone):empty {
   min-height: 100px;

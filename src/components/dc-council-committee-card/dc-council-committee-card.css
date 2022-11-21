@@ -36,3 +36,8 @@ ul {
 #deleteButton {
   background-color: white;
 }
+
+dc-council-agency-list {
+  margin-top: 10px;
+  padding-top: 5px;
+}

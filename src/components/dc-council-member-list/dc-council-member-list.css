@@ -38,21 +38,21 @@
   )
 }
 
-:host(.spots-available) {
+/* :host(.spots-available) {
   padding-bottom: 10px;
 }
 :host(.spots-available)::after {
   content: "More members allowed...";
   font-weight: 200;
   font-size: 0.7rem;
-}
+} */
 
 :host(.dropzone):empty {
   min-height: 100px;
 }
 :host(.dropzone) div:empty::after {
-  content: 'Vacant - Add Members here';
-  margin-top: 40px;
+  content: 'Add Member here';
+  margin: 25px 0;
   text-align: center;
   color: black;
 }
