@@ -1,7 +1,7 @@
 :host {
   display: block;
   min-height: 75px;
-  border-left: 2px solid var(--calcite-ui-brand);
+  border-top: 2px double var(--calcite-ui-brand);
   padding-left: 2px;  
 }
 :host(.action-member) div  {
