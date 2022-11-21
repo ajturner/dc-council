@@ -1,8 +1,11 @@
 :host {
   display: block;
   text-align: center;
+  --calcite-ui-text-3: black;
 }
 #choices {
   display: inline-block;
   margin: 0 auto;
+  --calcite-font-size--1: 1.2rem;
+  --calcite-font-size--2: 0.9rem;
 }

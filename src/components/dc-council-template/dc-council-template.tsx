@@ -62,6 +62,7 @@ export class DcCouncilTemplate {
           onClick={this.templateCurrent.bind(this)}
         >
           <calcite-radio-button
+            checked={true}
             id="currentrb"
             value="currentrb"
             name="light"
@@ -81,7 +82,6 @@ export class DcCouncilTemplate {
         >
           <calcite-radio-button
             id="blankrb"
-            checked={true}
             name="light"
             scale="m"
           ></calcite-radio-button>
