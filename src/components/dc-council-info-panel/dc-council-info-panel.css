@@ -1,0 +1,10 @@
+:host {
+  display: block;
+}
+#header {
+  font-size: larger;
+}
+#content {
+  line-height: 3rem;
+  font-size: larger;
+}

@@ -120,9 +120,19 @@ export class DcCouncilGame {
         <div id="gameboard" class={`display-${this.selectedPieces} sidebar-${this.sidebar ? 'visible' : 'hidden'}`}>
           <div id="header">
             <slot name="header"></slot>
-            <dc-council-share class="control">
-              Share
-            </dc-council-share>
+            <dc-council-info-panel>
+              <span slot="title">about</span>
+              <div slot="header">How to Use this Tool</div>
+              <p slot="content">
+                <ol>
+                  <li>Create/rename any desired committees.</li>
+                  <li>Drag and drop a Councilmember into the chair position, and then others into the committee member positions.</li>
+                  <li>Drag and drop the agencies this committee should be in charge of oversight.</li>
+                  <li>When you're ready, click "Share" to post to social media or send the link!</li>
+                </ol>
+              </p>
+            </dc-council-info-panel>
+            
 
             <dc-council-template 
               open={this.restart}
@@ -157,7 +167,12 @@ export class DcCouncilGame {
             <dc-council-committee-list
               committees={this.committees}
             >
-              <span>Committees</span>
+              <span id="boardHeader">
+                <span>Committees</span>
+                <dc-council-share class="control">
+                  Share
+                </dc-council-share>
+              </span>
             </dc-council-committee-list>
 
           </div>

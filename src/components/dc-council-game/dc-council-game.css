@@ -23,10 +23,11 @@
   display: flex;
 }
 
-.control {
-  margin: 20px 0 0 20px;
+dc-council-info-panel {
+  margin: 1.5rem 0 0 1rem;
 }
 #reset {
+  margin: 20px 0 0 20px;
   margin-left: auto;
 }
 
@@ -42,6 +43,16 @@
   padding-left: 10px; */
   /* max-height: 600px; */
 }
+
+#boardHeader {
+  display: flex;
+  align-items: stretch;
+}
+#boardHeader .control {
+  /* margin: 0 10px 0 auto; */
+  margin-left: 20px;
+}
+
 .sidebar-hidden #board {
   width: 100vw;
   
@@ -54,6 +65,7 @@ dc-council-agency-list {
   grid-area: agencies;
   height: 100vw;
 }
+
 
 .display-members dc-council-agency-list {
   display: none;

@@ -65,6 +65,11 @@ export namespace Components {
         "selectedPieces": string;
         "template": CouncilTemplate;
     }
+    interface DcCouncilInfoPanel {
+        "hideModal": () => Promise<void>;
+        "open": boolean;
+        "showModal": () => Promise<void>;
+    }
     interface DcCouncilMemberCard {
         /**
           * Should this member be removable (show action)
@@ -194,6 +199,12 @@ declare global {
         prototype: HTMLDcCouncilGameElement;
         new (): HTMLDcCouncilGameElement;
     };
+    interface HTMLDcCouncilInfoPanelElement extends Components.DcCouncilInfoPanel, HTMLStencilElement {
+    }
+    var HTMLDcCouncilInfoPanelElement: {
+        prototype: HTMLDcCouncilInfoPanelElement;
+        new (): HTMLDcCouncilInfoPanelElement;
+    };
     interface HTMLDcCouncilMemberCardElement extends Components.DcCouncilMemberCard, HTMLStencilElement {
     }
     var HTMLDcCouncilMemberCardElement: {
@@ -228,6 +239,7 @@ declare global {
         "dc-council-committee-placeholder": HTMLDcCouncilCommitteePlaceholderElement;
         "dc-council-dropzone": HTMLDcCouncilDropzoneElement;
         "dc-council-game": HTMLDcCouncilGameElement;
+        "dc-council-info-panel": HTMLDcCouncilInfoPanelElement;
         "dc-council-member-card": HTMLDcCouncilMemberCardElement;
         "dc-council-member-list": HTMLDcCouncilMemberListElement;
         "dc-council-share": HTMLDcCouncilShareElement;
@@ -295,6 +307,9 @@ declare namespace LocalJSX {
         "selectedPieces"?: string;
         "template"?: CouncilTemplate;
     }
+    interface DcCouncilInfoPanel {
+        "open"?: boolean;
+    }
     interface DcCouncilMemberCard {
         /**
           * Should this member be removable (show action)
@@ -345,6 +360,7 @@ declare namespace LocalJSX {
         "dc-council-committee-placeholder": DcCouncilCommitteePlaceholder;
         "dc-council-dropzone": DcCouncilDropzone;
         "dc-council-game": DcCouncilGame;
+        "dc-council-info-panel": DcCouncilInfoPanel;
         "dc-council-member-card": DcCouncilMemberCard;
         "dc-council-member-list": DcCouncilMemberList;
         "dc-council-share": DcCouncilShare;
@@ -364,6 +380,7 @@ declare module "@stencil/core" {
             "dc-council-committee-placeholder": LocalJSX.DcCouncilCommitteePlaceholder & JSXBase.HTMLAttributes<HTMLDcCouncilCommitteePlaceholderElement>;
             "dc-council-dropzone": LocalJSX.DcCouncilDropzone & JSXBase.HTMLAttributes<HTMLDcCouncilDropzoneElement>;
             "dc-council-game": LocalJSX.DcCouncilGame & JSXBase.HTMLAttributes<HTMLDcCouncilGameElement>;
+            "dc-council-info-panel": LocalJSX.DcCouncilInfoPanel & JSXBase.HTMLAttributes<HTMLDcCouncilInfoPanelElement>;
             "dc-council-member-card": LocalJSX.DcCouncilMemberCard & JSXBase.HTMLAttributes<HTMLDcCouncilMemberCardElement>;
             "dc-council-member-list": LocalJSX.DcCouncilMemberList & JSXBase.HTMLAttributes<HTMLDcCouncilMemberListElement>;
             "dc-council-share": LocalJSX.DcCouncilShare & JSXBase.HTMLAttributes<HTMLDcCouncilShareElement>;
