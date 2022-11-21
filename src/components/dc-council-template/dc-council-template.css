@@ -1,8 +1,8 @@
 :host {
   display: block;
+  text-align: center;
 }
 #choices {
-  text-align: center;
-  margin: auto;
-  padding: auto;
+  display: inline-block;
+  margin: 0 auto;
 }
