@@ -9,3 +9,6 @@
   --calcite-font-size--1: 1.2rem;
   --calcite-font-size--2: 0.9rem;
 }
+.choiceButtons calcite-button {
+  margin-left: 20px;
+}

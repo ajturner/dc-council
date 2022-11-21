@@ -26,6 +26,10 @@
 .control {
   margin: 20px 0 0 20px;
 }
+#reset {
+  margin-left: auto;
+}
+
 #board {
   grid-area: committees;
   overflow: scroll;

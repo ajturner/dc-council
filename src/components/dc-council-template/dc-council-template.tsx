@@ -39,6 +39,9 @@ export class DcCouncilTemplate {
   templateCurrent() {
     this.template = 'current';
   }
+  chooseTemplate(template: string) {
+    this.templateSelected.emit(template);
+  }
   
   // Reference to tile select
   tileSelectEl: HTMLInputElement;
@@ -59,7 +62,7 @@ export class DcCouncilTemplate {
           width="auto"
           type="radio"
           value="current"
-          onClick={this.templateCurrent.bind(this)}
+          onClick={_ev => this.templateCurrent.bind(this)}
         >
           <calcite-radio-button
             checked={true}
@@ -93,44 +96,82 @@ export class DcCouncilTemplate {
   render() {
     return (
       <Host>
-        <calcite-button
-          alignment="start"
-          appearance="outline"
-          color="red"
-          icon-start="reset"
-          scale="m"
-          onClick={this.showModal.bind(this)}
-        >
-          <slot></slot>
-        </calcite-button>
-        <calcite-modal
-          color=""
-          open={this.open}
-          background-color="white"
-          scale="m"
-          width="m"
-          intl-close="Close"
-          // ref={(el: HTMLCalciteModalElement) => this.modalEl = el} 
-          aria-labelledby="modal-share"
-        >
-          <h3 slot="header">Start your Fantasy Council</h3>
-          <div slot="content">
-            <p>
-              You can now create your own DC Fantasy Council. Create Committees, assign Chairs + Members, then give them oversight of Millions (or Billions) of dollars in Agency direction!
-            </p>
-            <p id="choices">
-              {this.renderChoice()}
-            </p>
-          </div>
-          <calcite-button
-            slot="primary"
-            width="full"
-            onClick={this.saveChoice.bind(this)}
-          >
-            Done
-          </calcite-button>
-        </calcite-modal>
+        {this.renderChoiceButtons()}
+        {this.renderModal()}
       </Host>
     );
+  }
+
+  // Shows modal
+  // private renderShowModalButton() {
+  //   return <calcite-button
+  //     alignment="start"
+  //     appearance="outline"
+  //     color="red"
+  //     icon-start="reset"
+  //     scale="m"
+  //     onClick={this.showModal.bind(this)}
+  //   >
+  //     <slot></slot>
+  //   </calcite-button>;
+  // }
+
+  // Separate, direct buttons
+  private renderChoiceButtons() {
+    return( 
+      <span class="choiceButtons">
+      <calcite-button
+        alignment="start"
+        appearance="outline"
+        color="blue"
+        icon-start="organization"
+        scale="m"
+          onClick={(_ev) => {this.chooseTemplate('current')}}
+      >
+        Reset to current Committees
+      </calcite-button>
+      <calcite-button
+        alignment="start"
+        appearance="outline"
+        color="red"
+        icon-start="reset"
+        scale="m"
+          onClick={(_ev) => {this.chooseTemplate('blank')}}
+      >
+        Clear all Committees
+      </calcite-button>
+      </span>
+    )
+  }
+
+  
+  private renderModal() {
+    return <calcite-modal
+      color=""
+      open={this.open}
+      background-color="white"
+      scale="m"
+      width="m"
+      intl-close="Close"
+      // ref={(el: HTMLCalciteModalElement) => this.modalEl = el} 
+      aria-labelledby="modal-share"
+    >
+      <h3 slot="header">Start your Fantasy Council</h3>
+      <div slot="content">
+        <p>
+          You can now create your own DC Fantasy Council. Create Committees, assign Chairs + Members, then give them oversight of Millions (or Billions) of dollars in Agency direction!
+        </p>
+        <p id="choices">
+          {this.renderChoice()}
+        </p>
+      </div>
+      <calcite-button
+        slot="primary"
+        width="full"
+        onClick={this.saveChoice.bind(this)}
+      >
+        Done
+      </calcite-button>
+    </calcite-modal>;
   }
 }

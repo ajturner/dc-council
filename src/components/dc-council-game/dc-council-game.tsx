@@ -126,7 +126,8 @@ export class DcCouncilGame {
 
             <dc-council-template 
               open={this.restart}
-              class="control">
+              class="control"
+              id="reset">
               Start Again
             </dc-council-template>
           </div>
