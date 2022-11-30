@@ -1,4 +1,4 @@
-import { Component, Host, h, Prop, Listen, Watch } from '@stencil/core';
+import { Component, Host, h, Prop, Listen } from '@stencil/core';
 import { createCommittee } from '../../utils/data';
 import state from '../../utils/state';
 import { ICommittee } from '../../utils/types';

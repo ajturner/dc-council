@@ -1,4 +1,4 @@
-import { Component, Host, h, State, Prop, Listen, Watch } from '@stencil/core';
+import { Component, Host, h, State, Prop, Listen } from '@stencil/core';
 import { loadAgencies, loadBlank, loadCommittees, loadMembers } from '../../utils/data';
 import state, { getTemplate, getTemplateParam, getVersion } from '../../utils/state';
 import { CouncilTemplate, ICommittee, IMember } from '../../utils/types';
