@@ -1,4 +1,4 @@
-import { Component, Host, h, State, Prop, Listen } from '@stencil/core';
+import { Component, Host, h, State, Prop, Listen, Watch } from '@stencil/core';
 import { loadAgencies, loadBlank, loadCommittees, loadMembers } from '../../utils/data';
 import state, { getTemplate, getTemplateParam, getVersion } from '../../utils/state';
 import { CouncilTemplate, ICommittee, IMember } from '../../utils/types';
@@ -24,10 +24,10 @@ export class DcCouncilGame {
   /**
    * restart - showing template
    */
-  @Prop() restart: boolean = false; 
+  @Prop({ mutable: true, reflect: true }) restart: boolean = false; 
 
   @State() agencies = [];
-  @State() committees: Array<ICommittee> = [];
+  @Prop({mutable: true, reflect: true}) committees: Array<ICommittee> = [];
   @State() members: Array<IMember> = [];
   
   // Show/hide sidebar
@@ -43,15 +43,13 @@ export class DcCouncilGame {
 
     this.committees = await this.loadTemplate(this.template);
 
-  }
-  async componentDidLoad() {
     if(!getTemplateParam()) {
       this.restart = true;
     }
+
   }
 
   availableAgencies(committees: Array<ICommittee>) {
-    // debugger;
     const usedAgencies = committees.map(committee => committee.agencies?.map(agency => agency.name)).flat()
 
     const availableAgencies = this.agencies.filter(agency => {
@@ -74,7 +72,7 @@ export class DcCouncilGame {
       }
       default: { 
         // blank, but with placeholder committees
-        const permanentCommittees = this.committees.filter(c => !c.editable);
+        let permanentCommittees = this.committees.filter(c => !c.editable);
         committees = await loadBlank(permanentCommittees);
       }
     }
@@ -87,7 +85,8 @@ export class DcCouncilGame {
 
   @Listen('templateSelected')
   async templateSelected(evt) {
-    this.committees = await this.loadTemplate(evt.detail);
+    const committees = await this.loadTemplate(evt.detail);
+    this.committees = [...committees];
   }
 
   @Listen('calciteRadioGroupChange')

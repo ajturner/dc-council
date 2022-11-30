@@ -1,4 +1,5 @@
 import { createStore } from "@stencil/store";
+import LZString from "lz-string";
 import { CouncilTemplate, IAgency, ICommittee, IMember } from "./types";
 
 const { state, onChange } = createStore({
@@ -64,12 +65,13 @@ export function getVersion(members:Array<IMember>, agencies:Array<IAgency>, comm
   if(searchParams.has(templateStateParameter) 
       && searchParams.get(templateStateParameter) === CouncilTemplate.saved
       && searchParams.has(committeesStateParameter)) {
-    const committeesState = searchParams.get(committeesStateParameter);
+    const committeesString = searchParams.get(committeesStateParameter);
 
     // change to use Buffer
-    const committeesString = atob(committeesState);
-    
-    state.committees = deserializeCommittees(committeesString, members, agencies, committees);
+    // const committeesString = atob(committeesState);
+    const committeesState = LZString.decompressFromEncodedURIComponent(committeesString);
+
+    state.committees = deserializeCommittees(committeesState, members, agencies, committees);
   }
   return state.committees;
 
@@ -81,14 +83,16 @@ export function setVersion(committees: Array<ICommittee>):string {
   const url = new URL(window.location);
 
   const string = serializeCommittees(committees);
-  const binary = btoa(string);
-    
+  
+  // const binary = btoa(string);
+  const binary = LZString.compressToEncodedURIComponent(string);
+
   url.searchParams.set(committeesStateParameter, binary);
   url.searchParams.set(templateStateParameter, 'saved');
   window.history.pushState({}, '', url);  
 
   return url.href;
-}
+} 
 
 const SERIALIZATION_SEPARATOR = ',';
 

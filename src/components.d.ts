@@ -57,6 +57,7 @@ export namespace Components {
          */
         "agencyFilename": string;
         "committeeFilename": string;
+        "committees": Array<ICommittee>;
         "memberFilename": string;
         /**
           * restart - showing template
@@ -299,6 +300,7 @@ declare namespace LocalJSX {
          */
         "agencyFilename"?: string;
         "committeeFilename"?: string;
+        "committees"?: Array<ICommittee>;
         "memberFilename"?: string;
         /**
           * restart - showing template

@@ -1,7 +1,7 @@
 import { Component, Host, h, Listen, Prop, Event, EventEmitter, Element, Method, State } from '@stencil/core';
 import { calculateBudget } from '../../utils/data';
 import state from '../../utils/state';
-import { ICommittee } from '../../utils/types';
+import { IAgency, ICommittee } from '../../utils/types';
 
 @Component({
   tag: 'dc-council-committee-card',
@@ -13,8 +13,8 @@ export class DcCouncilCommitteeCard {
   
   titleInputEl:HTMLInputElement;
 
-  @Prop() committee: ICommittee;
-  
+  @Prop({ mutable: true, reflect: true }) committee: ICommittee;
+
   /**
    * Determines if Members list is editable
    * used mostly for "Committee of the Whole"
@@ -31,10 +31,12 @@ export class DcCouncilCommitteeCard {
   @State() stats: {};
   // Is the title being edited?
   @State() editing: boolean = false;
+  @State() agencies: IAgency[] = [];
 
   componentWillRender() {  
     this.editable = this.committee.editable;
     this.updateStats(this.committee);
+    this.agencies = this.committee.agencies;
   }
 
   @Listen('membersChanged')
@@ -143,12 +145,7 @@ export class DcCouncilCommitteeCard {
         ></dc-council-committee-member-list>
 
         
-        <dc-council-agency-list
-          agencies={this.committee.agencies}
-          ref={el => (this.agenciesEl = el as HTMLDcCouncilAgencyListElement)}
-        >
-          Agencies
-        </dc-council-agency-list>          
+        {this.renderAgencyList(this.agencies)}
         </span>
         {/* <ul class="details subtitle">
           {Object.keys(this.committee).map(key => {
@@ -162,7 +159,14 @@ export class DcCouncilCommitteeCard {
     );
   }
 
-
+  private renderAgencyList(agencies: IAgency[] = []) {
+    return <dc-council-agency-list
+      agencies={agencies}
+      ref={el => (this.agenciesEl = el as HTMLDcCouncilAgencyListElement)}
+    >
+      Agencies
+    </dc-council-agency-list>;
+  }
   private renderDelete() {
     if(this.editable) {
       return ( <calcite-button

@@ -13,7 +13,7 @@ export class DcCouncilAgencyList {
   @Event() agenciesChanged: EventEmitter<any>;
 
   @Method()
-  addAgency(newAgencies: Array<IAgency>) {
+  public async addAgency(newAgencies: Array<IAgency>) {
     // Don't add duplicate members
     const existingAgencies = this.agencies.map(m => m.name);
     newAgencies = newAgencies.filter(agency => {
@@ -26,13 +26,14 @@ export class DcCouncilAgencyList {
 
   @Listen('agencyRemove')
   onAgencyRemove(evt) {
+    // add this agency to the global availability
     state.agencies = [...state.agencies, evt.detail];
+    // Now remove it from this commmittee
     this.removeAgency(evt.detail);
   }
 
   @Method()
   public async removeAgency(removedAgency:IAgency) {
-    // debugger;
     this.agencies = this.agencies.filter((agency) => {
       return agency.name !== removedAgency.name;
     })
@@ -62,7 +63,6 @@ export class DcCouncilAgencyList {
   }
   dragEnd(evt) {
     evt.preventDefault();
-    // debugger;
     if(!!state.draggable) {
       // remove the dragged element
       evt.target.removeAgency(state.draggable);//removeChild(evt.target);

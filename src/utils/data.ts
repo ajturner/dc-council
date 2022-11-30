@@ -74,7 +74,12 @@ export async function loadCommittees(filename:string, members:Array<IMember>, ag
 }
 
 export async function loadBlank(defaultCommittees:Array<ICommittee>):Promise<Array<ICommittee>> {
-  const startingCommittees = [...defaultCommittees, createCommittee(), createCommittee()];
+  const permanentCommittees = defaultCommittees.reduce((array, committee) => {
+    // deep copy, but override agencies - this ensures there is a new object for render state
+    const newCommittee = {...committee, ...{agencies: []}};
+    return [...array, newCommittee];
+  }, [])
+  const startingCommittees = [...permanentCommittees, createCommittee(), createCommittee()];
 
   return startingCommittees;
 }
