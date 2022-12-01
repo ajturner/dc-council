@@ -14,6 +14,7 @@ export namespace Components {
     interface DcCouncilAgencyList {
         "addAgency": (newAgencies: Array<IAgency>) => Promise<void>;
         "agencies": any[];
+        "display": string;
         "removeAgency": (removedAgency: IAgency) => Promise<void>;
     }
     interface DcCouncilCard {
@@ -64,6 +65,7 @@ export namespace Components {
          */
         "restart": boolean;
         "selectedPieces": string;
+        "subagencyFilename": string;
         "template": CouncilTemplate;
     }
     interface DcCouncilInfoPanel {
@@ -255,6 +257,7 @@ declare namespace LocalJSX {
     }
     interface DcCouncilAgencyList {
         "agencies"?: any[];
+        "display"?: string;
         "onAgenciesChanged"?: (event: DcCouncilAgencyListCustomEvent<any>) => void;
     }
     interface DcCouncilCard {
@@ -307,6 +310,7 @@ declare namespace LocalJSX {
          */
         "restart"?: boolean;
         "selectedPieces"?: string;
+        "subagencyFilename"?: string;
         "template"?: CouncilTemplate;
     }
     interface DcCouncilInfoPanel {

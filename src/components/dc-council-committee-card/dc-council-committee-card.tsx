@@ -162,6 +162,7 @@ export class DcCouncilCommitteeCard {
   private renderAgencyList(agencies: IAgency[] = []) {
     return <dc-council-agency-list
       agencies={agencies}
+      display='all'
       ref={el => (this.agenciesEl = el as HTMLDcCouncilAgencyListElement)}
     >
       Agencies

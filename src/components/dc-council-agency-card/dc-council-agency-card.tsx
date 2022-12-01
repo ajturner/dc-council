@@ -39,7 +39,8 @@ export class DcCouncilAgencyCard {
       <Host
         draggable="true" 
         onDragStart={this.dragStart.bind(this)}      
-        onDragEnd={this.dragEnd.bind(this)}      
+        onDragEnd={this.dragEnd.bind(this)}
+        class={this.agency.type}
       >
           <slot></slot>
           <dc-council-card>
@@ -52,6 +53,7 @@ export class DcCouncilAgencyCard {
 
             <div slot="details" class="details">
               <span id="cluster">Cluster: {this.agency.cluster}</span>
+              <span id="type">{this.agency.type} </span>
               <span id="budget">{calculateBudget([this.agency])}m budget</span>
               <a id="link" href={this.agency.link} target="_new">Website</a>
             </div>

@@ -22,8 +22,18 @@ dc-council-card {
 #cluster, #link {
   display: none;
 }
+#type {
+  font-size: 0.8rem;
+  font-weight: 300;
+}
 #name {
   font-weight: 600;
   font-size: 0.9rem;
   clear:right;
+}
+:host(.minor.display-major) {
+  display: none;
+}
+:host(.minor) {
+  border: thin green dashed;
 }

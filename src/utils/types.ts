@@ -31,7 +31,7 @@ export interface IAgency {
   link:string
   group:string
   committee?:string // ref which committee manages this agency
-  chair:string
+  type:string
 }
 
 export enum CouncilTemplate {

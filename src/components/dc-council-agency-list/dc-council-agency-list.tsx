@@ -10,6 +10,8 @@ import { CardAction, IAgency } from '../../utils/types';
 export class DcCouncilAgencyList {
   
   @Prop({ mutable:true, reflect: true }) agencies = [];
+  @Prop() display:string = 'major';
+
   @Event() agenciesChanged: EventEmitter<any>;
 
   @Method()
@@ -76,8 +78,7 @@ export class DcCouncilAgencyList {
   render() {
     return (
       <Host
-        class={`dropzone spots-available action-${state.action}`}
-        
+          class={`dropzone spots-available action-${state.action} display-${this.display}`}
           onDrop={this.addedElement.bind(this)}
           onDragOver={this.allowDrop.bind(this)}
           onDragEnd={this.dragEnd.bind(this)}
@@ -92,6 +93,7 @@ export class DcCouncilAgencyList {
             <dc-council-agency-card 
               agency={agency}
               action={CardAction.remove}
+              class={`display-${this.display}`}
             ></dc-council-agency-card>
           )
         })}
