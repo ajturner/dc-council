@@ -15,7 +15,6 @@ export class DcCouncilShare {
 
   @Method()
   public async showModal() {
-    this.url = await setVersion(state.committees);
     this.open = true;
   }
   @Method()
@@ -41,6 +40,7 @@ export class DcCouncilShare {
         appearance="primary"
         icon="chevron-left"
         width="full"
+        target="_new"
         href={`https://www.facebook.com/sharer/sharer.php?u=${url}`}
       >
         Share on Facebook
@@ -56,6 +56,7 @@ export class DcCouncilShare {
         appearance="primary"
         icon="chevron-left"
         width="full"
+        target="_new"
         href={`https://twitter.com/intent/tweet?text=${url}`}
       >
         Share on Twitter
@@ -103,7 +104,7 @@ export class DcCouncilShare {
   render() {
     return (
       <Host>
-        {this.renderButtons()}
+        {this.renderButtons(state.saved)}
         <calcite-modal
           color=""
           open={this.open}
@@ -122,8 +123,8 @@ export class DcCouncilShare {
             </p>
             <p>
               {this.renderCopy(this.url)}
-              {/* {this.renderTwitter(this.url)}
-              {this.renderFacebook(this.url)} */}
+              {this.renderTwitter(this.url)}
+              {this.renderFacebook(this.url)}
             </p>
           </div>
           <calcite-button
@@ -139,7 +140,8 @@ export class DcCouncilShare {
   }
 
 
-  private renderButtons() {
+  private renderButtons(savedState:boolean) {
+
     const shareButton = <calcite-button
       alignment="start"
       appearance="outline"
@@ -153,7 +155,7 @@ export class DcCouncilShare {
 
     const saveButton = <calcite-button
       alignment="start"
-      appearance={state.saved ? "outline" : "solid"}
+      appearance={savedState ? "outline" : "solid"}
       color="blue"
       icon-start="save"
       scale="m"
@@ -162,6 +164,6 @@ export class DcCouncilShare {
       Save
     </calcite-button>;
 
-    return state.saved ? shareButton : saveButton;
+    return savedState ? shareButton : saveButton;
   }
 }

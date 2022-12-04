@@ -13,6 +13,7 @@ const { state, onChange } = createStore({
 });
 
 onChange('saved', value => {
+  // debugger;
   state.saved = value;
 });
 
@@ -53,8 +54,10 @@ export function getTemplateParam():string {
 
   if(searchParams.has(templateStateParameter)) {
     return searchParams.get(templateStateParameter);
+  } else if(searchParams.has(committeesStateParameter)) {
+    return CouncilTemplate.saved;
   } else {
-    return null;
+    return CouncilTemplate.current;
   }
   
 }
@@ -79,14 +82,12 @@ export async function getVersion(
   ): Promise<Array<ICommittee>> 
 {
   var url = window?.location?.search;
-  
+
   let searchParams = new URLSearchParams(url);
 
   // console.debug("getFilterBookmark", {url, value: searchParams.get(filterName), searchParams})
   
-  if(searchParams.has(templateStateParameter) 
-      && searchParams.get(templateStateParameter) === CouncilTemplate.saved
-      && searchParams.has(committeesStateParameter)) 
+  if(searchParams.has(committeesStateParameter)) 
   {
     const committeesString = searchParams.get(committeesStateParameter);
 
@@ -126,10 +127,11 @@ export async function setVersion(
 
     const councilSave = await saveCouncil( council );
     const savedId = councilSave.id;
+    state.saved = true;
     url.searchParams.set(committeesStateParameter, savedId);
   }
   
-  url.searchParams.set(templateStateParameter, 'saved');
+  // url.searchParams.set(templateStateParameter, 'saved');
   window.history.pushState({}, '', url);  
 
   return url.href;
