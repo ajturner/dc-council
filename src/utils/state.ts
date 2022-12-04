@@ -18,7 +18,7 @@ onChange('saved', value => {
 });
 
 onChange('council', value => {
-  state.committees = value;
+  state.council = value;
   state.saved = false;
 });
 

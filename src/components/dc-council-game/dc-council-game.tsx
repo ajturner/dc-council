@@ -96,6 +96,7 @@ export class DcCouncilGame {
   async templateSelected(evt) {
     const committees = await this.loadTemplate(evt.detail);
     this.committees = [...committees];
+    state.council = {committees: this.committees};
   }
 
   @Listen('calciteRadioGroupChange')
