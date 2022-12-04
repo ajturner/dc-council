@@ -27,6 +27,12 @@ export class DcCouncilShare {
     this.open = false;
   }
 
+  @Method()
+  public async saveCouncil() {
+    this.url = await setVersion(state.committees);
+  }
+
+  
   renderFacebook(url: string = "") {
     return (
       <div class="shareButton">
@@ -97,16 +103,7 @@ export class DcCouncilShare {
   render() {
     return (
       <Host>
-        <calcite-button
-          alignment="start"
-          appearance="solid"
-          color="blue"
-          icon-start="share"
-          scale="m"
-          onClick={this.showModal.bind(this)}
-        >
-          <slot>Share</slot>
-        </calcite-button>
+        {this.renderButtons()}
         <calcite-modal
           color=""
           open={this.open}
@@ -141,4 +138,30 @@ export class DcCouncilShare {
     );
   }
 
+
+  private renderButtons() {
+    const shareButton = <calcite-button
+      alignment="start"
+      appearance="outline"
+      color="blue"
+      icon-start="share"
+      scale="m"
+      onClick={this.showModal.bind(this)}
+    >
+      <slot>Share</slot>
+    </calcite-button>;
+
+    const saveButton = <calcite-button
+      alignment="start"
+      appearance={state.saved ? "outline" : "solid"}
+      color="blue"
+      icon-start="save"
+      scale="m"
+      onClick={this.saveCouncil.bind(this)}
+    >
+      Save
+    </calcite-button>;
+
+    return state.saved ? shareButton : saveButton;
+  }
 }

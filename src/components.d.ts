@@ -105,6 +105,7 @@ export namespace Components {
     interface DcCouncilShare {
         "hideModal": () => Promise<void>;
         "open": boolean;
+        "saveCouncil": () => Promise<void>;
         "showModal": () => Promise<void>;
         "url": string;
     }

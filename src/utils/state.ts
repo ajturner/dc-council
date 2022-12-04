@@ -4,14 +4,26 @@ import { getCouncil, saveCouncil, serializeCommittees } from "./council";
 import { CouncilTemplate, IAgency, ICommittee, IMember } from "./types";
 
 const { state, onChange } = createStore({
+  council: null,
   committees: [], // current committees
   action: "", // which entites are being dragged: agency, member
   agencies: [], // agencies available to be places
-  draggable: null 
+  draggable: null,
+  saved: false // current save state
+});
+
+onChange('saved', value => {
+  state.saved = value;
+});
+
+onChange('council', value => {
+  state.committees = value;
+  state.saved = false;
 });
 
 onChange('committees', value => {
   state.committees = value;
+  state.saved = false;
 });
 
 onChange('action', value => {
@@ -20,6 +32,7 @@ onChange('action', value => {
 
 onChange('agencies', value => {
   state.agencies = value;
+  state.saved = false
 });
 
 onChange('draggable', value => {
@@ -79,6 +92,7 @@ export async function getVersion(
 
     // TODO: finish this function
     const council = await getCouncil(committeesString, members, agencies, committees);
+    state.council = council;
     state.committees = council.committees;
   }
   return state.committees;
@@ -96,16 +110,20 @@ export async function setVersion(
 
   
   if(store === "url") {
+    // TODO: DEPRECATED - remove this when verify save to DB is working
     // Store to URL
     const committeeString = serializeCommittees(committees);
     // const binary = btoa(string);
     const binary = LZString.compressToEncodedURIComponent( committeeString );
     url.searchParams.set(committeesStateParameter, binary);
   } else {
+
+    // TODO: Refactor to use Council interface throughout
     const council = {
-      title: "test",
+      ...state.council,
       committees: committees
     }
+
     const councilSave = await saveCouncil( council );
     const savedId = councilSave.id;
     url.searchParams.set(committeesStateParameter, savedId);
