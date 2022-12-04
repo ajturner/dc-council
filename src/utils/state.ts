@@ -1,5 +1,6 @@
 import { createStore } from "@stencil/store";
 import LZString from "lz-string";
+import { saveCouncil } from "./council";
 import { CouncilTemplate, IAgency, ICommittee, IMember } from "./types";
 
 const { state, onChange } = createStore({
@@ -78,16 +79,27 @@ export function getVersion(members:Array<IMember>, agencies:Array<IAgency>, comm
   // window.location.search = searchParams;
 }
 
-export function setVersion(committees: Array<ICommittee>):string {
+export async function setVersion(committees: Array<ICommittee>, store:string = "db"): Promise<string> {
   //@ts-ignore
   const url = new URL(window.location);
 
-  const string = serializeCommittees(committees);
   
-  // const binary = btoa(string);
-  const binary = LZString.compressToEncodedURIComponent(string);
-
-  url.searchParams.set(committeesStateParameter, binary);
+  if(store === "url") {
+    // Store to URL
+    const committeeString = serializeCommittees(committees);
+    // const binary = btoa(string);
+    const binary = LZString.compressToEncodedURIComponent( committeeString );
+    url.searchParams.set(committeesStateParameter, binary);
+  } else {
+    const council = {
+      title: "test",
+      committees: committees
+    }
+    const councilSave = await saveCouncil( council );
+    const savedId = councilSave.id;
+    url.searchParams.set(committeesStateParameter, savedId);
+  }
+  
   url.searchParams.set(templateStateParameter, 'saved');
   window.history.pushState({}, '', url);  
 
@@ -97,7 +109,7 @@ export function setVersion(committees: Array<ICommittee>):string {
 const SERIALIZATION_SEPARATOR = ',';
 
 // Creates a minimum-viable Committee string (id, name) that can be used to recreate full object
-function serializeCommittees(committees:Array<ICommittee>): string {
+export function serializeCommittees(committees:Array<ICommittee>): string {
   const object = committees.reduce((array, committee) => {
     const members = {
       chair: committee.members.chair.map(c => c.name).join(SERIALIZATION_SEPARATOR),
@@ -121,7 +133,7 @@ function serializeCommittees(committees:Array<ICommittee>): string {
   return JSON.stringify(object);
 }
 
-function deserializeCommittees(serialization:string, members:Array<IMember>, agencies:Array<IAgency>, committees:Array<ICommittee>): Array<ICommittee> {
+export function deserializeCommittees(serialization:string, members:Array<IMember>, agencies:Array<IAgency>, committees:Array<ICommittee>): Array<ICommittee> {
   const object = JSON.parse(serialization);
 
   const loadedCommittees = object.reduce((array, c) => {

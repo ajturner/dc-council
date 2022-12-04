@@ -15,7 +15,7 @@ export class DcCouncilShare {
 
   @Method()
   public async showModal() {
-    this.url = setVersion(state.committees);
+    this.url = await setVersion(state.committees);
     this.open = true;
   }
   @Method()

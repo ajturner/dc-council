@@ -9,6 +9,13 @@ export interface IMember {
   photo:string
 }
 
+export interface ICouncil {
+  id?:string
+  name?:string
+  description?:string
+  committees: ICommittee[]
+}
+
 export interface ICommittee {
   id:string
   name?:string
