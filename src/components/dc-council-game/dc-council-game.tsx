@@ -76,7 +76,7 @@ export class DcCouncilGame {
         break;
       }
       case CouncilTemplate.saved: {
-        committees = getVersion(this.members, this.agencies, this.committees);
+        committees = await getVersion(this.members, this.agencies, this.committees);
         break;
       }
       default: { 
