@@ -33,6 +33,7 @@ export interface IAgency {
   code:string
   name:string
   acronym:string
+  description:string
   cluster:string
   budget:string
   link:string

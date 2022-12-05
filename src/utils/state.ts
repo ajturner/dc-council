@@ -91,6 +91,7 @@ export async function getVersion(
   
   if(searchParams.has(committeesStateParameter)) 
   {
+    debugger;
     const committeesString = searchParams.get(committeesStateParameter);
 
     // TODO: finish this function
@@ -106,7 +107,7 @@ export async function getVersion(
 export async function setVersion(
     committees: Array<ICommittee>, 
     store:string = "db"
-  ): Promise<string> 
+  ): Promise<{}> 
 {
   //@ts-ignore
   const url = new URL(window.location);
@@ -133,19 +134,26 @@ export async function setVersion(
     url.searchParams.set(committeesStateParameter, savedId);
   }
   
+  const shareUrl = url.href;
+
   url.searchParams.set(editStateParameter, 'edit');
   window.history.pushState({}, '', url);  
 
-  return url.href;
+  return {share: shareUrl, edit: url.href};
 }
 
 // Checks of the current council is editable
+// Either has parameter for editing, or is a new council
 export async function checkEditable():Promise<boolean> {
   var url = window?.location?.search;
   
   let searchParams = new URLSearchParams(url);
 
-  if(searchParams.has(editStateParameter)) {
+  debugger;
+  if(searchParams.has(editStateParameter)
+    || !state.council
+    || !state.council?.id
+  ) {
     state.editable = true;
   }
   return state.editable;

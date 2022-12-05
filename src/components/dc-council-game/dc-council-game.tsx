@@ -41,8 +41,6 @@ export class DcCouncilGame {
 
   async componentWillLoad() {
 
-    checkEditable();
-
     this.template = getTemplate(this.template);
 
     this.members = await loadMembers(this.memberFilename);
@@ -59,6 +57,9 @@ export class DcCouncilGame {
       this.restart = true;
     }
 
+  }
+  async componentWillRender() {
+    checkEditable();
   }
 
   availableAgencies(committees: Array<ICommittee>) {

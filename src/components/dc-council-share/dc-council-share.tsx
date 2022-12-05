@@ -1,4 +1,4 @@
-import { Component, Host, h, Prop, Listen, Method } from '@stencil/core';
+import { Component, Host, h, Prop, Listen, Method, State } from '@stencil/core';
 import state, { setVersion } from '../../utils/state';
 
 @Component({
@@ -8,13 +8,18 @@ import state, { setVersion } from '../../utils/state';
 })
 export class DcCouncilShare {
   // modalEl: HTMLCalciteModalElement; 
-  inputEl: HTMLInputElement;
+  inputShareUrlEl: HTMLInputElement;
+  inputEditUrlEl: HTMLInputElement;
 
   @Prop({ mutable: true, reflect: true }) open: boolean = false
-  @Prop({ mutable: true, reflect: true }) url: string = "";
+  @Prop({ mutable: true, reflect: true }) editUrl: string = "";
+  @Prop({ mutable: true, reflect: true }) shareUrl: string = "";
+
+  // If the component is currently saving
+  @State() saving: boolean = false
 
   componentWillLoad() {
-    this.url = window.location.href;
+    this.shareUrl = window.location.href;
   }
 
   @Method()
@@ -32,7 +37,12 @@ export class DcCouncilShare {
 
   @Method()
   public async saveCouncil() {
-    this.url = await setVersion(state.committees);
+    this.saving = true;
+    const urls = await setVersion(state.committees);
+    this.shareUrl = urls['share'];
+    this.editUrl = urls['edit'];
+
+    this.saving = false;
   }
 
   
@@ -69,14 +79,14 @@ export class DcCouncilShare {
     )
   }  
 
-  renderCopy(url:string = "") {
+  renderCopy(shareUrl:string = "", editUrl:string = "") {
     return (
       <span class="shareurl">
       <input
         type="text" 
         class="code" 
-        ref={(el: HTMLInputElement) => this.inputEl = el} 
-        value={url}
+        ref={(el: HTMLInputElement) => this.inputShareUrlEl = el} 
+        value={shareUrl}
         readonly>
       </input>
       
@@ -88,18 +98,40 @@ export class DcCouncilShare {
           scale="m"
           type="button"
           width="auto"
-          onClick={(_ev: Event) => this.copyText()}
+          onClick={(_ev: Event) => this.copyText(this.inputShareUrlEl)}
         >
-          Copy URL
+          Copy Sharing URL
+      </calcite-button>
+
+      <input
+        type="text" 
+        class="code" 
+        ref={(el: HTMLInputElement) => this.inputEditUrlEl = el} 
+        value={editUrl}
+        readonly>
+      </input>
+      
+      <em>If you want to edit this council later, copy and save this URL:</em>
+      <calcite-button
+          slot="action"
+          alignment="center"
+          appearance="outline"
+          color="blue"
+          scale="m"
+          type="button"
+          width="auto"
+          onClick={(_ev: Event) => this.copyText(this.inputEditUrlEl)}
+        >
+          Copy Edit URL
       </calcite-button>
       
       </span>
     )
   }
-  copyText() {
+  copyText(refEl) {
     /* Select the text field */
-    this.inputEl.select();
-    this.inputEl.setSelectionRange(0, 99999); /*For mobile devices*/
+    refEl.select();
+    refEl.setSelectionRange(0, 99999); /*For mobile devices*/
 
     /* Copy the text inside the text field */
     document.execCommand("copy");
@@ -126,9 +158,9 @@ export class DcCouncilShare {
               You can copy the URL below to share with other people.
             </p>
             <p>
-              {this.renderCopy(this.url)}
-              {this.renderTwitter(this.url)}
-              {this.renderFacebook(this.url)}
+              {this.renderCopy(this.shareUrl, this.editUrl)}
+              {this.renderTwitter(this.shareUrl)}
+              {this.renderFacebook(this.shareUrl)}
             </p>
           </div>
           <calcite-button
@@ -163,6 +195,7 @@ export class DcCouncilShare {
       color="blue"
       icon-start="save"
       scale="m"
+      loading={this.saving}
       onClick={this.saveCouncil.bind(this)}
     >
       Save

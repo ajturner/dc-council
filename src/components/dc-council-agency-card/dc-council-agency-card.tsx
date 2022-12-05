@@ -52,10 +52,9 @@ export class DcCouncilAgencyCard {
             </span>
 
             <div slot="details" class="details">
-              <span id="cluster">Cluster: {this.agency.cluster}</span>
               <span id="type">{this.agency.type} </span>
               <span id="budget">{calculateBudget([this.agency])}m budget</span>
-              <a id="link" href={this.agency.link} target="_new">Website</a>
+              {this.renderInfoPanel(this.agency)}
             </div>
             
           </dc-council-card>
@@ -70,4 +69,20 @@ export class DcCouncilAgencyCard {
       ></calcite-icon>;
     }
   }
+
+  private renderInfoPanel(agency: IAgency) {
+    return <dc-council-info-panel>
+      <span slot="title">About</span>
+      <div slot="header">About {agency.name}</div>
+      <p slot="content">
+        <ul>
+              <li><span id="cluster">Cluster: {this.agency.cluster}</span></li>
+              <li><span id="type">{this.agency.type} </span></li>
+              <li><span id="budget">{calculateBudget([this.agency])}m budget</span></li>
+              <li><a id="link" href={this.agency.link} target="_new">Website</a></li>
+        </ul>
+      </p>
+    </dc-council-info-panel>;
+  }
 }
+

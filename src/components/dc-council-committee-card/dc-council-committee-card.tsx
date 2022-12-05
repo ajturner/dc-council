@@ -138,6 +138,7 @@ export class DcCouncilCommitteeCard {
         </span>
         <span slot="details">
           {this.stats}
+          {this.renderInfoPanel(this.committee)}
         <dc-council-committee-member-list
           members={this.committee.members}
           editable={this.editable}
@@ -168,6 +169,16 @@ export class DcCouncilCommitteeCard {
       Agencies
     </dc-council-agency-list>;
   }
+  private renderInfoPanel(committee: ICommittee) {
+    return <dc-council-info-panel>
+      <span slot="title">About</span>
+      <div slot="header">About {committee.name}</div>
+      <p slot="content">
+        <ul>
+        </ul>
+      </p>
+    </dc-council-info-panel>;
+  }  
   private renderDelete() {
     if(this.editable) {
       return ( <calcite-button

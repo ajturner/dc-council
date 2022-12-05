@@ -103,11 +103,12 @@ export namespace Components {
         "position": string;
     }
     interface DcCouncilShare {
+        "editUrl": string;
         "hideModal": () => Promise<void>;
         "open": boolean;
         "saveCouncil": () => Promise<void>;
+        "shareUrl": string;
         "showModal": () => Promise<void>;
-        "url": string;
     }
     interface DcCouncilTemplate {
         "hideModal": () => Promise<void>;
@@ -349,8 +350,9 @@ declare namespace LocalJSX {
         "position"?: string;
     }
     interface DcCouncilShare {
+        "editUrl"?: string;
         "open"?: boolean;
-        "url"?: string;
+        "shareUrl"?: string;
     }
     interface DcCouncilTemplate {
         "onTemplateSelected"?: (event: DcCouncilTemplateCustomEvent<string>) => void;
