@@ -54,7 +54,7 @@ export class DcCouncilAgencyCard {
             <div slot="details" class="details">
               <span id="type">{this.agency.type} </span>
               <span id="budget">{calculateBudget([this.agency])}m budget</span>
-              {this.renderInfoPanel(this.agency)}
+              <span>{this.renderInfoPanel(this.agency)}</span>
             </div>
             
           </dc-council-card>
@@ -71,18 +71,22 @@ export class DcCouncilAgencyCard {
   }
 
   private renderInfoPanel(agency: IAgency) {
-    return <dc-council-info-panel>
-      <span slot="title">About</span>
-      <div slot="header">About {agency.name}</div>
-      <p slot="content">
-        <ul>
-              <li><span id="cluster">Cluster: {this.agency.cluster}</span></li>
-              <li><span id="type">{this.agency.type} </span></li>
-              <li><span id="budget">{calculateBudget([this.agency])}m budget</span></li>
-              <li><a id="link" href={this.agency.link} target="_new">Website</a></li>
-        </ul>
-      </p>
-    </dc-council-info-panel>;
+    if(agency.description?.length > 0) {
+      return <dc-council-info-panel>
+        <span slot="title"><calcite-icon icon="information" scale="m"></calcite-icon></span>
+        <div slot="header">About {agency.name}</div>
+        <p slot="content">
+          {this.agency.description}
+          <br/>
+          {!!this.agency.link ?
+            <a href={this.agency.link} target="_new">Agency Website</a>
+            : null
+          }
+        </p>
+      </dc-council-info-panel>;
+    } else {
+      return;
+    }
   }
 }
 

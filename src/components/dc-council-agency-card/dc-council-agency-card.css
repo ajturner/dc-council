@@ -22,7 +22,7 @@ dc-council-card {
 /* #cluster, #link {
   display: none;
 } */
-#type {
+#type, #budget {
   font-size: 0.8rem;
   font-weight: 300;
 }

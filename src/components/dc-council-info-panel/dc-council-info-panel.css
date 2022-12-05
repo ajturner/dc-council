@@ -1,10 +1,6 @@
 :host {
-  display: block;
+  display: inline;
 }
 #header {
   font-size: larger;
-}
-#content {
-  /* line-height: 3rem; */
-  /* font-size: larger; */
 }

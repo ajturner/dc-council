@@ -93,14 +93,12 @@ export class DcCouncilGame {
     state.agencies = this.availableAgencies(committees);
     state.committees = committees;
 
-    // Clear URL
-    resetState();
-
     return committees;
   }
 
   @Listen('templateSelected')
   async templateSelected(evt) {
+    resetState();
     const committees = await this.loadTemplate(evt.detail);
     this.committees = [...committees];
     state.council = {committees: this.committees};

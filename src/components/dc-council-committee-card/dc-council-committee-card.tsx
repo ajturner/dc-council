@@ -170,13 +170,18 @@ export class DcCouncilCommitteeCard {
     </dc-council-agency-list>;
   }
   private renderInfoPanel(committee: ICommittee) {
-    return <dc-council-info-panel>
-      <span slot="title">About</span>
-      <div slot="header">About {committee.name}</div>
-      <p slot="content">
-        {committee.description}
-      </p>
-    </dc-council-info-panel>;
+    if(committee.description?.length > 0) {
+      return <dc-council-info-panel>
+        <span slot="title">About</span>
+        <div slot="header">About {committee.name}</div>
+        <p slot="content">
+          {committee.description}
+        </p>
+      </dc-council-info-panel>;
+    } else {
+      return;
+    }
+    
   }  
   private renderDelete() {
     if(this.editable) {
