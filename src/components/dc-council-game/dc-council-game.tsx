@@ -16,7 +16,7 @@ export class DcCouncilGame {
    * URL to Agency spreadsheet
    */
   @Prop() agencyFilename: string = "assets/2022/agencies.csv";
-  @Prop() subagencyFilename: string = "assets/2022/minoragencies.csv";
+  @Prop() minoragencyFilename: string = "assets/2022/minoragencies.csv";
   @Prop() committeeFilename: string = "assets/2022/committees.csv";
   @Prop() memberFilename: string = "assets/2022/members.csv";
 
@@ -45,8 +45,8 @@ export class DcCouncilGame {
 
     this.members = await loadMembers(this.memberFilename);
     const agencies = await loadAgencies(this.agencyFilename);
-    const subagencies = await loadAgencies(this.subagencyFilename);
-    this.agencies = [...agencies, ...subagencies];
+    const minoragencies = await loadAgencies(this.minoragencyFilename);
+    this.agencies = [...agencies, ...minoragencies];
 
     // what agencies are available
      state.agencies = this.agencies;

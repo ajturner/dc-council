@@ -61,12 +61,12 @@ export namespace Components {
         "committeeFilename": string;
         "committees": Array<ICommittee>;
         "memberFilename": string;
+        "minoragencyFilename": string;
         /**
           * restart - showing template
          */
         "restart": boolean;
         "selectedPieces": string;
-        "subagencyFilename": string;
         "template": CouncilTemplate;
     }
     interface DcCouncilInfoPanel {
@@ -309,12 +309,12 @@ declare namespace LocalJSX {
         "committeeFilename"?: string;
         "committees"?: Array<ICommittee>;
         "memberFilename"?: string;
+        "minoragencyFilename"?: string;
         /**
           * restart - showing template
          */
         "restart"?: boolean;
         "selectedPieces"?: string;
-        "subagencyFilename"?: string;
         "template"?: CouncilTemplate;
     }
     interface DcCouncilInfoPanel {
