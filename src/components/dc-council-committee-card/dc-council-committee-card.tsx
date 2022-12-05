@@ -107,7 +107,7 @@ export class DcCouncilCommitteeCard {
         <slot></slot>
         <dc-council-card>
           <span slot="action">
-            {this.renderDelete()}
+            {state.editable ? this.renderDelete() : null}
           </span>
           <span slot="title" id="title">
             <span id="titleView"

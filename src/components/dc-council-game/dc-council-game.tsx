@@ -1,6 +1,6 @@
 import { Component, Host, h, State, Prop, Listen } from '@stencil/core';
 import { loadAgencies, loadBlank, loadCommittees, loadMembers } from '../../utils/data';
-import state, { getTemplate, getTemplateParam, getVersion } from '../../utils/state';
+import state, { checkEditable, getTemplate, getTemplateParam, getVersion } from '../../utils/state';
 import { CouncilTemplate, ICommittee, IMember } from '../../utils/types';
 
 @Component({
@@ -40,6 +40,9 @@ export class DcCouncilGame {
   private agencyDisplayEl;
 
   async componentWillLoad() {
+
+    checkEditable();
+
     this.template = getTemplate(this.template);
 
     this.members = await loadMembers(this.memberFilename);
@@ -132,14 +135,9 @@ export class DcCouncilGame {
             {this.renderInfoPanel()}
             
 
-            <dc-council-template 
-              open={this.restart}
-              class="control"
-              id="reset">
-              Start Again
-            </dc-council-template>
+            {state.editable ? this.renderTemplatePicker() : null}
           </div>
-          {this.renderSidebar()}
+          {state.editable ? this.renderSidebar() : null}
           {this.renderBoard()}
           {this.renderFooter()}
         </div>
@@ -147,6 +145,15 @@ export class DcCouncilGame {
     );
   }
 
+
+  private renderTemplatePicker() {
+    return <dc-council-template
+      open={this.restart}
+      class="control"
+      id="reset">
+      Start Again
+    </dc-council-template>;
+  }
 
   private renderFooter() {
     return <div id="footer">

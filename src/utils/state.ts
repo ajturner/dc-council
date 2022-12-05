@@ -9,7 +9,8 @@ const { state, onChange } = createStore({
   action: "", // which entites are being dragged: agency, member
   agencies: [], // agencies available to be places
   draggable: null,
-  saved: false // current save state
+  saved: false, // current save state
+  editable: false // is this just a view or can it be edited?
 });
 
 onChange('saved', value => {
@@ -44,6 +45,7 @@ export default state;
 
 const committeesStateParameter = "council";
 const templateStateParameter = "template";
+const editStateParameter = "secret";
 
 export function getTemplateParam():string {
   var url = window?.location?.search;
@@ -131,8 +133,20 @@ export async function setVersion(
     url.searchParams.set(committeesStateParameter, savedId);
   }
   
-  // url.searchParams.set(templateStateParameter, 'saved');
+  url.searchParams.set(editStateParameter, 'edit');
   window.history.pushState({}, '', url);  
 
   return url.href;
+}
+
+// Checks of the current council is editable
+export async function checkEditable():Promise<boolean> {
+  var url = window?.location?.search;
+  
+  let searchParams = new URLSearchParams(url);
+
+  if(searchParams.has(editStateParameter)) {
+    state.editable = true;
+  }
+  return state.editable;
 }

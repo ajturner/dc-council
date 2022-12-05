@@ -37,7 +37,7 @@ export class DcCouncilAgencyCard {
   render() {
     return (
       <Host
-        draggable="true" 
+        draggable={state.editable}
         onDragStart={this.dragStart.bind(this)}      
         onDragEnd={this.dragEnd.bind(this)}
         class={this.agency.type}

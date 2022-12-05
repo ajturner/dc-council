@@ -54,12 +54,16 @@ export class DcCouncilCommitteeList {
               ></dc-council-committee-card>
             )
           })}
-          <dc-council-committee-placeholder
-            id="newCommitteeButton"
-          ></dc-council-committee-placeholder>                    
+          {state.editable ? this.renderNewCommittee() : null}
         </div> 
       </Host>
     );
   }
 
+
+  private renderNewCommittee() {
+    return <dc-council-committee-placeholder
+      id="newCommitteeButton"
+    ></dc-council-committee-placeholder>;
+  }
 }

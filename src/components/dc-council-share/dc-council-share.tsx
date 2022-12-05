@@ -13,6 +13,10 @@ export class DcCouncilShare {
   @Prop({ mutable: true, reflect: true }) open: boolean = false
   @Prop({ mutable: true, reflect: true }) url: string = "";
 
+  componentWillLoad() {
+    this.url = window.location.href;
+  }
+
   @Method()
   public async showModal() {
     this.open = true;
@@ -104,7 +108,7 @@ export class DcCouncilShare {
   render() {
     return (
       <Host>
-        {this.renderButtons(state.saved)}
+        {this.renderButtons(!state.editable || (state.editable && state.saved))}
         <calcite-modal
           color=""
           open={this.open}
