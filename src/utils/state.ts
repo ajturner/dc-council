@@ -91,7 +91,6 @@ export async function getVersion(
   
   if(searchParams.has(committeesStateParameter)) 
   {
-    debugger;
     const committeesString = searchParams.get(committeesStateParameter);
 
     // TODO: finish this function
@@ -149,7 +148,6 @@ export async function checkEditable():Promise<boolean> {
   
   let searchParams = new URLSearchParams(url);
 
-  debugger;
   if(searchParams.has(editStateParameter)
     || !state.council
     || !state.council?.id

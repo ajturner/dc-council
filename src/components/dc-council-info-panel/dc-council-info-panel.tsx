@@ -48,7 +48,8 @@ export class DcCouncilInfoPanel {
       aria-labelledby="modal-share"
     >
       <h3 id="header">
-        <slot name="header">Start your Fantasy Council</slot></h3>
+        <slot >Start your Fantasy Council</slot>
+      </h3>
       <div id="content">
         <slot name="content"></slot>
       </div>
