@@ -146,14 +146,7 @@ export class DcCouncilShare {
                 {this.renderFacebook(this.shareUrl)}
               </p>
             </div>
-            <div id="editInfo">
-              <p>
-                If you want to edit this committee later, you can bookmark your current browser or copy and save the URL below.
-              </p>
-              <p>
-                {this.renderCopy(this.inputEditUrlEl, this.editUrl, false)}
-              </p>
-            </div>
+            {state.editable ? this.renderEditInfo() : null}
           </div>
           <calcite-button
             slot="primary"
@@ -167,6 +160,17 @@ export class DcCouncilShare {
     );
   }
 
+
+  private renderEditInfo() {
+    return <div id="editInfo">
+      <p>
+        If you want to edit this committee later, you can bookmark your current browser or copy and save the URL below.
+      </p>
+      <p>
+        {this.renderCopy(this.inputEditUrlEl, this.editUrl, false)}
+      </p>
+    </div>;
+  }
 
   private renderButtons(savedState:boolean) {
 

@@ -96,6 +96,7 @@ export class DcCouncilTemplate {
   render() {
     return (
       <Host>
+        <slot name="title"></slot>
         {this.renderChoiceButtons()}
         {this.renderModal()}
       </Host>

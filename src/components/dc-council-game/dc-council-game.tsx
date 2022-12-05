@@ -53,7 +53,8 @@ export class DcCouncilGame {
 
     this.committees = await this.loadTemplate(this.template);
 
-    if(!getTemplateParam()) {
+    // TODO: clean up this logic for how to determine this is the initial view
+    if(!getTemplateParam() || !state.council) {
       this.restart = true;
     }
 
@@ -129,6 +130,7 @@ export class DcCouncilGame {
   }
 
   render() {
+
     return (
       <Host>
         <div id="gameboard" class={`display-${this.selectedPieces} sidebar-${this.sidebar ? 'visible' : 'hidden'}`}>
@@ -137,7 +139,7 @@ export class DcCouncilGame {
             {this.renderInfoPanel()}
             
 
-            {state.editable ? this.renderTemplatePicker() : null}
+            {this.renderTemplatePicker()}
           </div>
           {state.editable ? this.renderSidebar() : null}
           {this.renderBoard()}
@@ -153,7 +155,7 @@ export class DcCouncilGame {
       open={this.restart}
       class="control"
       id="reset">
-      Start Again
+      <span id="start" slot="title">Create your own</span>
     </dc-council-template>;
   }
 
