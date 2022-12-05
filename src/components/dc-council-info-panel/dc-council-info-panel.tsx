@@ -47,17 +47,18 @@ export class DcCouncilInfoPanel {
       // ref={(el: HTMLCalciteModalElement) => this.modalEl = el} 
       aria-labelledby="modal-share"
     >
-      <h3 id="header">
-        <slot >Start your Fantasy Council</slot>
+      <h3 id="header" slot="header">
+        <slot name="header">Start your Fantasy Council</slot>
       </h3>
-      <div id="content">
+      <div id="content" slot="content">
         <slot name="content"></slot>
       </div>
       <calcite-button
+        slot="primary"
         width="full"
         onClick={this.hideModal.bind(this)}
       >
-        <slot name="primary">Done</slot>
+        Done
       </calcite-button>
     </calcite-modal>;
   }

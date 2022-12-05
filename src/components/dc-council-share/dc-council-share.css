@@ -5,7 +5,7 @@
 
 .shareButton {
   width: 200px;
-  float: left;
+  /* float: left; */
   padding-left: 20px;
 }
 
@@ -19,8 +19,18 @@ input {
 .shareurl calcite-button {
   order: 2;
 }
+#shareButtons {
+  display: flex;
+}
 .shareurl {
   display: flex;
   flex-direction: row;
   padding: 5px;
+}
+
+#shareInfo {
+}
+#editInfo {
+  border-top: 1px solid #AAA;
+  font-weight: 400;
 }

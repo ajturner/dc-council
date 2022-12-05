@@ -41,6 +41,10 @@ onChange('draggable', value => {
   state.draggable = value;
 });
 
+export function resetState() {
+  history.pushState("", document.title, window.location.pathname);
+}
+
 export default state;
 
 const committeesStateParameter = "council";
@@ -133,12 +137,16 @@ export async function setVersion(
     url.searchParams.set(committeesStateParameter, savedId);
   }
   
-  const shareUrl = url.href;
 
   url.searchParams.set(editStateParameter, 'edit');
-  window.history.pushState({}, '', url);  
+  const editUrl = url.href;
+  window.history.pushState({}, '', editUrl);  
 
-  return {share: shareUrl, edit: url.href};
+  // We want a clean share URL
+  url.searchParams.delete(editStateParameter);
+  const shareUrl = url;
+
+  return {share: shareUrl, edit: editUrl};
 }
 
 // Checks of the current council is editable

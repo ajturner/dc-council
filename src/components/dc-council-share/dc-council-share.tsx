@@ -39,6 +39,7 @@ export class DcCouncilShare {
   public async saveCouncil() {
     this.saving = true;
     const urls = await setVersion(state.committees);
+
     this.shareUrl = urls['share'];
     this.editUrl = urls['edit'];
 
@@ -79,53 +80,32 @@ export class DcCouncilShare {
     )
   }  
 
-  renderCopy(shareUrl:string = "", editUrl:string = "") {
+  renderCopy(refEl: HTMLInputElement, inputUrl:string = "", primary: boolean = true) {
     return (
+      <div>
       <span class="shareurl">
       <input
         type="text" 
         class="code" 
-        ref={(el: HTMLInputElement) => this.inputShareUrlEl = el} 
-        value={shareUrl}
+        ref={(el: HTMLInputElement) => refEl = el} 
+        value={inputUrl}
         readonly>
       </input>
       
       <calcite-button
           slot="action"
           alignment="center"
-          appearance="solid"
+          appearance={primary ? "solid" : "outline"}
           color="blue"
           scale="m"
           type="button"
           width="auto"
-          onClick={(_ev: Event) => this.copyText(this.inputShareUrlEl)}
+          onClick={(_ev: Event) => this.copyText(refEl)}
         >
-          Copy Sharing URL
+          Copy URL
       </calcite-button>
-
-      <input
-        type="text" 
-        class="code" 
-        ref={(el: HTMLInputElement) => this.inputEditUrlEl = el} 
-        value={editUrl}
-        readonly>
-      </input>
-      
-      <em>If you want to edit this council later, copy and save this URL:</em>
-      <calcite-button
-          slot="action"
-          alignment="center"
-          appearance="outline"
-          color="blue"
-          scale="m"
-          type="button"
-          width="auto"
-          onClick={(_ev: Event) => this.copyText(this.inputEditUrlEl)}
-        >
-          Copy Edit URL
-      </calcite-button>
-      
       </span>
+      </div>
     )
   }
   copyText(refEl) {
@@ -153,15 +133,27 @@ export class DcCouncilShare {
         >
           <h3 slot="header">Share your Fantasy Council</h3>
           <div slot="content">
-            <p>
-              Thank you for crafting your proposal for DC Council Committees! <br/>
-              You can copy the URL below to share with other people.
-            </p>
-            <p>
-              {this.renderCopy(this.shareUrl, this.editUrl)}
-              {this.renderTwitter(this.shareUrl)}
-              {this.renderFacebook(this.shareUrl)}
-            </p>
+            <div id="shareInfo">
+              <p>
+                Thank you for crafting your proposal for DC Council Committees! <br/>
+                You can copy the URL below to share with other people.
+              </p>
+              <p>
+                {this.renderCopy(this.inputShareUrlEl, this.shareUrl, true)}
+              </p>
+              <p id="shareButtons">
+                {this.renderTwitter(this.shareUrl)}
+                {this.renderFacebook(this.shareUrl)}
+              </p>
+            </div>
+            <div id="editInfo">
+              <p>
+                If you want to edit this committee later, you can bookmark your current browser or copy and save the URL below.
+              </p>
+              <p>
+                {this.renderCopy(this.inputEditUrlEl, this.editUrl, false)}
+              </p>
+            </div>
           </div>
           <calcite-button
             slot="primary"

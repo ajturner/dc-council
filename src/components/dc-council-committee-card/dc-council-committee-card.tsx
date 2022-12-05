@@ -174,8 +174,7 @@ export class DcCouncilCommitteeCard {
       <span slot="title">About</span>
       <div slot="header">About {committee.name}</div>
       <p slot="content">
-        <ul>
-        </ul>
+        {committee.description}
       </p>
     </dc-council-info-panel>;
   }  

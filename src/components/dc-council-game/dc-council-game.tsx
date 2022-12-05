@@ -1,6 +1,6 @@
 import { Component, Host, h, State, Prop, Listen } from '@stencil/core';
 import { loadAgencies, loadBlank, loadCommittees, loadMembers } from '../../utils/data';
-import state, { checkEditable, getTemplate, getTemplateParam, getVersion } from '../../utils/state';
+import state, { checkEditable, getTemplate, getTemplateParam, getVersion, resetState } from '../../utils/state';
 import { CouncilTemplate, ICommittee, IMember } from '../../utils/types';
 
 @Component({
@@ -92,6 +92,9 @@ export class DcCouncilGame {
 
     state.agencies = this.availableAgencies(committees);
     state.committees = committees;
+
+    // Clear URL
+    resetState();
 
     return committees;
   }
