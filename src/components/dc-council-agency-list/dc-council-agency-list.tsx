@@ -12,6 +12,8 @@ export class DcCouncilAgencyList {
   @Prop({ mutable:true, reflect: true }) agencies = [];
   @Prop() display:string = 'major';
 
+  @Prop() editable:boolean = true;
+
   @Event() agenciesChanged: EventEmitter<any>;
 
   @Method()
@@ -92,7 +94,7 @@ export class DcCouncilAgencyList {
           return (
             <dc-council-agency-card 
               agency={agency}
-              action={CardAction.remove}
+              action={this.editable ? CardAction.remove : null}
               class={`display-${this.display}`}
             ></dc-council-agency-card>
           )

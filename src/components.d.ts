@@ -15,6 +15,7 @@ export namespace Components {
         "addAgency": (newAgencies: Array<IAgency>) => Promise<void>;
         "agencies": any[];
         "display": string;
+        "editable": boolean;
         "removeAgency": (removedAgency: IAgency) => Promise<void>;
     }
     interface DcCouncilCard {
@@ -260,6 +261,7 @@ declare namespace LocalJSX {
     interface DcCouncilAgencyList {
         "agencies"?: any[];
         "display"?: string;
+        "editable"?: boolean;
         "onAgenciesChanged"?: (event: DcCouncilAgencyListCustomEvent<any>) => void;
     }
     interface DcCouncilCard {

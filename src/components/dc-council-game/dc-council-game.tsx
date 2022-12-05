@@ -175,6 +175,9 @@ export class DcCouncilGame {
           <dc-council-share class="control">
             Share
           </dc-council-share>
+          <span id="previewSelection">
+            {state.draggable}
+          </span>
         </span>
       </dc-council-committee-list>
 
@@ -203,6 +206,7 @@ export class DcCouncilGame {
           display={this.minorAgencyDisplay ? 'all' : 'major'}
           agencies={state.agencies}
           class="pieces"
+          editable={false}
         >
         <calcite-label layout="inline">
           <calcite-checkbox ref={el => this.agencyDisplayEl = el} checked={this.minorAgencyDisplay} scale="m"></calcite-checkbox>
