@@ -12,7 +12,6 @@ export class DcCouncilPreview {
   @Prop() committees:ICommittee[] = []
 
   render() {
-    debugger;
     return (
       <Host>
         <slot></slot>

@@ -27,7 +27,7 @@ calcite-card {
 }
 
 /* TODO: consolidate this styling across components */
-:host(.ghost) {
+:host(.dragging) {
   background: #0f9535;
   opacity: 0.5;
 }

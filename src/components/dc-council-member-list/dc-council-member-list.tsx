@@ -62,6 +62,7 @@ export class DcCouncilMemberList {
   addedElement(evt) {
     evt.preventDefault();
     var data = evt.dataTransfer.getData("text");
+    
     const newMember = JSON.parse(data);
     this.addMembers([newMember]);
   }

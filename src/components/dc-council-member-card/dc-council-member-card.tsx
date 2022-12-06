@@ -27,13 +27,17 @@ export class DcCouncilMemberCard {
 
   dragEnd(_ev) {
     state.action = "";
+    // ev.currentTarget.classList.remove("dragging");
+
   }
   dragStart(ev) {
     state.action = "member";
 
     // Change the source element's background color
     // to show that drag has started
-    ev.currentTarget.classList.add("dragging");
+    // TODO: how to remove the style on the element left behind
+    // ev.currentTarget.classList.add("dragging");
+
     // Clear the drag data cache (for all formats/types)
     ev.dataTransfer.clearData();
     // Set the drag's format and data.
