@@ -34,7 +34,9 @@ export class DcCouncilCommitteeList {
 
   @Listen('committeeUpdated')
   committeeUpdated(_evt) {
+    debugger;
     state.committees = this.committees;
+    state.saved = false;
   }
 
   render() {

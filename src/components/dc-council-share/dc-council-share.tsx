@@ -14,6 +14,7 @@ export class DcCouncilShare {
   @Prop({ mutable: true, reflect: true }) open: boolean = false
   @Prop({ mutable: true, reflect: true }) editUrl: string = "";
   @Prop({ mutable: true, reflect: true }) shareUrl: string = "";
+  @Prop() scale:string = "m";
 
   // If the component is currently saving
   @State() saving: boolean = false
@@ -125,8 +126,8 @@ export class DcCouncilShare {
           color=""
           open={this.open}
           background-color="white"
-          scale="m"
-          width="s"
+          scale={this.scale}
+          width={this.scale}
           intl-close="Close"
           // ref={(el: HTMLCalciteModalElement) => this.modalEl = el} 
           aria-labelledby="modal-share"
@@ -135,9 +136,10 @@ export class DcCouncilShare {
           <div slot="content">
             <div id="shareInfo">
               <p>
-                Thank you for crafting your proposal for DC Council Committees! <br/>
-                You can copy the URL below to share with other people.
+                Thank you for crafting your proposal for DC Council Committees! 
+                Now share your lineup on social media and invite friends to make their own.<br/>
               </p>
+              {this.renderPreview()}
               <p>
                 {this.renderCopy(this.inputShareUrlEl, this.shareUrl, true)}
               </p>
@@ -160,6 +162,15 @@ export class DcCouncilShare {
     );
   }
 
+
+  private renderPreview() {
+    return <div id="preview">
+      <div id="previewTitle">My Fantasy DC Council Committee Chair Lineup</div>
+      <dc-council-preview
+        committees={state.committees}>
+      </dc-council-preview>
+    </div>;
+  }
 
   private renderEditInfo() {
     return <div id="editInfo">

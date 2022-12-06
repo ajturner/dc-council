@@ -72,6 +72,7 @@ export namespace Components {
     interface DcCouncilInfoPanel {
         "hideModal": () => Promise<void>;
         "open": boolean;
+        "scale": string;
         "showModal": () => Promise<void>;
     }
     interface DcCouncilMemberCard {
@@ -103,11 +104,15 @@ export namespace Components {
          */
         "position": string;
     }
+    interface DcCouncilPreview {
+        "committees": ICommittee[];
+    }
     interface DcCouncilShare {
         "editUrl": string;
         "hideModal": () => Promise<void>;
         "open": boolean;
         "saveCouncil": () => Promise<void>;
+        "scale": string;
         "shareUrl": string;
         "showModal": () => Promise<void>;
     }
@@ -223,6 +228,12 @@ declare global {
         prototype: HTMLDcCouncilMemberListElement;
         new (): HTMLDcCouncilMemberListElement;
     };
+    interface HTMLDcCouncilPreviewElement extends Components.DcCouncilPreview, HTMLStencilElement {
+    }
+    var HTMLDcCouncilPreviewElement: {
+        prototype: HTMLDcCouncilPreviewElement;
+        new (): HTMLDcCouncilPreviewElement;
+    };
     interface HTMLDcCouncilShareElement extends Components.DcCouncilShare, HTMLStencilElement {
     }
     var HTMLDcCouncilShareElement: {
@@ -248,6 +259,7 @@ declare global {
         "dc-council-info-panel": HTMLDcCouncilInfoPanelElement;
         "dc-council-member-card": HTMLDcCouncilMemberCardElement;
         "dc-council-member-list": HTMLDcCouncilMemberListElement;
+        "dc-council-preview": HTMLDcCouncilPreviewElement;
         "dc-council-share": HTMLDcCouncilShareElement;
         "dc-council-template": HTMLDcCouncilTemplateElement;
     }
@@ -319,6 +331,7 @@ declare namespace LocalJSX {
     }
     interface DcCouncilInfoPanel {
         "open"?: boolean;
+        "scale"?: string;
     }
     interface DcCouncilMemberCard {
         /**
@@ -351,9 +364,13 @@ declare namespace LocalJSX {
          */
         "position"?: string;
     }
+    interface DcCouncilPreview {
+        "committees"?: ICommittee[];
+    }
     interface DcCouncilShare {
         "editUrl"?: string;
         "open"?: boolean;
+        "scale"?: string;
         "shareUrl"?: string;
     }
     interface DcCouncilTemplate {
@@ -374,6 +391,7 @@ declare namespace LocalJSX {
         "dc-council-info-panel": DcCouncilInfoPanel;
         "dc-council-member-card": DcCouncilMemberCard;
         "dc-council-member-list": DcCouncilMemberList;
+        "dc-council-preview": DcCouncilPreview;
         "dc-council-share": DcCouncilShare;
         "dc-council-template": DcCouncilTemplate;
     }
@@ -394,6 +412,7 @@ declare module "@stencil/core" {
             "dc-council-info-panel": LocalJSX.DcCouncilInfoPanel & JSXBase.HTMLAttributes<HTMLDcCouncilInfoPanelElement>;
             "dc-council-member-card": LocalJSX.DcCouncilMemberCard & JSXBase.HTMLAttributes<HTMLDcCouncilMemberCardElement>;
             "dc-council-member-list": LocalJSX.DcCouncilMemberList & JSXBase.HTMLAttributes<HTMLDcCouncilMemberListElement>;
+            "dc-council-preview": LocalJSX.DcCouncilPreview & JSXBase.HTMLAttributes<HTMLDcCouncilPreviewElement>;
             "dc-council-share": LocalJSX.DcCouncilShare & JSXBase.HTMLAttributes<HTMLDcCouncilShareElement>;
             "dc-council-template": LocalJSX.DcCouncilTemplate & JSXBase.HTMLAttributes<HTMLDcCouncilTemplateElement>;
         }

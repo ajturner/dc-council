@@ -7,6 +7,7 @@ import { Component, Host, h, Method, Listen, Prop } from '@stencil/core';
 })
 export class DcCouncilInfoPanel {
   @Prop({ mutable: true, reflect: true }) open: boolean = false;
+  @Prop() scale:string = "m";
 
   @Method()
   public async showModal() {
@@ -41,8 +42,8 @@ export class DcCouncilInfoPanel {
       color=""
       open={this.open}
       background-color="white"
-      scale="m"
-      width="m"
+      scale={this.scale}
+      width={this.scale}
       intl-close="Close"
       // ref={(el: HTMLCalciteModalElement) => this.modalEl = el} 
       aria-labelledby="modal-share"

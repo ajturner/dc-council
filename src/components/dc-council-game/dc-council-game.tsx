@@ -49,10 +49,15 @@ export class DcCouncilGame {
     this.agencies = [...agencies, ...minoragencies];
 
     // what agencies are available
-     state.agencies = this.agencies;
+    state.agencies = this.agencies;
+
 
     this.committees = await this.loadTemplate(this.template);
 
+    // TODO: Move this to a more central state management
+    state.council = {
+      committees: this.committees
+    }
     // TODO: clean up this logic for how to determine this is the initial view
     if(!getTemplateParam() || !state.council) {
       this.restart = true;
@@ -137,6 +142,7 @@ export class DcCouncilGame {
           <div id="header">
             <slot name="header"></slot>
             {this.renderInfoPanel()}
+            {/* {this.renderPreviewPanel()} */}
             
 
             {this.renderTemplatePicker()}
@@ -172,7 +178,7 @@ export class DcCouncilGame {
       >
         <span id="boardHeader">
           <span>Committees</span>
-          <dc-council-share class="control">
+          <dc-council-share class="control" scale="l">
             Share
           </dc-council-share>
           <span id="previewSelection">
@@ -235,4 +241,16 @@ export class DcCouncilGame {
       </p>
     </dc-council-info-panel>;
   }
+  // private renderPreviewPanel() {
+  //   return <dc-council-info-panel scale="m">
+  //     <span slot="title">Preview</span>
+  //     <div slot="header">Preview Council</div>
+  //     <p slot="content">
+  //       <dc-council-preview
+  //         committees={state.committees}>
+          
+  //       </dc-council-preview>
+  //     </p>
+  //   </dc-council-info-panel>;
+  // }  
 }
