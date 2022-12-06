@@ -18,7 +18,7 @@ export class DcCouncilCommitteeList {
 
     this.committees = [...this.committees, newCommittee];
 
-    state.committees = this.committees;
+    state.committees = [...this.committees];
 
   }
 
@@ -29,12 +29,13 @@ export class DcCouncilCommitteeList {
       return c.id !== evt.detail.id
     })
 
-    state.committees = this.committees;
+    // New copies
+    state.committees = [...this.committees];
   }
 
   @Listen('committeeUpdated')
   committeeUpdated(_evt) {
-    state.committees = this.committees;
+    state.committees = [...this.committees];
     state.saved = false;
   }
 

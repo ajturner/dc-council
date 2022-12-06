@@ -1,5 +1,6 @@
 import { Component, Host, h, Prop, Listen, Method, State } from '@stencil/core';
 import state, { setVersion } from '../../utils/state';
+import { ICommittee } from '../../utils/types';
 
 @Component({
   tag: 'dc-council-share',
@@ -139,7 +140,7 @@ export class DcCouncilShare {
                 Thank you for crafting your proposal for DC Council Committees! 
                 Now share your lineup on social media and invite friends to make their own.<br/>
               </p>
-              {this.renderPreview()}
+              {this.renderPreview(state.committees)}
               <p>
                 {this.renderCopy(this.inputShareUrlEl, this.shareUrl, true)}
               </p>
@@ -163,11 +164,11 @@ export class DcCouncilShare {
   }
 
 
-  private renderPreview() {
+  private renderPreview(committees: ICommittee[]) {
     return <div id="preview">
       <div id="previewTitle">My Fantasy DC Council Committee Chair Lineup</div>
       <dc-council-preview
-        committees={state.committees}>
+        committees={committees}>
       </dc-council-preview>
     </div>;
   }

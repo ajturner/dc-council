@@ -9,7 +9,7 @@ import { ICommittee, IMember } from '../../utils/types';
 })
 export class DcCouncilPreview {
 
-  @Prop() committees:ICommittee[] = []
+  @Prop({ mutable: true, reflect: true }) committees:ICommittee[] = []
 
   render() {
     return (

@@ -89,13 +89,13 @@ export class DcCouncilCommitteeCard {
   }
 
   @Listen('calciteInlineEditableEditConfirm')
-  titleChanged(evt) {
+  titleChanged(_evt) {
     
     this.committee.name = this.titleInputEl.value;
-    console.log("titleChanged", {evt:evt, name: this.committee.name , t: this.titleInputEl.value, class: this.el.classList});
+    // console.log("titleChanged", {evt:evt, name: this.committee.name , t: this.titleInputEl.value, class: this.el.classList});
     this.el.classList.remove("editing");
     this.editing = false;
-    console.log("titleChanged 2", {evt:evt, name: this.committee.name , t: this.titleInputEl.value, class: this.el.classList});
+    // console.log("titleChanged 2", {evt:evt, name: this.committee.name , t: this.titleInputEl.value, class: this.el.classList});
   }
   render() {
     return (
