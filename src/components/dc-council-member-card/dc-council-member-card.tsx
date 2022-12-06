@@ -50,7 +50,7 @@ export class DcCouncilMemberCard {
 
     return (
       <Host
-        draggable={String(this.editable) && state.editable}
+        draggable={String(this.editable) && String(state.editable)}
         onDragStart={this.dragStart.bind(this)}
         onDragEnd={this.dragEnd.bind(this)}
       >
