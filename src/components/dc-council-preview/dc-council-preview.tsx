@@ -1,4 +1,5 @@
 import { Component, Host, h, Prop, getAssetPath } from '@stencil/core';
+import { calculateBudget } from '../../utils/data';
 import { ICommittee, IMember } from '../../utils/types';
 
 @Component({
@@ -30,8 +31,7 @@ export class DcCouncilPreview {
 
     return <div class="committee">
       {!!chair ? this.renderMember(chair, committee) : null}
-      
-      
+      <span class="budget">{calculateBudget(committee.agencies)}m budget</span>
     </div>
   }
   renderMember(person: IMember, committee: ICommittee) {
