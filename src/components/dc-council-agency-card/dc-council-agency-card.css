@@ -26,6 +26,9 @@ dc-council-card {
   font-size: 0.8rem;
   font-weight: 300;
 }
+#type::after {
+  content: '–';
+}
 #name {
   font-weight: 600;
   font-size: 0.9rem;

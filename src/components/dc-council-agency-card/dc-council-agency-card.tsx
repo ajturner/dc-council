@@ -52,7 +52,7 @@ export class DcCouncilAgencyCard {
             </span>
 
             <div slot="details" class="details">
-              <span id="type">{this.agency.type} </span>
+              <span id="type">{this.agency.type}</span>
               <span id="budget">{calculateBudget([this.agency])}m budget</span>
               <span>{this.renderInfoPanel(this.agency)}</span>
             </div>
