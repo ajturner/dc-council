@@ -229,8 +229,8 @@ export class DcCouncilGame {
 
   private renderInfoPanel() {
     return <dc-council-info-panel>
-      <span slot="title">How to use this Tool</span>
-      <div slot="header">How to Use this Tool</div>
+      <span slot="title">How to use this tool</span>
+      <div slot="header">How to Use this tool</div>
       <p slot="content">
         <ol>
           <li>Create/rename any desired committees.</li>
