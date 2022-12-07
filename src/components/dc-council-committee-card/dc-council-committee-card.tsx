@@ -164,7 +164,6 @@ export class DcCouncilCommitteeCard {
               // editing-enabled="true"
             >
               <calcite-input-text
-                
                 scale="l"
                 status="idle"
                 alignment="start"

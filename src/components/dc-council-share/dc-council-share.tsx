@@ -166,7 +166,8 @@ export class DcCouncilShare {
 
   private renderPreview(committees: ICommittee[]) {
     return <div id="preview">
-      <div id="previewTitle">My Fantasy DC Council Committee Chair Lineup</div>
+      <span id="previewTitle">{state.council?.title}</span>
+      <span id="titleSuffix">A Fantasy DC Council Committee Chair Lineup</span>
       <dc-council-preview
         committees={committees}>
       </dc-council-preview>

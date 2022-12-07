@@ -1,4 +1,4 @@
-import { Component, Host, h, State, Prop, Listen } from '@stencil/core';
+import { Component, Host, h, State, Prop, Listen, Element } from '@stencil/core';
 import { loadAgencies, loadBlank, loadCommittees, loadMembers } from '../../utils/data';
 import state, { checkEditable, getTemplate, getTemplateParam, getVersion, resetState } from '../../utils/state';
 import { CouncilTemplate, ICommittee, IMember } from '../../utils/types';
@@ -9,7 +9,8 @@ import { CouncilTemplate, ICommittee, IMember } from '../../utils/types';
   scoped: true,
 })
 export class DcCouncilGame {
-
+  @Element() el: HTMLElement;
+  
   @Prop({ mutable: true, reflect: true }) template: CouncilTemplate = CouncilTemplate.current;
 
   /**
@@ -37,6 +38,8 @@ export class DcCouncilGame {
   // Show major or minor agencies
   @State() minorAgencyDisplay:boolean = false;
 
+  titleInputEl:HTMLInputElement;
+
   private agencyDisplayEl;
 
   async componentWillLoad() {
@@ -56,6 +59,7 @@ export class DcCouncilGame {
 
     // TODO: Move this to a more central state management
     state.council = {
+      ...state.council,
       committees: this.committees
     }
     // TODO: clean up this logic for how to determine this is the initial view
@@ -67,6 +71,25 @@ export class DcCouncilGame {
   async componentWillRender() {
     checkEditable();
   }
+
+  @State() editing: boolean = false;
+  editMode() {
+    if(!this.editing) {
+      this.editing = true;
+      this.el.classList.add("editing");
+    }
+  }
+  @Listen('calciteInlineEditableEditConfirm')
+  titleChanged(_evt) {
+    
+    state.council.title = this.titleInputEl.value;
+    this.el.classList.remove("editing");
+    this.editing = false;
+
+    // Council needs to be resaved;
+    state.saved = false;
+  }
+
 
   availableAgencies(committees: Array<ICommittee>) {
     const usedAgencies = committees.map(committee => committee.agencies?.map(agency => agency.name)).flat()
@@ -177,7 +200,8 @@ export class DcCouncilGame {
         committees={this.committees}
       >
         <span id="boardHeader">
-          <span>Committees</span>
+        {this.renderEditableTitle()}
+          
           <dc-council-share class="control" scale="l">
             Share
           </dc-council-share>
@@ -188,6 +212,35 @@ export class DcCouncilGame {
       </dc-council-committee-list>
 
     </div>;
+  }
+
+  private renderEditableTitle() {
+    // debugger;
+    return <span slot="title" id="title">
+      <span id="titleView"
+        onClick={this.editMode.bind(this)}
+      >{!!state.council?.title ? state.council.title : "Your Council (Click to Change Title)"}</span>
+      {/* <calcite-icon icon="group" scale="m" aria-hidden="true"></calcite-icon> */}
+      <calcite-inline-editable
+        id="titleEdit"
+        scale="l"
+        intl-cancel-editing="Cancelar"
+        intl-enable-editing="Haga clic para editar"
+        intl-confirm-changes="Guardar"
+        controls={true}
+      >
+        <calcite-input-text
+          scale="l"
+          status="idle"
+          alignment="start"
+          prefix-text=""
+          suffix-text=""
+          value={state.council?.title}
+          placeholder="Council Name"
+          ref={el => this.titleInputEl = el}
+        ></calcite-input-text>
+      </calcite-inline-editable>
+    </span>;
   }
 
   @Listen('calciteCheckboxChange') 

@@ -39,7 +39,13 @@ input {
   font-weight: 400;
   text-align: center;
 }
+dc-council-preview {
+  margin-top: 2rem;
+}
 #previewTitle {
   font-weight: 600;
-  margin-bottom: 1rem;
+}
+#previewTitle::after {
+  content: '–';
+  margin: 0 1rem;
 }

@@ -14,7 +14,6 @@ const { state, onChange } = createStore({
 });
 
 onChange('saved', value => {
-  // debugger;
   state.saved = value;
 });
 

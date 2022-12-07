@@ -23,6 +23,24 @@
   display: flex;
 }
 
+/* Editing council title */
+#titleEdit {
+  display: none;
+}
+:host() #titleEdit {
+  display: none;
+}
+:host() #titleView {
+  display: block;
+}
+:host(.editing) #titleEdit {
+  display: block;
+}
+:host(.editing) #titleView {
+  display: none;
+}
+
+
 dc-council-info-panel {
   margin: 1.5rem 0 0 1rem;
 }
