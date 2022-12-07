@@ -235,8 +235,8 @@ export class DcCouncilGame {
         <ol>
           <li>Create/rename any desired committees.</li>
           <li>Drag and drop a Councilmember into the chair position, and then others into the committee member positions.</li>
-          <li>Drag and drop the agencies this committee should be in charge of oversight.</li>
-          <li>When you're ready, click "Share" to post to social media or send the link!</li>
+          <li>Drag and drop the agencies this committee should have oversight of.</li>
+          <li>When you're ready, click "Save" and you will be given the option to share your version on social media or via a link!</li>
         </ol>
       </p>
     </dc-council-info-panel>;
