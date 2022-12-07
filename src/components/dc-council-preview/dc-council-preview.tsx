@@ -26,7 +26,13 @@ export class DcCouncilPreview {
   }
   renderPreviewCommittee(committee:ICommittee) {
 
-    const chair = committee.members.chair[0];
+    let chair = committee.members.chair[0];
+    if(!chair) {
+      chair = {
+        name: "No No chair selected",
+        photo: "person.png"
+      }
+    }
     // debugger;
 
     return <div class="committee">
