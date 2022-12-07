@@ -46,3 +46,11 @@ dc-council-agency-list {
   margin-top: 10px;
   padding-top: 5px;
 }
+/* When an agency can be added here */
+:host(.action-agency) {
+  border: 1px dashed green;
+  background-color: lightgreen;  
+}
+:host(.action-agency):hover {
+  border: 1px solid red;
+}

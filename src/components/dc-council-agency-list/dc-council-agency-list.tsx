@@ -70,7 +70,6 @@ export class DcCouncilAgencyList {
     if(!!state.draggable) {
       // remove the dragged element
       evt.target.removeAgency(state.draggable);//removeChild(evt.target);
-
     }
 
     state.draggable = null;

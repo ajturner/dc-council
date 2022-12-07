@@ -92,17 +92,57 @@ export class DcCouncilCommitteeCard {
   titleChanged(_evt) {
     
     this.committee.name = this.titleInputEl.value;
-    // console.log("titleChanged", {evt:evt, name: this.committee.name , t: this.titleInputEl.value, class: this.el.classList});
     this.el.classList.remove("editing");
     this.editing = false;
-    // console.log("titleChanged 2", {evt:evt, name: this.committee.name , t: this.titleInputEl.value, class: this.el.classList});
+
+    // Council needs to be resaved;
+    state.saved = false;
   }
+
+  @Listen('addedElement')
+  addedElement(evt) {
+    if(state.action === "agency") {
+        console.log(`drop: effectAllowed = ${evt.dataTransfer.effectAllowed}`);
+
+      evt.preventDefault();
+      // debugger
+      var data = evt.dataTransfer.getData("text");
+      const newAgency = JSON.parse(data);
+      this.agenciesEl.addAgency([ newAgency ]);
+      
+      // Storing so we can remove later
+      state.draggable = newAgency;
+    }
+  }
+
+  allowDrop(evt) {
+    if(state.action === "agency") {
+      evt.preventDefault();
+    }
+  }
+  dragEnd(evt) {
+    evt.preventDefault();
+    if(!!state.draggable) {
+      // remove the dragged element
+      evt.target.removeAgency(state.draggable);//removeChild(evt.target);
+    }
+
+    state.draggable = null;
+
+  }
+
   render() {
+    let classes = [`action-${state.action}`];
+    if(this.editable) {
+      classes.push('editable')
+    }
+
     return (
       <Host
-        class={{
-          'editable': this.editable
-        }}
+        onDrop={this.addedElement.bind(this)}
+        onDragOver={this.allowDrop.bind(this)}
+        onDragEnd={this.dragEnd.bind(this)}      
+        class={classes.join(' ')}
       >
         <slot></slot>
         <dc-council-card>
