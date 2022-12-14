@@ -2,8 +2,8 @@ import LZString from "lz-string";
 import state from "./state";
 import { IAgency, ICommittee, ICouncil, IMember } from "./types";
 
-// const councilAPI = "https://9hd7czxsbb.execute-api.us-east-1.amazonaws.com/dev";
-const councilAPI = "http://localhost:3000/dev";
+const councilAPI = "https://9hd7czxsbb.execute-api.us-east-1.amazonaws.com/dev";
+// const councilAPI = "http://localhost:3000/dev";
 const LEGACY_SERIALIZATION_LENGTH = 40;
 
 // Create a Council with Committees
