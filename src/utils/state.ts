@@ -114,7 +114,8 @@ export async function setVersion(
   //@ts-ignore
   const url = new URL(window.location);
 
-  
+  let councilSave = null;
+
   if(store === "url") {
     // TODO: DEPRECATED - remove this when verify save to DB is working
     // Store to URL
@@ -123,24 +124,31 @@ export async function setVersion(
     const binary = LZString.compressToEncodedURIComponent( committeeString );
     url.searchParams.set(committeesStateParameter, binary);
   } else {
+    // Get Secret that write protects this council
+    const secret = url.searchParams.get(editStateParameter);
 
     // TODO: Refactor to use Council interface throughout
-    const council = {
+    let council = {
       ...state.council,
+      secret: !!secret ? secret : undefined,
       committees: committees
     }
-
-    const councilSave = await saveCouncil( council );
+    
+    councilSave = await saveCouncil( council );
     const savedId = councilSave.id;
     state.saved = true;
     url.searchParams.set(committeesStateParameter, savedId);
   }
   
+  let editUrl = null;
 
-  url.searchParams.set(editStateParameter, 'edit');
-  const editUrl = url.href;
-  window.history.pushState({}, '', editUrl);  
-
+  // Update the Url with the unique secret
+  if(councilSave && councilSave.secret) {
+    url.searchParams.set(editStateParameter, councilSave.secret);
+    editUrl = url.href;
+    window.history.pushState({}, '', editUrl);    
+  }
+  
   // We want a clean share URL
   url.searchParams.delete(editStateParameter);
   const shareUrl = url;
