@@ -1,0 +1,2 @@
+import{r as s,h as t,H as o}from"./p-90672ca6.js";const l=":host{display:block}";const n=class{constructor(t){s(this,t);this.committees=[];this.score=0}componentWillRender(){this.calculateCompleteness()}calculateCompleteness(){const s=this.committees.reduce(((s,t)=>{s+=t.members.chair.length>=1?50:0;s+=t.agencies.length>=1?50:0;return s}),0);this.score=s/this.committees.length}render(){return t(o,null,t("slot",null),this.score," / 100")}};n.style=l;export{n as dc_council_evaluation};
+//# sourceMappingURL=p-12712f44.entry.js.map
