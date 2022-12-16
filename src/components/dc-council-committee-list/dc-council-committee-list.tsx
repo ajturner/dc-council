@@ -44,7 +44,6 @@ export class DcCouncilCommitteeList {
       <Host>
         <div class="head">
           <span id="title"><slot></slot></span>
-
         </div>
         <div id="committees" class="container">
           {this.committees.map((committee) => {

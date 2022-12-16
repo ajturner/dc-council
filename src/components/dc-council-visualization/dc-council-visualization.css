@@ -1,0 +1,7 @@
+:host {
+  display: block;
+}
+#chart {
+  height: 78vh;
+  width: 100vw;
+}

@@ -171,7 +171,7 @@ export class DcCouncilGame {
             {this.renderTemplatePicker()}
           </div>
           {state.editable ? this.renderSidebar() : null}
-          {this.renderBoard()}
+          {this.renderBoard(this.committees)}
           {this.renderFooter()}
         </div>
       </Host>
@@ -194,7 +194,7 @@ export class DcCouncilGame {
     </div>;
   }
 
-  private renderBoard() {
+  private renderBoard(_committees: ICommittee[]) {
     return <div id="board">
       <dc-council-committee-list
         committees={this.committees}
@@ -205,6 +205,11 @@ export class DcCouncilGame {
           <dc-council-share class="control" scale="l">
             Share
           </dc-council-share>
+          <dc-council-visualization
+            committees={state.committees}
+          >
+            <span slot="title">Budget Visualization</span>
+          </dc-council-visualization>
           <span id="previewSelection">
             {state.draggable}
           </span>

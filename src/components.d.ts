@@ -53,6 +53,9 @@ export namespace Components {
          */
         "position": string;
     }
+    interface DcCouncilEvaluation {
+        "committees": ICommittee[];
+    }
     interface DcCouncilGame {
         /**
           * URL to Agency spreadsheet
@@ -74,6 +77,8 @@ export namespace Components {
         "open": boolean;
         "scale": string;
         "showModal": () => Promise<void>;
+    }
+    interface DcCouncilLeaderboard {
     }
     interface DcCouncilMemberCard {
         /**
@@ -121,6 +126,9 @@ export namespace Components {
         "open": boolean;
         "showModal": () => Promise<void>;
         "template": string;
+    }
+    interface DcCouncilVisualization {
+        "committees": ICommittee[];
     }
 }
 export interface DcCouncilAgencyCardCustomEvent<T> extends CustomEvent<T> {
@@ -204,6 +212,12 @@ declare global {
         prototype: HTMLDcCouncilDropzoneElement;
         new (): HTMLDcCouncilDropzoneElement;
     };
+    interface HTMLDcCouncilEvaluationElement extends Components.DcCouncilEvaluation, HTMLStencilElement {
+    }
+    var HTMLDcCouncilEvaluationElement: {
+        prototype: HTMLDcCouncilEvaluationElement;
+        new (): HTMLDcCouncilEvaluationElement;
+    };
     interface HTMLDcCouncilGameElement extends Components.DcCouncilGame, HTMLStencilElement {
     }
     var HTMLDcCouncilGameElement: {
@@ -215,6 +229,12 @@ declare global {
     var HTMLDcCouncilInfoPanelElement: {
         prototype: HTMLDcCouncilInfoPanelElement;
         new (): HTMLDcCouncilInfoPanelElement;
+    };
+    interface HTMLDcCouncilLeaderboardElement extends Components.DcCouncilLeaderboard, HTMLStencilElement {
+    }
+    var HTMLDcCouncilLeaderboardElement: {
+        prototype: HTMLDcCouncilLeaderboardElement;
+        new (): HTMLDcCouncilLeaderboardElement;
     };
     interface HTMLDcCouncilMemberCardElement extends Components.DcCouncilMemberCard, HTMLStencilElement {
     }
@@ -246,6 +266,12 @@ declare global {
         prototype: HTMLDcCouncilTemplateElement;
         new (): HTMLDcCouncilTemplateElement;
     };
+    interface HTMLDcCouncilVisualizationElement extends Components.DcCouncilVisualization, HTMLStencilElement {
+    }
+    var HTMLDcCouncilVisualizationElement: {
+        prototype: HTMLDcCouncilVisualizationElement;
+        new (): HTMLDcCouncilVisualizationElement;
+    };
     interface HTMLElementTagNameMap {
         "dc-council-agency-card": HTMLDcCouncilAgencyCardElement;
         "dc-council-agency-list": HTMLDcCouncilAgencyListElement;
@@ -255,13 +281,16 @@ declare global {
         "dc-council-committee-member-list": HTMLDcCouncilCommitteeMemberListElement;
         "dc-council-committee-placeholder": HTMLDcCouncilCommitteePlaceholderElement;
         "dc-council-dropzone": HTMLDcCouncilDropzoneElement;
+        "dc-council-evaluation": HTMLDcCouncilEvaluationElement;
         "dc-council-game": HTMLDcCouncilGameElement;
         "dc-council-info-panel": HTMLDcCouncilInfoPanelElement;
+        "dc-council-leaderboard": HTMLDcCouncilLeaderboardElement;
         "dc-council-member-card": HTMLDcCouncilMemberCardElement;
         "dc-council-member-list": HTMLDcCouncilMemberListElement;
         "dc-council-preview": HTMLDcCouncilPreviewElement;
         "dc-council-share": HTMLDcCouncilShareElement;
         "dc-council-template": HTMLDcCouncilTemplateElement;
+        "dc-council-visualization": HTMLDcCouncilVisualizationElement;
     }
 }
 declare namespace LocalJSX {
@@ -313,6 +342,9 @@ declare namespace LocalJSX {
          */
         "position"?: string;
     }
+    interface DcCouncilEvaluation {
+        "committees"?: ICommittee[];
+    }
     interface DcCouncilGame {
         /**
           * URL to Agency spreadsheet
@@ -332,6 +364,8 @@ declare namespace LocalJSX {
     interface DcCouncilInfoPanel {
         "open"?: boolean;
         "scale"?: string;
+    }
+    interface DcCouncilLeaderboard {
     }
     interface DcCouncilMemberCard {
         /**
@@ -378,6 +412,9 @@ declare namespace LocalJSX {
         "open"?: boolean;
         "template"?: string;
     }
+    interface DcCouncilVisualization {
+        "committees"?: ICommittee[];
+    }
     interface IntrinsicElements {
         "dc-council-agency-card": DcCouncilAgencyCard;
         "dc-council-agency-list": DcCouncilAgencyList;
@@ -387,13 +424,16 @@ declare namespace LocalJSX {
         "dc-council-committee-member-list": DcCouncilCommitteeMemberList;
         "dc-council-committee-placeholder": DcCouncilCommitteePlaceholder;
         "dc-council-dropzone": DcCouncilDropzone;
+        "dc-council-evaluation": DcCouncilEvaluation;
         "dc-council-game": DcCouncilGame;
         "dc-council-info-panel": DcCouncilInfoPanel;
+        "dc-council-leaderboard": DcCouncilLeaderboard;
         "dc-council-member-card": DcCouncilMemberCard;
         "dc-council-member-list": DcCouncilMemberList;
         "dc-council-preview": DcCouncilPreview;
         "dc-council-share": DcCouncilShare;
         "dc-council-template": DcCouncilTemplate;
+        "dc-council-visualization": DcCouncilVisualization;
     }
 }
 export { LocalJSX as JSX };
@@ -408,13 +448,16 @@ declare module "@stencil/core" {
             "dc-council-committee-member-list": LocalJSX.DcCouncilCommitteeMemberList & JSXBase.HTMLAttributes<HTMLDcCouncilCommitteeMemberListElement>;
             "dc-council-committee-placeholder": LocalJSX.DcCouncilCommitteePlaceholder & JSXBase.HTMLAttributes<HTMLDcCouncilCommitteePlaceholderElement>;
             "dc-council-dropzone": LocalJSX.DcCouncilDropzone & JSXBase.HTMLAttributes<HTMLDcCouncilDropzoneElement>;
+            "dc-council-evaluation": LocalJSX.DcCouncilEvaluation & JSXBase.HTMLAttributes<HTMLDcCouncilEvaluationElement>;
             "dc-council-game": LocalJSX.DcCouncilGame & JSXBase.HTMLAttributes<HTMLDcCouncilGameElement>;
             "dc-council-info-panel": LocalJSX.DcCouncilInfoPanel & JSXBase.HTMLAttributes<HTMLDcCouncilInfoPanelElement>;
+            "dc-council-leaderboard": LocalJSX.DcCouncilLeaderboard & JSXBase.HTMLAttributes<HTMLDcCouncilLeaderboardElement>;
             "dc-council-member-card": LocalJSX.DcCouncilMemberCard & JSXBase.HTMLAttributes<HTMLDcCouncilMemberCardElement>;
             "dc-council-member-list": LocalJSX.DcCouncilMemberList & JSXBase.HTMLAttributes<HTMLDcCouncilMemberListElement>;
             "dc-council-preview": LocalJSX.DcCouncilPreview & JSXBase.HTMLAttributes<HTMLDcCouncilPreviewElement>;
             "dc-council-share": LocalJSX.DcCouncilShare & JSXBase.HTMLAttributes<HTMLDcCouncilShareElement>;
             "dc-council-template": LocalJSX.DcCouncilTemplate & JSXBase.HTMLAttributes<HTMLDcCouncilTemplateElement>;
+            "dc-council-visualization": LocalJSX.DcCouncilVisualization & JSXBase.HTMLAttributes<HTMLDcCouncilVisualizationElement>;
         }
     }
 }

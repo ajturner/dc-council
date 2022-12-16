@@ -29,6 +29,7 @@ export class DcCouncilPreview {
     let chair = committee.members.chair[0];
     if(!chair) {
       chair = {
+        // need double "No No" because we slice off first name
         name: "No No chair selected",
         photo: "person.png"
       }
