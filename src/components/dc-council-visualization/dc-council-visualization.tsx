@@ -1,6 +1,7 @@
 import { Component, Host, h, Prop } from '@stencil/core';
 import * as am5 from "@amcharts/amcharts5";
 import * as am5hierarchy from "@amcharts/amcharts5/hierarchy";
+import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 import { ICommittee } from '../../utils/types';
 
 @Component({
@@ -24,6 +25,9 @@ export class DcCouncilVisualization {
   createVisualization() {
     // debugger;
     this.root = am5.Root.new( this.chartEl );
+    this.root.setThemes([
+      am5themes_Animated.new(this.root)
+    ]);
     this.createTreemap();
   }
   private createTreemap() {
@@ -46,8 +50,8 @@ export class DcCouncilVisualization {
         categoryField: "name",
         childDataField: "agencies",
         // layoutAlgorithm: "sliceDice",
-        nodePaddingOuter: 20,
-        nodePaddingInner: 10
+        // nodePaddingOuter: 20,
+        // nodePaddingInner: 10
       })
     );
     const data = this.compileCommitteeData(this.committees);
@@ -57,6 +61,14 @@ export class DcCouncilVisualization {
     //   numericFields: ["agencies.budget"]
     // });
     series.data.setAll(data);
+    series.set("selectedDataItem", series.dataItems[0]);
+
+    // series.rectangles.template.set("tooltipText", "{category}: [bold]${sum}[/]");
+    series.labels.template.setAll({
+      text: "{category}: [bold]${sum}[/]",
+      fontSize: 14
+    });
+    
     // Add breadcrumbs
     container.children.unshift(
       am5hierarchy.BreadcrumbBar.new(this.root, {
@@ -100,9 +112,7 @@ export class DcCouncilVisualization {
         </span>
         <div slot="header">Budget Visualization</div>
         <div slot="content">
-        <div id="chart" ref={el => this.chartEl = el}>
-
-        </div>
+        <div id="chart" ref={el => this.chartEl = el}></div>
         </div>
       </dc-council-info-panel>
       </Host>
