@@ -1,22 +1,75 @@
 # DC Fantasy Council 
 
-Visualization project for DC Council committees, starting in 2022-2023.
+Visualization project for DC Council committees, starting in 2023-2024. 
 
 Built by [Andrew Turner](https://highearthorbit.com) in collaboration with [Greater Greater Washington](https://ggwash.org/).
 
+Read more about the project in [this blog post](https://highearthorbit.com/articles/civic-council-game/).
 
 ## Using Components
 
-First, include the components source files
+You can embed this project into any other website or application. It was built with [Web Components](https://www.webcomponents.org/introduction) using [StencilJS](https://stenciljs.com/). 
+
+Add this HTML to your website:
 
 ```html
-<script type="module" src="./../build/dc-council.esm.js"></script>
-<script nomodule src="./../build/dc-council.js"></script>
+<dc-council-game
+	agency-filename="https://ajturner.github.io/dc-council/assets/2022/agencies.csv"
+	minoragency-filename="https://ajturner.github.io/dc-council/assets/2022/minoragencies.csv"
+	committee-filename="https://ajturner.github.io/dc-council/assets/2022/committees.csv"
+	member-filename="https://ajturner.github.io/dc-council/assets/2022/members.csv">
+    <h3 slot="header">DC Fantasy Council 2022-2024</h3>
+</dc-council-game>
+<script type="module" src="https://ajturner.github.io/dc-council/build/dc-council.esm.js"></script>
+<script nomodule src="https://ajturner.github.io/dc-council/build/dc-council.js"></script>
+<script type="module" src="https://js.arcgis.com/calcite-components/1.0.0-beta.97/calcite.esm.js"></script>
+<link rel="stylesheet" type="text/css" href="https://js.arcgis.com/calcite-components/1.0.0-beta.97/calcite.css" />
 ```
 
-## Getting Started
+### Changing Data for other municipalities
 
-To start building a new web component using Stencil, clone this repo to a new directory:
+You can load different Members, Agencies, and Committees from any organization. These are just spreadsheets, and should have these columns:
+
+_agencies.csv_
+`code,name,budget,description,link,committee,type`
+
+- `code` is a unique string
+- `name` is the Agency name to display
+- `budget` is the amount of money in the Agency's budget
+- `description` optional short description to display for more info
+- `link` optional Web URL to the Agency webpage
+- `committee` Name of the Committee in default assignment
+- `type` _major_ or _minor_ for showing in the UI
+
+_members.csv_
+`name,role,elected,termstart,termend,affiliation,link,photo`
+
+- `name` Member name to display
+- `role` Council position (e.g. Chair, At-Large, Region 1)
+- `elected` optional year elected
+- `termstart` optional year term starts
+- `termend` optional year term ends
+- `affilition` optional politicial or other affiliation to display
+- `link` optional Web URL to the Member's webpage
+- `photo` Web URL to an image of the member
+
+_committees.csv_
+
+Used for the default committee.
+
+Columns: `id,name,description,chair,members,link,permanent`
+
+- `id` unique string code
+- `name` Committee name to display
+- `description` optional summary to display for more info
+- `chair` Member name that is the default Committee Chair
+- `members` comma-separated (and quoted) list of Members on the committee by default
+- `link` optional Web URL to the existing Committee webpage
+- `permanent` true if the Committee should not be editable and should always be present even with a "blank" council
+
+## Developers
+
+To work on the code for this project
 
 ```bash
 git clone https://github.com/ajturner/dc-council.git
@@ -41,44 +94,3 @@ To run the unit tests for the components, run:
 ```bash
 npm test
 ```
-
-
-# Developers
-
-## Stencil
-
-Stencil is a compiler for building fast web apps using Web Components.
-
-Stencil combines the best concepts of the most popular frontend frameworks into a compile-time rather than run-time tool.  Stencil takes TypeScript, JSX, a tiny virtual DOM layer, efficient one-way data binding, an asynchronous rendering pipeline (similar to React Fiber), and lazy-loading out of the box, and generates 100% standards-based Web Components that run in any browser supporting the Custom Elements v1 spec.
-
-Stencil components are just Web Components, so they work in any major framework or with no framework at all.
-
-## Naming Components
-
-When creating new component tags, we recommend _not_ using `stencil` in the component name (ex: `<stencil-datepicker>`). This is because the generated component has little to nothing to do with Stencil; it's just a web component!
-
-Instead, use a prefix that fits your company or any name for a group of related components. For example, all of the Ionic generated web components use the prefix `ion`.
-
-
-## Using this component
-
-There are three strategies we recommend for using web components built with Stencil.
-
-The first step for all three of these strategies is to [publish to NPM](https://docs.npmjs.com/getting-started/publishing-npm-packages).
-
-### Script tag
-
-- Put a script tag similar to this `<script type='module' src='https://unpkg.com/my-component@0.0.1/dist/my-component.esm.js'></script>` in the head of your index.html
-- Then you can use the element anywhere in your template, JSX, html etc
-
-### Node Modules
-- Run `npm install my-component --save`
-- Put a script tag similar to this `<script type='module' src='node_modules/my-component/dist/my-component.esm.js'></script>` in the head of your index.html
-- Then you can use the element anywhere in your template, JSX, html etc
-
-### In a stencil-starter app
-- Run `npm install my-component --save`
-- Add an import to the npm packages `import my-component;`
-- Then you can use the element anywhere in your template, JSX, html etc
-
-![Built With Stencil](https://img.shields.io/badge/-Built%20With%20Stencil-16161d.svg?logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjIuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA1MTIgNTEyOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI%2BCjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI%2BCgkuc3Qwe2ZpbGw6I0ZGRkZGRjt9Cjwvc3R5bGU%2BCjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik00MjQuNywzNzMuOWMwLDM3LjYtNTUuMSw2OC42LTkyLjcsNjguNkgxODAuNGMtMzcuOSwwLTkyLjctMzAuNy05Mi43LTY4LjZ2LTMuNmgzMzYuOVYzNzMuOXoiLz4KPHBhdGggY2xhc3M9InN0MCIgZD0iTTQyNC43LDI5Mi4xSDE4MC40Yy0zNy42LDAtOTIuNy0zMS05Mi43LTY4LjZ2LTMuNkgzMzJjMzcuNiwwLDkyLjcsMzEsOTIuNyw2OC42VjI5Mi4xeiIvPgo8cGF0aCBjbGFzcz0ic3QwIiBkPSJNNDI0LjcsMTQxLjdIODcuN3YtMy42YzAtMzcuNiw1NC44LTY4LjYsOTIuNy02OC42SDMzMmMzNy45LDAsOTIuNywzMC43LDkyLjcsNjguNlYxNDEuN3oiLz4KPC9zdmc%2BCg%3D%3D&colorA=16161d&style=flat-square)
