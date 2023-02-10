@@ -1,0 +1,43 @@
+:host {
+  display: block;
+  background: white;
+  position: relative;
+  display: grid;
+  grid-template-columns: fit-content(70px) auto;
+  grid-template-areas: 
+    "thumbnail title"
+    "thumbnail details";  
+}
+
+#action {
+  display: none;
+}
+:host(:hover) #action  {
+  display: block;
+  color: red;
+}
+
+#action {
+  position: absolute;
+  right: 0;
+  top: 40px;
+  z-index: 500;
+}
+#thumbnail {
+  grid-area: thumbnail;
+  max-width: 70px;
+  /* 
+  height: 100%;
+  border-radius: 50%;
+  vertical-align: middle;
+  margin-right: 5px; */
+}
+#title {
+  grid-area: title;
+  padding: 5px 0 0 5px;
+  min-height: 50px;
+}
+#details {
+  grid-area: details;
+  padding: 5px 0 0 5px;
+}

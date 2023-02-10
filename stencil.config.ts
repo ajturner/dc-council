@@ -2,7 +2,7 @@ import { Config } from '@stencil/core';
 import { sass } from '@stencil/sass';
 
 export const config: Config = {
-  namespace: 'hub-user-workspace',
+  namespace: 'dc-council',
   sourceMap: true,
   plugins: [
     sass()

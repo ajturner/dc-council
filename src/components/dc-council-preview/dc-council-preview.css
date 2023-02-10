@@ -1,0 +1,25 @@
+:host {
+  display: block;
+}
+#committees {
+  display: flex;
+  flex-wrap: wrap;
+}
+.committee {
+  width: 15vw;
+  margin-bottom: 2em;
+}
+.member {
+  text-align: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+.photo {
+  border-radius: 50px;
+  width: 100px;
+}
+.budget {
+  font-size: 0.9em;
+  font-weight: 200;
+}
