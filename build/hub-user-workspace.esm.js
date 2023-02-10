@@ -1,0 +1,2 @@
+import{p as t,b as r}from"./p-1b210672.js";export{s as setNonce}from"./p-1b210672.js";const a=()=>{const s=import.meta.url;const r={};if(s!==""){r.resourcesUrl=new URL(".",s).href}return t(r)};a().then((s=>r([["p-97c10dda",[[1,"hub-user-workspace"],[1,"hub-changelog"],[1,"hub-feed"],[1,"hub-status",{statusUrl:[1,"status-url"],status:[32]}],[1,"hub-text"],[1,"workspace-card"]]]],s)));
+//# sourceMappingURL=hub-user-workspace.esm.js.map

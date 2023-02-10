@@ -1,2 +1,0 @@
-import{r as o,h as r,H as t}from"./p-90672ca6.js";const a=":host{display:block}";const s=class{constructor(r){o(this,r)}render(){return r(t,null,r("dc-council-info-panel",null,r("span",{slot:"title"},"Leaderboard"),r("div",{slot:"header"},"Leaderboard"),r("div",{slot:"content"},r("div",{id:"chart"}))))}};s.style=a;export{s as dc_council_leaderboard};
-//# sourceMappingURL=p-dc48ace7.entry.js.map
