@@ -3,20 +3,28 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
-    <title>DC councils for GGWash</title>
+    <title>Hub User Workspace</title>
 
-    <script type="module" src="./build/dc-council.esm.js"></script>
-    <script nomodule src="./build/dc-council.js"></script>
-    
+    <script type="module" src="./build/hub-user-workspace.esm.js"></script>
+    <script nomodule src="./build/hub-user-workspace.js"></script>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://esri.github.io/hub-components/harnesses/calcite/calcite.css"
+    />
+    <script
+      type="module"
+      src="https://esri.github.io/hub-components/harnesses/build/hub-components.esm.js"
+    ></script>    
   <!-- <link rel="stylesheet" type="text/css" href="assets/calcite.css" />
   <script type="module" src="assets/calcite.esm.js"></script> -->
   </head>
   <body>
 
   
-  <dc-council-game>
-    <h3 slot="header">DC Fantasy Council 2023-2024</h3>
-  </dc-council-game>
+  <hub-user-workspace>
+    <h1 slot="header">User Workspace</h1>
+  </hub-user-workspace>
       <script type="module" src="https://js.arcgis.com/calcite-components/1.0.0-beta.97/calcite.esm.js"></script>
     <link rel="stylesheet" type="text/css" href="https://js.arcgis.com/calcite-components/1.0.0-beta.97/calcite.css" />
 
@@ -27,14 +35,5 @@
       padding: 0;
     }
   </style>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-YYNB49NCYV"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-YYNB49NCYV');
-  </script>
   </body>
 </html>

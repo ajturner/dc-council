@@ -5,459 +5,100 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { CardAction, CouncilTemplate, IAgency, ICommittee, ICommitteeMembers, IMember } from "./utils/types";
 export namespace Components {
-    interface DcCouncilAgencyCard {
-        "action": CardAction;
-        "agency": any;
+    interface HubChangelog {
     }
-    interface DcCouncilAgencyList {
-        "addAgency": (newAgencies: Array<IAgency>) => Promise<void>;
-        "agencies": any[];
-        "display": string;
-        "editable": boolean;
-        "removeAgency": (removedAgency: IAgency) => Promise<void>;
+    interface HubFeed {
     }
-    interface DcCouncilCard {
-        "thumbnail": string;
+    interface HubStatus {
+        "statusUrl": string;
     }
-    interface DcCouncilCommitteeCard {
-        "committee": ICommittee;
-        "deleteCommittee": () => Promise<void>;
-        /**
-          * Determines if Members list is editable used mostly for "Committee of the Whole"
-         */
-        "editable": boolean;
+    interface HubText {
     }
-    interface DcCouncilCommitteeList {
-        "committees": Array<ICommittee>;
+    interface HubUserWorkspace {
     }
-    interface DcCouncilCommitteeMemberList {
-        /**
-          * Determines if Members list is editable used mostly for "Committee of the Whole"
-         */
-        "editable": boolean;
-        "getMembers": () => Promise<ICommitteeMembers>;
-        "members": ICommitteeMembers;
+    interface WorkspaceCard {
     }
-    interface DcCouncilCommitteePlaceholder {
-        "committee": any;
-    }
-    interface DcCouncilDropzone {
-        /**
-          * Drag + Drop group name
-         */
-        "group": string;
-        /**
-          * Temporary id
-         */
-        "position": string;
-    }
-    interface DcCouncilEvaluation {
-        "committees": ICommittee[];
-    }
-    interface DcCouncilGame {
-        /**
-          * URL to Agency spreadsheet
-         */
-        "agencyFilename": string;
-        "committeeFilename": string;
-        "committees": Array<ICommittee>;
-        "memberFilename": string;
-        "minoragencyFilename": string;
-        /**
-          * restart - showing template
-         */
-        "restart": boolean;
-        "selectedPieces": string;
-        "template": CouncilTemplate;
-    }
-    interface DcCouncilInfoPanel {
-        "hideModal": () => Promise<void>;
-        "open": boolean;
-        "scale": string;
-        "showModal": () => Promise<void>;
-    }
-    interface DcCouncilLeaderboard {
-    }
-    interface DcCouncilMemberCard {
-        /**
-          * Should this member be removable (show action)
-         */
-        "action": CardAction;
-        /**
-          * Determines if Members list is editable used mostly for "Committee of the Whole"
-         */
-        "editable": boolean;
-        "member": any;
-    }
-    interface DcCouncilMemberList {
-        /**
-          * Determines if Members list is editable used mostly for "Committee of the Whole"
-         */
-        "editable": boolean;
-        /**
-          * Maximum number of members allowed. Null or -1 means unlimited
-         */
-        "max": number;
-        /**
-          * Array of people in this list
-         */
-        "members": Array<IMember>;
-        /**
-          * Name of position for this to show
-         */
-        "position": string;
-    }
-    interface DcCouncilPreview {
-        "committees": ICommittee[];
-    }
-    interface DcCouncilShare {
-        "editUrl": string;
-        "hideModal": () => Promise<void>;
-        "open": boolean;
-        "saveCouncil": () => Promise<void>;
-        "scale": string;
-        "shareUrl": string;
-        "showModal": () => Promise<void>;
-    }
-    interface DcCouncilTemplate {
-        "hideModal": () => Promise<void>;
-        "open": boolean;
-        "showModal": () => Promise<void>;
-        "template": string;
-    }
-    interface DcCouncilVisualization {
-        "committees": ICommittee[];
-    }
-}
-export interface DcCouncilAgencyCardCustomEvent<T> extends CustomEvent<T> {
-    detail: T;
-    target: HTMLDcCouncilAgencyCardElement;
-}
-export interface DcCouncilAgencyListCustomEvent<T> extends CustomEvent<T> {
-    detail: T;
-    target: HTMLDcCouncilAgencyListElement;
-}
-export interface DcCouncilCommitteeCardCustomEvent<T> extends CustomEvent<T> {
-    detail: T;
-    target: HTMLDcCouncilCommitteeCardElement;
-}
-export interface DcCouncilCommitteePlaceholderCustomEvent<T> extends CustomEvent<T> {
-    detail: T;
-    target: HTMLDcCouncilCommitteePlaceholderElement;
-}
-export interface DcCouncilDropzoneCustomEvent<T> extends CustomEvent<T> {
-    detail: T;
-    target: HTMLDcCouncilDropzoneElement;
-}
-export interface DcCouncilMemberCardCustomEvent<T> extends CustomEvent<T> {
-    detail: T;
-    target: HTMLDcCouncilMemberCardElement;
-}
-export interface DcCouncilMemberListCustomEvent<T> extends CustomEvent<T> {
-    detail: T;
-    target: HTMLDcCouncilMemberListElement;
-}
-export interface DcCouncilTemplateCustomEvent<T> extends CustomEvent<T> {
-    detail: T;
-    target: HTMLDcCouncilTemplateElement;
 }
 declare global {
-    interface HTMLDcCouncilAgencyCardElement extends Components.DcCouncilAgencyCard, HTMLStencilElement {
+    interface HTMLHubChangelogElement extends Components.HubChangelog, HTMLStencilElement {
     }
-    var HTMLDcCouncilAgencyCardElement: {
-        prototype: HTMLDcCouncilAgencyCardElement;
-        new (): HTMLDcCouncilAgencyCardElement;
+    var HTMLHubChangelogElement: {
+        prototype: HTMLHubChangelogElement;
+        new (): HTMLHubChangelogElement;
     };
-    interface HTMLDcCouncilAgencyListElement extends Components.DcCouncilAgencyList, HTMLStencilElement {
+    interface HTMLHubFeedElement extends Components.HubFeed, HTMLStencilElement {
     }
-    var HTMLDcCouncilAgencyListElement: {
-        prototype: HTMLDcCouncilAgencyListElement;
-        new (): HTMLDcCouncilAgencyListElement;
+    var HTMLHubFeedElement: {
+        prototype: HTMLHubFeedElement;
+        new (): HTMLHubFeedElement;
     };
-    interface HTMLDcCouncilCardElement extends Components.DcCouncilCard, HTMLStencilElement {
+    interface HTMLHubStatusElement extends Components.HubStatus, HTMLStencilElement {
     }
-    var HTMLDcCouncilCardElement: {
-        prototype: HTMLDcCouncilCardElement;
-        new (): HTMLDcCouncilCardElement;
+    var HTMLHubStatusElement: {
+        prototype: HTMLHubStatusElement;
+        new (): HTMLHubStatusElement;
     };
-    interface HTMLDcCouncilCommitteeCardElement extends Components.DcCouncilCommitteeCard, HTMLStencilElement {
+    interface HTMLHubTextElement extends Components.HubText, HTMLStencilElement {
     }
-    var HTMLDcCouncilCommitteeCardElement: {
-        prototype: HTMLDcCouncilCommitteeCardElement;
-        new (): HTMLDcCouncilCommitteeCardElement;
+    var HTMLHubTextElement: {
+        prototype: HTMLHubTextElement;
+        new (): HTMLHubTextElement;
     };
-    interface HTMLDcCouncilCommitteeListElement extends Components.DcCouncilCommitteeList, HTMLStencilElement {
+    interface HTMLHubUserWorkspaceElement extends Components.HubUserWorkspace, HTMLStencilElement {
     }
-    var HTMLDcCouncilCommitteeListElement: {
-        prototype: HTMLDcCouncilCommitteeListElement;
-        new (): HTMLDcCouncilCommitteeListElement;
+    var HTMLHubUserWorkspaceElement: {
+        prototype: HTMLHubUserWorkspaceElement;
+        new (): HTMLHubUserWorkspaceElement;
     };
-    interface HTMLDcCouncilCommitteeMemberListElement extends Components.DcCouncilCommitteeMemberList, HTMLStencilElement {
+    interface HTMLWorkspaceCardElement extends Components.WorkspaceCard, HTMLStencilElement {
     }
-    var HTMLDcCouncilCommitteeMemberListElement: {
-        prototype: HTMLDcCouncilCommitteeMemberListElement;
-        new (): HTMLDcCouncilCommitteeMemberListElement;
-    };
-    interface HTMLDcCouncilCommitteePlaceholderElement extends Components.DcCouncilCommitteePlaceholder, HTMLStencilElement {
-    }
-    var HTMLDcCouncilCommitteePlaceholderElement: {
-        prototype: HTMLDcCouncilCommitteePlaceholderElement;
-        new (): HTMLDcCouncilCommitteePlaceholderElement;
-    };
-    interface HTMLDcCouncilDropzoneElement extends Components.DcCouncilDropzone, HTMLStencilElement {
-    }
-    var HTMLDcCouncilDropzoneElement: {
-        prototype: HTMLDcCouncilDropzoneElement;
-        new (): HTMLDcCouncilDropzoneElement;
-    };
-    interface HTMLDcCouncilEvaluationElement extends Components.DcCouncilEvaluation, HTMLStencilElement {
-    }
-    var HTMLDcCouncilEvaluationElement: {
-        prototype: HTMLDcCouncilEvaluationElement;
-        new (): HTMLDcCouncilEvaluationElement;
-    };
-    interface HTMLDcCouncilGameElement extends Components.DcCouncilGame, HTMLStencilElement {
-    }
-    var HTMLDcCouncilGameElement: {
-        prototype: HTMLDcCouncilGameElement;
-        new (): HTMLDcCouncilGameElement;
-    };
-    interface HTMLDcCouncilInfoPanelElement extends Components.DcCouncilInfoPanel, HTMLStencilElement {
-    }
-    var HTMLDcCouncilInfoPanelElement: {
-        prototype: HTMLDcCouncilInfoPanelElement;
-        new (): HTMLDcCouncilInfoPanelElement;
-    };
-    interface HTMLDcCouncilLeaderboardElement extends Components.DcCouncilLeaderboard, HTMLStencilElement {
-    }
-    var HTMLDcCouncilLeaderboardElement: {
-        prototype: HTMLDcCouncilLeaderboardElement;
-        new (): HTMLDcCouncilLeaderboardElement;
-    };
-    interface HTMLDcCouncilMemberCardElement extends Components.DcCouncilMemberCard, HTMLStencilElement {
-    }
-    var HTMLDcCouncilMemberCardElement: {
-        prototype: HTMLDcCouncilMemberCardElement;
-        new (): HTMLDcCouncilMemberCardElement;
-    };
-    interface HTMLDcCouncilMemberListElement extends Components.DcCouncilMemberList, HTMLStencilElement {
-    }
-    var HTMLDcCouncilMemberListElement: {
-        prototype: HTMLDcCouncilMemberListElement;
-        new (): HTMLDcCouncilMemberListElement;
-    };
-    interface HTMLDcCouncilPreviewElement extends Components.DcCouncilPreview, HTMLStencilElement {
-    }
-    var HTMLDcCouncilPreviewElement: {
-        prototype: HTMLDcCouncilPreviewElement;
-        new (): HTMLDcCouncilPreviewElement;
-    };
-    interface HTMLDcCouncilShareElement extends Components.DcCouncilShare, HTMLStencilElement {
-    }
-    var HTMLDcCouncilShareElement: {
-        prototype: HTMLDcCouncilShareElement;
-        new (): HTMLDcCouncilShareElement;
-    };
-    interface HTMLDcCouncilTemplateElement extends Components.DcCouncilTemplate, HTMLStencilElement {
-    }
-    var HTMLDcCouncilTemplateElement: {
-        prototype: HTMLDcCouncilTemplateElement;
-        new (): HTMLDcCouncilTemplateElement;
-    };
-    interface HTMLDcCouncilVisualizationElement extends Components.DcCouncilVisualization, HTMLStencilElement {
-    }
-    var HTMLDcCouncilVisualizationElement: {
-        prototype: HTMLDcCouncilVisualizationElement;
-        new (): HTMLDcCouncilVisualizationElement;
+    var HTMLWorkspaceCardElement: {
+        prototype: HTMLWorkspaceCardElement;
+        new (): HTMLWorkspaceCardElement;
     };
     interface HTMLElementTagNameMap {
-        "dc-council-agency-card": HTMLDcCouncilAgencyCardElement;
-        "dc-council-agency-list": HTMLDcCouncilAgencyListElement;
-        "dc-council-card": HTMLDcCouncilCardElement;
-        "dc-council-committee-card": HTMLDcCouncilCommitteeCardElement;
-        "dc-council-committee-list": HTMLDcCouncilCommitteeListElement;
-        "dc-council-committee-member-list": HTMLDcCouncilCommitteeMemberListElement;
-        "dc-council-committee-placeholder": HTMLDcCouncilCommitteePlaceholderElement;
-        "dc-council-dropzone": HTMLDcCouncilDropzoneElement;
-        "dc-council-evaluation": HTMLDcCouncilEvaluationElement;
-        "dc-council-game": HTMLDcCouncilGameElement;
-        "dc-council-info-panel": HTMLDcCouncilInfoPanelElement;
-        "dc-council-leaderboard": HTMLDcCouncilLeaderboardElement;
-        "dc-council-member-card": HTMLDcCouncilMemberCardElement;
-        "dc-council-member-list": HTMLDcCouncilMemberListElement;
-        "dc-council-preview": HTMLDcCouncilPreviewElement;
-        "dc-council-share": HTMLDcCouncilShareElement;
-        "dc-council-template": HTMLDcCouncilTemplateElement;
-        "dc-council-visualization": HTMLDcCouncilVisualizationElement;
+        "hub-changelog": HTMLHubChangelogElement;
+        "hub-feed": HTMLHubFeedElement;
+        "hub-status": HTMLHubStatusElement;
+        "hub-text": HTMLHubTextElement;
+        "hub-user-workspace": HTMLHubUserWorkspaceElement;
+        "workspace-card": HTMLWorkspaceCardElement;
     }
 }
 declare namespace LocalJSX {
-    interface DcCouncilAgencyCard {
-        "action"?: CardAction;
-        "agency"?: any;
-        "onAgencyRemove"?: (event: DcCouncilAgencyCardCustomEvent<IAgency>) => void;
+    interface HubChangelog {
     }
-    interface DcCouncilAgencyList {
-        "agencies"?: any[];
-        "display"?: string;
-        "editable"?: boolean;
-        "onAgenciesChanged"?: (event: DcCouncilAgencyListCustomEvent<any>) => void;
+    interface HubFeed {
     }
-    interface DcCouncilCard {
-        "thumbnail"?: string;
+    interface HubStatus {
+        "statusUrl"?: string;
     }
-    interface DcCouncilCommitteeCard {
-        "committee"?: ICommittee;
-        /**
-          * Determines if Members list is editable used mostly for "Committee of the Whole"
-         */
-        "editable"?: boolean;
-        "onCommitteeUpdated"?: (event: DcCouncilCommitteeCardCustomEvent<ICommittee>) => void;
-        "onRemoveCommittee"?: (event: DcCouncilCommitteeCardCustomEvent<any>) => void;
+    interface HubText {
     }
-    interface DcCouncilCommitteeList {
-        "committees"?: Array<ICommittee>;
+    interface HubUserWorkspace {
     }
-    interface DcCouncilCommitteeMemberList {
-        /**
-          * Determines if Members list is editable used mostly for "Committee of the Whole"
-         */
-        "editable"?: boolean;
-        "members"?: ICommitteeMembers;
-    }
-    interface DcCouncilCommitteePlaceholder {
-        "committee"?: any;
-        "onAddCommittee"?: (event: DcCouncilCommitteePlaceholderCustomEvent<any>) => void;
-    }
-    interface DcCouncilDropzone {
-        /**
-          * Drag + Drop group name
-         */
-        "group"?: string;
-        "onAddedElement"?: (event: DcCouncilDropzoneCustomEvent<any>) => void;
-        /**
-          * Temporary id
-         */
-        "position"?: string;
-    }
-    interface DcCouncilEvaluation {
-        "committees"?: ICommittee[];
-    }
-    interface DcCouncilGame {
-        /**
-          * URL to Agency spreadsheet
-         */
-        "agencyFilename"?: string;
-        "committeeFilename"?: string;
-        "committees"?: Array<ICommittee>;
-        "memberFilename"?: string;
-        "minoragencyFilename"?: string;
-        /**
-          * restart - showing template
-         */
-        "restart"?: boolean;
-        "selectedPieces"?: string;
-        "template"?: CouncilTemplate;
-    }
-    interface DcCouncilInfoPanel {
-        "open"?: boolean;
-        "scale"?: string;
-    }
-    interface DcCouncilLeaderboard {
-    }
-    interface DcCouncilMemberCard {
-        /**
-          * Should this member be removable (show action)
-         */
-        "action"?: CardAction;
-        /**
-          * Determines if Members list is editable used mostly for "Committee of the Whole"
-         */
-        "editable"?: boolean;
-        "member"?: any;
-        "onMemberRemove"?: (event: DcCouncilMemberCardCustomEvent<any>) => void;
-    }
-    interface DcCouncilMemberList {
-        /**
-          * Determines if Members list is editable used mostly for "Committee of the Whole"
-         */
-        "editable"?: boolean;
-        /**
-          * Maximum number of members allowed. Null or -1 means unlimited
-         */
-        "max"?: number;
-        /**
-          * Array of people in this list
-         */
-        "members"?: Array<IMember>;
-        "onMembersChanged"?: (event: DcCouncilMemberListCustomEvent<any>) => void;
-        /**
-          * Name of position for this to show
-         */
-        "position"?: string;
-    }
-    interface DcCouncilPreview {
-        "committees"?: ICommittee[];
-    }
-    interface DcCouncilShare {
-        "editUrl"?: string;
-        "open"?: boolean;
-        "scale"?: string;
-        "shareUrl"?: string;
-    }
-    interface DcCouncilTemplate {
-        "onTemplateSelected"?: (event: DcCouncilTemplateCustomEvent<string>) => void;
-        "open"?: boolean;
-        "template"?: string;
-    }
-    interface DcCouncilVisualization {
-        "committees"?: ICommittee[];
+    interface WorkspaceCard {
     }
     interface IntrinsicElements {
-        "dc-council-agency-card": DcCouncilAgencyCard;
-        "dc-council-agency-list": DcCouncilAgencyList;
-        "dc-council-card": DcCouncilCard;
-        "dc-council-committee-card": DcCouncilCommitteeCard;
-        "dc-council-committee-list": DcCouncilCommitteeList;
-        "dc-council-committee-member-list": DcCouncilCommitteeMemberList;
-        "dc-council-committee-placeholder": DcCouncilCommitteePlaceholder;
-        "dc-council-dropzone": DcCouncilDropzone;
-        "dc-council-evaluation": DcCouncilEvaluation;
-        "dc-council-game": DcCouncilGame;
-        "dc-council-info-panel": DcCouncilInfoPanel;
-        "dc-council-leaderboard": DcCouncilLeaderboard;
-        "dc-council-member-card": DcCouncilMemberCard;
-        "dc-council-member-list": DcCouncilMemberList;
-        "dc-council-preview": DcCouncilPreview;
-        "dc-council-share": DcCouncilShare;
-        "dc-council-template": DcCouncilTemplate;
-        "dc-council-visualization": DcCouncilVisualization;
+        "hub-changelog": HubChangelog;
+        "hub-feed": HubFeed;
+        "hub-status": HubStatus;
+        "hub-text": HubText;
+        "hub-user-workspace": HubUserWorkspace;
+        "workspace-card": WorkspaceCard;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "dc-council-agency-card": LocalJSX.DcCouncilAgencyCard & JSXBase.HTMLAttributes<HTMLDcCouncilAgencyCardElement>;
-            "dc-council-agency-list": LocalJSX.DcCouncilAgencyList & JSXBase.HTMLAttributes<HTMLDcCouncilAgencyListElement>;
-            "dc-council-card": LocalJSX.DcCouncilCard & JSXBase.HTMLAttributes<HTMLDcCouncilCardElement>;
-            "dc-council-committee-card": LocalJSX.DcCouncilCommitteeCard & JSXBase.HTMLAttributes<HTMLDcCouncilCommitteeCardElement>;
-            "dc-council-committee-list": LocalJSX.DcCouncilCommitteeList & JSXBase.HTMLAttributes<HTMLDcCouncilCommitteeListElement>;
-            "dc-council-committee-member-list": LocalJSX.DcCouncilCommitteeMemberList & JSXBase.HTMLAttributes<HTMLDcCouncilCommitteeMemberListElement>;
-            "dc-council-committee-placeholder": LocalJSX.DcCouncilCommitteePlaceholder & JSXBase.HTMLAttributes<HTMLDcCouncilCommitteePlaceholderElement>;
-            "dc-council-dropzone": LocalJSX.DcCouncilDropzone & JSXBase.HTMLAttributes<HTMLDcCouncilDropzoneElement>;
-            "dc-council-evaluation": LocalJSX.DcCouncilEvaluation & JSXBase.HTMLAttributes<HTMLDcCouncilEvaluationElement>;
-            "dc-council-game": LocalJSX.DcCouncilGame & JSXBase.HTMLAttributes<HTMLDcCouncilGameElement>;
-            "dc-council-info-panel": LocalJSX.DcCouncilInfoPanel & JSXBase.HTMLAttributes<HTMLDcCouncilInfoPanelElement>;
-            "dc-council-leaderboard": LocalJSX.DcCouncilLeaderboard & JSXBase.HTMLAttributes<HTMLDcCouncilLeaderboardElement>;
-            "dc-council-member-card": LocalJSX.DcCouncilMemberCard & JSXBase.HTMLAttributes<HTMLDcCouncilMemberCardElement>;
-            "dc-council-member-list": LocalJSX.DcCouncilMemberList & JSXBase.HTMLAttributes<HTMLDcCouncilMemberListElement>;
-            "dc-council-preview": LocalJSX.DcCouncilPreview & JSXBase.HTMLAttributes<HTMLDcCouncilPreviewElement>;
-            "dc-council-share": LocalJSX.DcCouncilShare & JSXBase.HTMLAttributes<HTMLDcCouncilShareElement>;
-            "dc-council-template": LocalJSX.DcCouncilTemplate & JSXBase.HTMLAttributes<HTMLDcCouncilTemplateElement>;
-            "dc-council-visualization": LocalJSX.DcCouncilVisualization & JSXBase.HTMLAttributes<HTMLDcCouncilVisualizationElement>;
+            "hub-changelog": LocalJSX.HubChangelog & JSXBase.HTMLAttributes<HTMLHubChangelogElement>;
+            "hub-feed": LocalJSX.HubFeed & JSXBase.HTMLAttributes<HTMLHubFeedElement>;
+            "hub-status": LocalJSX.HubStatus & JSXBase.HTMLAttributes<HTMLHubStatusElement>;
+            "hub-text": LocalJSX.HubText & JSXBase.HTMLAttributes<HTMLHubTextElement>;
+            "hub-user-workspace": LocalJSX.HubUserWorkspace & JSXBase.HTMLAttributes<HTMLHubUserWorkspaceElement>;
+            "workspace-card": LocalJSX.WorkspaceCard & JSXBase.HTMLAttributes<HTMLWorkspaceCardElement>;
         }
     }
 }
